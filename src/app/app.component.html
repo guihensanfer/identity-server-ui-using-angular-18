@@ -10,6 +10,11 @@
     font-family: Manrope, sans-serif;
   }
 
+  .bTextBold{
+    font-family: Manrope, sans-serif;
+    font-weight: bold;
+  }
+
   .bText6{
     font-family: Manrope, sans-serif;
     font-size: 90%;
@@ -57,53 +62,58 @@
 </style>
 
 <main class="main">
-  <div class="content">
-    <div class="left-side">
-      
-      
-      <h1 class="bText4">Sign in {{ title }}</h1>
-      <form method="post">
-        <div class="form-group">
-          <label class="bText6" for="email">Email address</label>
-          <input class="bInputText" type="text" placeholder="Email" id="email" name="email" />
+  <ng-container *transloco="let t">
+    <h1 class="bText4">{{ t('title') + ' ' + title }}</h1>
+    <div class="content">
+      <div class="left-side">                        
+        <div>
+          <span class="bTextBold">{{t('newAccountLabel')}}</span>
+          <a class="bTextLink" style="margin-left:5px;" href="#">{{t('newAccountButton')}}</a>
         </div>
-        <div class="form-group">
-          <label class="bText6" for="password">Password</label>
-          <input class="bInputText" type="password" placeholder="Password" id="password" name="password" />
-        </div>
-        <div class="form-group">          
-          <input class="bButton" type="submit" value="Continue" />
-        </div>
-        <a class="bTextLink" href="#">I forgot my password</a>
-        <span class="bText4" style="display: block;">Or</span>
-        <div class="externalProviders">          
+        <form method="post">
+          <div class="form-group">
+            <label class="bText6" for="email">Email address</label>
+            <input class="bInputText" type="text" placeholder="Email" id="email" name="email" />
+          </div>
+          <div class="form-group">
+            <label class="bText6" for="password">Password</label>
+            <input class="bInputText" type="password" placeholder="Password" id="password" name="password" />
+          </div>
+          <div class="form-group">          
+            <input class="bButton" type="submit" value="Continue" />
+          </div>
+          <a class="bTextLink" href="#">I forgot my password</a>
+          <span class="bText4" style="display: block;">Or</span>
+          <div class="externalProviders">          
+            <a
+              href="#"        
+              title="Log in using Google"              
+            >
+              <img src="assets/450af603-3544-480d-9dc1-e49c0b5122f7.png" width="48px">
+              <span class="bText">Continue with Google</span>
+            </a>
+          </div>
+        </form>
+        
+      </div>
+      <div class="divider" role="separator" aria-label="Divider"></div>
+      <div class="right-side">
+       
+        <div class="social-links">
           <a
-            href="#"        
-            title="Log in using Google"              
+            href="https://bomdev.com.br/"        
+            title="Bomdev Software House"  
+            target="_blank"
+            rel="noopener"
           >
-            <img src="assets/450af603-3544-480d-9dc1-e49c0b5122f7.png" width="48px">
-            <span class="bText">Continue with Google</span>
+            <img src="assets/logo.svg" width="48px">
           </a>
+        
         </div>
-      </form>
-      
-    </div>
-    <div class="divider" role="separator" aria-label="Divider"></div>
-    <div class="right-side">
-     
-      <div class="social-links">
-        <a
-          href="https://bomdev.com.br/"        
-          title="Bomdev Software House"  
-          target="_blank"
-          rel="noopener"
-        >
-          <img src="assets/logo.svg" width="48px">
-        </a>
-      
       </div>
     </div>
-  </div>
+  </ng-container>  
+  
 </main>
 
 <router-outlet />

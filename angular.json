@@ -95,6 +95,10 @@
               {
                 "glob": "**/*",
                 "input": "public/assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "public/assets/i18n"
               }
             ],
             "styles": [
