@@ -1,5 +1,12 @@
 {
     "title": "Continue to",
     "newAccountLabel":"New user?",
-    "newAccountButton":"Create an account"
+    "newAccountButton":"Create an account",
+    "emailAddressLabel":"Email address",
+    "passwordLabel":"Password",
+    "continueButton":"Continue",
+    "forgetPasswordButton":"I forget my password",
+    "orLabel":"Or",
+    "loginUsingGoogleTitle":"Log in using Google",
+    "loginUsingGoogleButton":"Continue with Google"
 }

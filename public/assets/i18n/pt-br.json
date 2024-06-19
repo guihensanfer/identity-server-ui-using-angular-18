@@ -1,5 +1,12 @@
 {
     "title": "Continuar para",
     "newAccountLabel":"Não possui conta?",
-    "newAccountButton":"Cadastre-se"
+    "newAccountButton":"Cadastre-se",
+    "emailAddressLabel":"Endereço de e-mail",
+    "passwordLabel":"Senha",
+    "continueButton":"Continuar",
+    "forgetPasswordButton":"Esqueci minha senha",
+    "orLabel":"Ou",
+    "loginUsingGoogleTitle":"Continuar usando Google",
+    "loginUsingGoogleButton":"Continuar usando Google"
 }
