@@ -5,11 +5,11 @@ import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TranslocoModule],
+  imports: [TranslocoModule, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent  implements OnInit {
+export class AppComponent  implements OnInit {  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -17,17 +17,16 @@ export class AppComponent  implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.router.parseUrl(this.router.parseUrl(this.router.url).queryParams['lang']));
-    this.route.paramMap.subscribe(params => {
-      const lang = params.get('lang');
+    console.log(this.route.snapshot.paramMap.get('lang'));
+    console.log(this.route.snapshot.paramMap);
+        const lang = this.route.snapshot.paramMap.get('lang');
       
       if (lang) {
         this.translocoService.setActiveLang(lang);
       } else {
         // Redireciona para o idioma padrão se não houver parâmetro de idioma na URL
         this.router.navigate(['/sso/pt-br']);
-      }
-    });
+      }  
   }
 
   title = 'identity-server-ui';
