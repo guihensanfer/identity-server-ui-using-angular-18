@@ -1,0 +1,64 @@
+@font-face {
+    font-family: 'Manrope';
+    src: url('/assets/fonts/static/Manrope-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  .bText{
+    font-family: Manrope, sans-serif;
+  }
+
+  .bTextBold{
+    font-family: Manrope, sans-serif;
+    font-weight: bold;
+  }
+
+  .bText6{
+    font-family: Manrope, sans-serif;
+    font-size: 90%;
+  }
+
+  .bText4{
+    font-family: Manrope, sans-serif;
+    font-size: 120%;
+  }
+
+  .bTextLink{
+    font-family: Manrope, sans-serif;
+    color:#1e90ff;
+    text-decoration: underline;
+  }
+
+  .bButton{
+    font-family: Manrope, sans-serif;
+    font-size: 100%;
+    background-color:#000;
+    color:#fff;
+    padding:5px;
+    border-radius: 5px;
+    border: none;
+  }
+
+  .bInputText{
+    font-family: Manrope, sans-serif;
+    font-size: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color:#FFF;
+    border-bottom: solid 1px #323232;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    display: block;
+  }
+
+  .right-side{
+    margin-top:10px;
+  }
+
+  @media screen and (max-width: 650px) {
+    
+  }

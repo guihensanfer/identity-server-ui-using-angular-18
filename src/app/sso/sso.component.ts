@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './sso.component.css'
 })
 export class SsoComponent {
+  title = "application";
 
 }
