@@ -1,3 +1,51 @@
+
+
+.form-group input{
+    width: 400px;
+    
+}
+
+.bMargin-top-default{
+    margin-top:20px;
+    display: block;
+}
+
+.externalProviders ul{
+    padding: 0px;
+}
+.externalProviders ul li{
+    list-style: none;
+    border-radius: 20px;
+    border:solid 1px #c0c0c0;
+    padding: 10px;
+    display: block;
+}
+
+.externalProviders a {
+    display: flex;
+    align-items: center;    
+    
+}
+.externalProviders img {
+    margin-right: 10px;
+    width: 32px; 
+}
+.externalProviders .bText {
+    display: flex;
+    align-items: center;
+}
+
+.customContainer{
+    padding-top:20px;    
+    padding-left:20px;
+    padding-right:20px;    
+    padding-bottom:40px;
+    /* border: solid 1px #323232; */
+    background-color: #DCDCDC;
+    border-radius: 15px;
+    width: 420px;
+}
+
 @media screen and (max-width: 650px) {
   
 }  

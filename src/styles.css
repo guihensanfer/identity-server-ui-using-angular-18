@@ -18,10 +18,25 @@
     font-family: Manrope, sans-serif;
     font-size: 90%;
   }
-
+  
   .bText4{
     font-family: Manrope, sans-serif;
     font-size: 120%;
+  }
+
+  .bText3{
+    font-family: Manrope, sans-serif;
+    font-size: 140%;
+  }
+
+  .bText2{
+    font-family: Manrope, sans-serif;
+    font-size: 160%;
+  }
+
+  .bText1{
+    font-family: Manrope, sans-serif;
+    font-size: 180%;
   }
 
   .bTextLink{
@@ -37,7 +52,7 @@
   .bButton{
     font-family: Manrope, sans-serif;
     font-size: 100%;
-    background-color:#000;
+    background-color:#626262;
     color:#fff;
     padding:5px;
     border-radius: 5px;
@@ -57,4 +72,9 @@
     border-right: none;
     border-top: none;
     display: block;
+  }
+
+  .container{
+    margin-left:15%;
+    margin-right:15%;
   }

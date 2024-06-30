@@ -1,39 +1,45 @@
-<main class="main">
+<main class="main container">
     <ng-container *transloco="let t">
-      <h1 class="bText4">{{ t('title') + ' ' + title }}</h1>
-      <div class="content">
-        <div class="left-side">                        
-          <div>
-            <span class="bTextBold">{{t('newAccountLabel')}}</span>
-            <a class="bTextLink" style="margin-left:5px;" href="#">{{t('newAccountButton')}}</a>
-          </div>
-          <form method="post">
-            <div class="form-group">
-              <label class="bText6" for="email">{{t('emailAddressLabel')}}</label>
-              <input class="bInputText" type="text" placeholder="{{t('emailAddressLabel')}}" id="email" name="email" />
+      <div class="customContainer bMargin-top-default">
+        <h1 class="bText2">{{ t('title') + ' ' + title }}</h1>
+        <div class="content">
+          <div class="left-side">                        
+            <div class="bMargin-top-default">
+              <span class="bTextBold">{{t('newAccountLabel')}}</span>
+              <a class="bTextLink" style="margin-left:5px;" href="#">{{t('newAccountButton')}}</a>
             </div>
-            <div class="form-group">
-              <label class="bText6" for="password">{{t('passwordLabel')}}</label>
-              <input class="bInputText" type="password" placeholder="{{t('passwordLabel')}}" id="password" name="password" />
-            </div>
-            <div class="form-group">          
-              <input class="bButton" type="submit" value="{{t('continueButton')}}" />
-            </div>
-            <a class="bTextLink" href="#">{{t('forgetPasswordButton')}}</a>
-            <span class="bText4" style="display: block;">{{t('orLabel')}}</span>
-            <div class="externalProviders">          
-              <a
-                href="#" class="bTextLink"       
-                title="{{t('loginUsingGoogleTitle')}}"              
-              >
-                <img src="assets/450af603-3544-480d-9dc1-e49c0b5122f7.png" width="48px">
-                <span class="bText">{{t('loginUsingGoogleButton')}}</span>
-              </a>
-            </div>
-          </form>
-          
-        </div>        
+            <form method="post" class="bMargin-top-default">
+              <div class="form-group">
+                <label class="bText6" for="email">{{t('emailAddressLabel')}}</label>
+                <input class="bInputText" type="text" placeholder="{{t('emailAddressLabel')}}" id="email" name="email" />
+              </div>
+              <div class="form-group">
+                <label class="bText6" for="password">{{t('passwordLabel')}}</label>
+                <input class="bInputText" type="password" placeholder="{{t('passwordLabel')}}" id="password" name="password" />
+              </div>
+              <input class="bButton bMargin-top-default" type="submit" value="{{t('continueButton')}}" />
+              <a class="bTextLink bMargin-top-default" href="#">{{t('forgetPasswordButton')}}</a>
+              <span class="bText4 bMargin-top-default">{{t('orLabel')}}</span>
+              <div class="externalProviders bMargin-top-default">      
+                <ul>
+                  <li>
+                    <a
+                      href="#" class="bTextLink"       
+                      title="{{t('loginUsingGoogleTitle')}}"              
+                    >
+                      <img src="assets/450af603-3544-480d-9dc1-e49c0b5122f7.png" width="48px">
+                      <span class="bText">{{t('loginUsingGoogleButton')}}</span>
+                    </a>
+                  </li>
+                </ul>    
+                
+              </div>
+            </form>
+            
+          </div>        
+        </div>
       </div>
+      
     </ng-container>  
     
   </main>

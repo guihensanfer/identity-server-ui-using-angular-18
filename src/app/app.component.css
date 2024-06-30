@@ -4,8 +4,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 10px;
-  margin-top: 10px;
+  padding-top: 5px;
+  margin-top: 20px;
   border-top:solid 1px #DCDCDC;
     
 }
@@ -21,8 +21,16 @@
     gap: 15px;
 }
 
+.footer .links{
+  font-size: 90%;
+}
+
+.footer .links span{
+  color:#626262;
+}
+
 .footer .links a{
-  color: #A0A0A0;
+  color: #323232;
 }
 
 .footer .links a::after {
@@ -34,6 +42,7 @@
 .footer .links a:last-child::after {
   content: '';
 }
+
 
   @media screen and (max-width: 650px) {
     

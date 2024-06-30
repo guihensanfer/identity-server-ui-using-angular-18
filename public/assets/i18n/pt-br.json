@@ -8,5 +8,9 @@
     "forgetPasswordButton":"Esqueci minha senha",
     "orLabel":"Ou",
     "loginUsingGoogleTitle":"Continuar usando Google",
-    "loginUsingGoogleButton":"Continuar usando Google"
+    "loginUsingGoogleButton":"Continuar usando Google",
+    "rightsLabel":"Copyright © 2024 Bomdev. Todos os direitos reservados",
+    "doNotShareMyPersonalInfoLabel":"Não compartilhar minhas informações pessoais",
+    "privacyLabel":"Privacidade",
+    "termsOfUseLabel":"Termos de uso"
 }
