@@ -27,10 +27,12 @@
 
 .footer .links span{
   color:#626262;
+  text-align: right;
 }
 
 .footer .links a{
   color: #323232;
+  text-align: right;
 }
 
 .footer .links a::after {
@@ -44,6 +46,6 @@
 }
 
 
-  @media screen and (max-width: 650px) {
-    
-  }
+@media screen and (max-width: 650px) {
+  
+}

@@ -18,6 +18,12 @@
     font-family: Manrope, sans-serif;
     font-size: 90%;
   }
+
+  .bLegend{
+    font-family: Manrope, sans-serif;
+    font-size: 80%;
+    color: #626262;
+  }
   
   .bText4{
     font-family: Manrope, sans-serif;
@@ -43,6 +49,7 @@
     font-family: Manrope, sans-serif;
     color:#1e90ff;
     text-decoration: none;
+    font-weight: bold;
   }
 
   .bTextLink:hover{
@@ -52,11 +59,18 @@
   .bButton{
     font-family: Manrope, sans-serif;
     font-size: 100%;
-    background-color:#626262;
     color:#fff;
+    background-color:#1187fc;
     padding:5px;
     border-radius: 5px;
     border: none;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .bButton:hover{
+    background-color: #DCDCDC;
   }
 
   .bInputText{
