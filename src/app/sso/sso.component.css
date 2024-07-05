@@ -1,5 +1,5 @@
 .form-group input{
-    width: 100%;
+    width: 95%;
     
 }
 
@@ -27,7 +27,7 @@
 .externalProviders a {
     display: flex;
     align-items: center;    
-    color: #626262;    
+    color: #323232;    
 }
 .externalProviders img {
     margin-right: 10px;
@@ -43,16 +43,19 @@
   }
 
 .customContainer{
-    padding-top:20px;    
+    padding-top:10px;    
     padding-left:20px;
     padding-right:20px;    
-    padding-bottom:40px;
-    border: solid 1px #828282;
+    padding-bottom:10px;
+    border: solid 1px #DCDCDC;
     background-color: #FFF;
     border-radius: 15px;
     /* width: 420px; */
 }
 
 @media screen and (max-width: 650px) {
-  
+  .container{
+    margin-left: 2%;
+    margin-right: 2%;
+  }
 }  

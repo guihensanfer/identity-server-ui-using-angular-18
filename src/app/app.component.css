@@ -4,9 +4,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 5px;
-  margin-top: 20px;
-  border-top:solid 1px #DCDCDC;
+  padding-top: 5px;  
+  /* border-top:solid 1px #DCDCDC; */
     
 }
 .footer .logo {
@@ -41,11 +40,22 @@
   position: absolute;
   margin-left: 5px;
 }
+
+.footer .links span::after {
+  content: '|';
+  color: #E0E0E0;
+  position: absolute;
+  margin-left: 5px;
+}
+
 .footer .links a:last-child::after {
   content: '';
 }
 
 
 @media screen and (max-width: 650px) {
-  
+  .container{
+    margin-left: 2%;
+    margin-right: 2%;
+  }
 }

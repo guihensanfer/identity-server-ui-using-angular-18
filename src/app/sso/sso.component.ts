@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+import { SeparatorElemComponent } from '../separator-elem/separator-elem.component';
 
 @Component({
   selector: 'app-sso',
   standalone: true,
-  imports: [TranslocoModule, CommonModule, RouterLink, RouterLinkActive],
+  imports: [TranslocoModule, CommonModule, RouterLink, RouterLinkActive, SeparatorElemComponent],
   templateUrl: './sso.component.html',
   styleUrl: './sso.component.css'
 })
