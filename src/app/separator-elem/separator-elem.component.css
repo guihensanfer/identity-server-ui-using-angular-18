@@ -1,4 +1,4 @@
 .separator {
-    border-top: 1px solid #DCDCDC;     
+    border-top: 1px dashed var(--background-third-color);     
     display: block;
 }

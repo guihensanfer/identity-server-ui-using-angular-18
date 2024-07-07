@@ -1,42 +1,36 @@
 <main class="main container">
     <ng-container *transloco="let t">
       <div class="customContainer">
-        <h1 class="bText2">{{ t('title') + ' ' + title }}</h1>
-        <app-separator-elem></app-separator-elem>
+        <h1 class="bText2">{{ t('title') + ' ' + title }}</h1>        
         <div class="content">
           <div class="left-side">                        
             <div class="bMargin-top-default">
               <span class="bTextBold">{{t('newAccountLabel')}}</span>
               <a class="bTextLink" style="margin-left:5px;" href="#">{{t('newAccountButton')}}</a>
+            </div>            
+            <div class="externalProviders bMargin-top-default">      
+              <ul>                  
+                <li>
+                  
+                  <a                      
+                    href="#" class="bTextLink"       
+                    title="{{t('loginUsingGoogleTitle')}}"              
+                  >
+                    <img src="assets/450af603-3544-480d-9dc1-e49c0b5122f7.png" width="48px">
+                    <span class="bText">{{t('loginUsingGoogleButton')}}</span>
+                  </a>
+                  
+                </li>
+              </ul>                    
             </div>
+            <app-separator-elem class="bMargin-top-default"></app-separator-elem>
             <form method="post" class="bMargin-top-default">
               <div class="form-group">
                 <label class="bLegend" for="email">{{t('emailAddressLabel')}}</label>
                 <input class="bInputText" type="text" placeholder="{{t('emailAddressLabel')}}" id="email" name="email" />
-              </div>
-              <div class="form-group">
-                <label class="bLegend" for="password">{{t('passwordLabel')}}</label>
-                <input class="bInputText" type="password" placeholder="{{t('passwordLabel')}}" id="password" name="password" />
-              </div>
-              <input id="sendButton" class="bButton bMargin-top-default" type="submit" value="{{t('continueButton')}}" />
-              <a class="bTextLink bMargin-top-default" href="#">{{t('forgetPasswordButton')}}</a>
-              <span class="bText4 bTextBold bMargin-top-default">{{t('orLabel')}}</span>
-              <div class="externalProviders bMargin-top-default">      
-                <ul>
-                  <li>
-                    <a
-                      href="#" class="bTextLink"       
-                      title="{{t('loginUsingGoogleTitle')}}"              
-                    >
-                      <img src="assets/450af603-3544-480d-9dc1-e49c0b5122f7.png" width="48px">
-                      <span class="bText">{{t('loginUsingGoogleButton')}}</span>
-                    </a>
-                  </li>
-                </ul>    
-                
-              </div>
-            </form>
-            
+              </div>              
+              <input id="sendButton" class="bButton bMargin-top-default" type="submit" value="{{t('continueButton')}}" />                            
+            </form>            
           </div>        
         </div>
       </div>

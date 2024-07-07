@@ -1,3 +1,11 @@
+:root {
+  --text-primary-color:#FFF;
+  --text-secundary-color:#e0e0e0;
+  --background-primary-color:#1A504F;
+  --background-secundary-color:#2C3636;
+  --background-third-color:#213333;
+}
+
 @font-face {
     font-family: 'Manrope';
     src: url('/assets/fonts/static/Manrope-Regular.ttf') format('truetype');
@@ -7,49 +15,56 @@
 
   .bText{
     font-family: Manrope, sans-serif;
+    color: var(--text-primary-color);
   }
 
   .bTextBold{
     font-family: Manrope, sans-serif;
     font-weight: bold;
+    color: var(--text-primary-color);
   }
 
   .bText6{
     font-family: Manrope, sans-serif;
     font-size: 90%;
+    color: var(--text-primary-color);
   }
 
   .bLegend{
     font-family: Manrope, sans-serif;
     font-size: 80%;
-    color: #626262;
+    color: var(--text-secundary-color);
   }
   
   .bText4{
     font-family: Manrope, sans-serif;
     font-size: 120%;
+    color: var(--text-primary-color);
   }
 
   .bText3{
     font-family: Manrope, sans-serif;
     font-size: 140%;
+    color: var(--text-primary-color);
   }
 
   .bText2{
     font-family: Manrope, sans-serif;
     font-size: 160%;
+    color: var(--text-primary-color);
   }
 
   .bText1{
     font-family: Manrope, sans-serif;
     font-size: 180%;
+    color: var(--text-primary-color);
   }
 
   .bTextLink{
     font-family: Manrope, sans-serif;
-    color:#1e90ff;
+    color:#48E0DE;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: bold;    
   }
 
   .bTextLink:hover{
@@ -59,9 +74,10 @@
   .bButton{
     font-family: Manrope, sans-serif;
     font-size: 100%;
-    color:#fff;
-    background-color:#1187fc;
-    padding:5px;
+    color: var(--text-primary-color);
+    background-color:var(--background-third-color);
+    padding:8px;
+    
     border-radius: 5px;
     border: none;
     font-weight: bold;
@@ -70,25 +86,31 @@
   }
 
   .bButton:hover{
-    background-color: #DCDCDC;
+    background-color: #2F9492;
   }
 
   .bInputText{
     font-family: Manrope, sans-serif;
     font-size: 100%;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 10px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 20px;
+    padding-right: 5px;
     
-    background-color:#FFF;
-    border-bottom: solid 1px #323232;
-    border-left: none;
-    border-right: none;
-    border-top: none;
+    background-color:#2F9492;
+    border: none;
+  
+    border-radius: 20px;
+    
     display: block;
   }
 
   .container{
     margin-left:35%;
     margin-right:35%;
+  }
+
+  label{
+    margin-bottom: 5px;
+    display: block;
   }
