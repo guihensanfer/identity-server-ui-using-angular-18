@@ -24,11 +24,11 @@
               </ul>                    
             </div>
             <app-separator-elem class="bMargin-top-default"></app-separator-elem>
-            <form *ngIf="reativeForm"  [formGroup="reativeForm"] (submit)="onSubmit()" method="post" class="bMargin-top-default">
+            <form [formGroup]="myGroup" (submit)="onSubmit()" method="post" class="bMargin-top-default">
               <div class="form-group">
                 <label class="bLegend" for="email">{{t('emailAddressLabel')}}</label>
-                <input class="bInputText" type="text" placeholder="{{t('emailAddressLabel')}}" formControlName="email" id="email" name="email" />
-                <div class="alert alert-danger" *ngIf="reativeForm.get('email')?.invalid && reativeForm.get('email')?.touched">{{t('requiredField')}}</div>
+                <input class="bInputText invalid" type="text" placeholder="{{t('emailAddressLabel')}}" formControlName="email" id="email" name="email" />
+                <div class="alert alert-danger" *ngIf="myGroup.get('email')?.invalid && myGroup.get('email')?.touched">{{t('requiredField')}}</div>
               </div>              
               <input id="sendButton" class="bButton bMargin-top-default" type="submit" value="{{t('continueButton')}}" />                            
             </form>            

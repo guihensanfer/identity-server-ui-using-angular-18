@@ -14,15 +14,15 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 })
 export class SsoComponent  implements OnInit {
 
+  public myGroup = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.maxLength(200), Validators.email])   
+  });
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private translocoService: TranslocoService
   ) {}
 
-  reativeForm = new FormGroup({
-    email: new FormControl('')   
-  });
 
   ngOnInit(): void {    
       const lang = this.route.snapshot.paramMap.get('lang');
