@@ -2,7 +2,7 @@
     "title": "Continue to",
     "newAccountLabel":"New user?",
     "newAccountButton":"Create an account",
-    "emailAddressLabel":"Email address",
+    "emailAddressLabel":"Enter email",
     "passwordLabel":"Password",
     "continueButton":"Continue",
     "forgetPasswordButton":"I forget my password",
@@ -12,5 +12,6 @@
     "rightsLabel":"Copyright © 2024 Bomdev. All rights reserved",
     "doNotShareMyPersonalInfoLabel":"Do not share my personal information",
     "privacyLabel":"Privacy",
-    "termsOfUseLabel":"Terms of use"
+    "termsOfUseLabel":"Terms of use",
+    "requiredField":"This field is required"
 }

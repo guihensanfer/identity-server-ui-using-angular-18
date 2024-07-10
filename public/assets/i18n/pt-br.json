@@ -12,5 +12,6 @@
     "rightsLabel":"Copyright © 2024 Bomdev. Todos os direitos reservados",
     "doNotShareMyPersonalInfoLabel":"Não compartilhar minhas informações pessoais",
     "privacyLabel":"Privacidade",
-    "termsOfUseLabel":"Termos de uso"
+    "termsOfUseLabel":"Termos de uso",
+    "requiredField":"Obrigatório"
 }

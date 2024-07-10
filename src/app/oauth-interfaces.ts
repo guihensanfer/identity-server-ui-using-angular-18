@@ -1,12 +1,13 @@
 export interface RespDefault <T> {
   message: string;
   ticket: string;
-  data: T;
+  success:boolean;
+  errors: [],  
+  data: [T];
 }
 
 export interface RespCheckEmailExists{
-  exists: boolean,
-  projectId: number  
+  userExists: boolean,  
 }
 
 export interface PostCheckEmailExists{
