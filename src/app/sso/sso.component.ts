@@ -49,9 +49,10 @@ export class SsoComponent  implements OnInit {
   }  
 
   onChange(event: Event){
-    this._loading.showLoading();
+    
 
     if(this.myGroup.controls.email.valid){
+      this._loading.showLoading();
       const element = event.target as HTMLInputElement;
 
       this.oAuthService.userEmailExists(element.value, null)
