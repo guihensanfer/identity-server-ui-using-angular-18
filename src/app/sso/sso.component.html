@@ -34,7 +34,8 @@
                 <!-- <div class="alert alert-danger" *ngIf="myGroup.get('email')?.invalid && myGroup.get('email')?.touched">{{t('requiredField')}}</div> -->
               </div>              
               <input id="sendButton" class="bButton bMargin-top-default" type="submit" value="{{t('continueButton')}}" 
-                [disabled]="nextButtonDisabled" />                            
+                [disabled]="nextButtonDisabled"
+                [class.bButtonUnfocused]="nextButtonDisabled" />                            
             </form>            
           </div>        
         </div>

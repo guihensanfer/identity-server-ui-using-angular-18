@@ -69,11 +69,7 @@ export class SsoComponent  implements OnInit {
           }
         }
       );
-    }   
-    else
-    {
-      console.log('invalid yet');
-    }        
+    }       
   }
 
   title = 'identity-server-ui';

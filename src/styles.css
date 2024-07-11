@@ -89,6 +89,15 @@
     background-color: #2F9492;
   }
 
+  .bButtonUnfocused{
+    color:#355252 !important;    
+}
+
+  .bButtonUnfocused:hover{
+      background-color: var(--background-third-color) !important;
+      cursor: not-allowed;
+  }
+
   .bInputText{
     font-family: Manrope, sans-serif;
     font-size: 110%;
