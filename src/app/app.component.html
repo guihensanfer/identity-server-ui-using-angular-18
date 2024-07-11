@@ -17,6 +17,7 @@
         <a class="bTextLink" href="#link2" rel="noopener noreferrer" target="_blank">{{t('termsOfUseLabel')}}</a>
         <a class="bTextLink" href="#link3" rel="noopener noreferrer" target="_blank">{{t('privacyLabel')}}</a>        
     </div>
-  </ng-container>
+    <app-loading *ngIf="_loading.loading"></app-loading>
+  </ng-container>  
   
 </footer>

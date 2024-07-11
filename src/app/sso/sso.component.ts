@@ -6,7 +6,8 @@ import { SeparatorElemComponent } from '../separator-elem/separator-elem.compone
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OauthService } from '../oauth.service';
 import { RespCheckEmailExists, RespDefault } from '../oauth-interfaces';
-import { escape } from 'querystring';
+import { AppComponent } from '../app.component';
+import { LoadingService } from '../loading.service';
 
 @Component({
   selector: 'app-sso',
@@ -20,7 +21,9 @@ export class SsoComponent  implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private translocoService: TranslocoService,
-    private oAuthService:OauthService
+    private oAuthService:OauthService,
+    private appComponent: AppComponent,
+    public _loading:LoadingService
   ) {}
 
 
@@ -46,6 +49,8 @@ export class SsoComponent  implements OnInit {
   }  
 
   onChange(event: Event){
+    this._loading.showLoading();
+
     if(this.myGroup.controls.email.valid){
       const element = event.target as HTMLInputElement;
 
@@ -62,14 +67,16 @@ export class SsoComponent  implements OnInit {
           },
           error : (err) => {
             this.nextButtonDisabled = true;
+            this._loading.hideLoading();
             console.log(err);
           },
           complete: () => {
-            console.log('complete');
-          }
+            this._loading.hideLoading();
+          }          
         }
       );
-    }       
+    }  
+         
   }
 
   title = 'identity-server-ui';

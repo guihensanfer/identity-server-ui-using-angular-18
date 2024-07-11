@@ -1,0 +1,16 @@
+#loadingContainer{
+    background-color: #FFF;
+    opacity: 0.6;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top:0px;
+    bottom:0px;
+    z-index: 1000;
+}
+
+#loadingContainer img{
+    width: 24px;
+    display: table;
+    margin: 300px auto;
+}
