@@ -46,30 +46,34 @@ export class SsoComponent  implements OnInit {
   }  
 
   onChange(event: Event){
-    const element = event.target as HTMLInputElement;
+    if(this.myGroup.controls.email.valid){
+      const element = event.target as HTMLInputElement;
 
-    this.oAuthService.userEmailExists(element.value, null)
-      .subscribe({
-        next :  (res : RespDefault<RespCheckEmailExists>) => {                
-          if(res && res.data?.userExists){
-            this.nextButtonDisabled = false;
-          }
-          else{
+      this.oAuthService.userEmailExists(element.value, null)
+        .subscribe({
+          next :  (res : RespDefault<RespCheckEmailExists>) => {                
+            if(res && res.data?.userExists){
+              this.nextButtonDisabled = false;
+            }
+            else{
+              this.nextButtonDisabled = true;
+              console.log('teste');
+            }      
+          },
+          error : (err) => {
             this.nextButtonDisabled = true;
-            console.log('teste');
-          }      
-        },
-        error : (err) => {
-          this.nextButtonDisabled = true;
-          console.log(err);
-        },
-        complete: () => {
-          console.log('complete');
+            console.log(err);
+          },
+          complete: () => {
+            console.log('complete');
+          }
         }
-      }
-    );
-
-
+      );
+    }   
+    else
+    {
+      console.log('invalid yet');
+    }        
   }
 
   title = 'identity-server-ui';

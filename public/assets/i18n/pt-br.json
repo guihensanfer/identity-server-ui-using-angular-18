@@ -3,6 +3,7 @@
     "newAccountLabel":"Não possui conta?",
     "newAccountButton":"Cadastre-se",
     "emailAddressLabel":"Endereço de e-mail",
+    "emailAddressPlaceholder":"Digite seu e-mail",
     "passwordLabel":"Senha",
     "continueButton":"Continuar",
     "forgetPasswordButton":"Esqueci minha senha",

@@ -27,7 +27,7 @@
             <form [formGroup]="myGroup" (submit)="onSubmit()" method="post" class="bMargin-top-default">
               <div class="form-group">
                 <label class="bLegend" for="email">{{t('emailAddressLabel')}}</label>
-                <input class="bInputText" type="text" placeholder="{{t('emailAddressLabel')}}" formControlName="email" id="email" name="email" 
+                <input class="bInputText" type="text" placeholder="{{t('emailAddressPlaceholder')}}" formControlName="email" id="email" name="email" 
                   [class.invalidInput]="myGroup.get('email')?.invalid && myGroup.get('email')?.touched" 
                   (change)="onChange($event)"
                   />
