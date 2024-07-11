@@ -14,5 +14,7 @@
     "doNotShareMyPersonalInfoLabel":"Não compartilhar minhas informações pessoais",
     "privacyLabel":"Privacidade",
     "termsOfUseLabel":"Termos de uso",
-    "requiredField":"Obrigatório"
+    "requiredField":"Obrigatório",
+    "emailFound":"E-mail encontrado.",
+    "emailNotFound":"E-mail não encontrado."
 }

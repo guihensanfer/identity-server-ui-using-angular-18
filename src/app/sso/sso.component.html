@@ -31,7 +31,8 @@
                   [class.invalidInput]="myGroup.get('email')?.invalid && myGroup.get('email')?.touched" 
                   (change)="onChange($event)"
                   />
-                <!-- <div class="alert alert-danger" *ngIf="myGroup.get('email')?.invalid && myGroup.get('email')?.touched">{{t('requiredField')}}</div> -->
+                <div class="alert-danger" *ngIf="!nextButtonDisabled && !emailFound">{{t('emailNotFound')}}</div>
+                <div class="alert-success" *ngIf="emailFound">{{t('emailFound')}}</div>
               </div>              
               <input id="sendButton" class="bButton bMargin-top-default" type="submit" value="{{t('continueButton')}}" 
                 [disabled]="nextButtonDisabled"

@@ -1,16 +1,55 @@
 #loadingContainer{
     background-color: #FFF;
-    opacity: 0.6;
+    opacity: 0.4;
     position: absolute;
     left: 0px;
     right: 0px;
     top:0px;
     bottom:0px;
     z-index: 1000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 #loadingContainer img{
     width: 24px;
     display: table;
     margin: 300px auto;
+}
+
+.loader {
+    display: flex;
+    justify-content: space-between;
+    width: 60px;
+}
+
+.loader::before,
+.loader::after,
+.loader div {
+    content: '';
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #333;
+    animation: blink 1.4s infinite both;
+}
+
+.loader div {
+    animation-delay: 0.2s;
+}
+
+.loader::before {
+    animation-delay: 0.4s;
+}
+
+@keyframes blink {
+    0%, 80%, 100% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
 }

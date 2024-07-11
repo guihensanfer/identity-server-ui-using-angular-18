@@ -31,6 +31,7 @@ export class SsoComponent  implements OnInit {
     email: new FormControl('', [Validators.required, Validators.maxLength(200), Validators.email])   
   });
   nextButtonDisabled: boolean = true;
+  emailFound:boolean = false;
 
   ngOnInit(): void {    
       const lang = this.route.snapshot.paramMap.get('lang');
@@ -60,10 +61,11 @@ export class SsoComponent  implements OnInit {
           next :  (res : RespDefault<RespCheckEmailExists>) => {                
             if(res && res.data?.userExists){
               this.nextButtonDisabled = false;
+              this.emailFound = true;
             }
             else{
               this.nextButtonDisabled = true;
-              console.log('teste');
+              this.emailFound = false;              
             }      
           },
           error : (err) => {
