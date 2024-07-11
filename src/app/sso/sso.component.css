@@ -45,6 +45,22 @@ h1{
     width: 100%;
   }
 
+.invalidInput{
+    border: solid 2px #e75151;
+    background-image: url('/assets/wrong.svg');
+    background-size: 16px;
+    background-position: calc(100% - 10px) center;
+    background-repeat: no-repeat;    
+}
+
+.validInput{
+    border: solid 2px #17c06c;
+    background-image: url('/assets/success.svg');
+    background-size: 28px;
+    background-position: calc(100% - 10px) center;
+    background-repeat: no-repeat;        
+}
+
 .customContainer{
     padding-top:10px;    
     padding-left:20px;
