@@ -3,11 +3,11 @@ export interface RespDefault <T> {
   ticket: string;
   success:boolean;
   errors: [],  
-  data: [T];
+  data: T;
 }
 
 export interface RespCheckEmailExists{
-  userExists: boolean,  
+  userExists: boolean
 }
 
 export interface PostCheckEmailExists{

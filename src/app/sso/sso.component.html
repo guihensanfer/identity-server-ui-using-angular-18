@@ -27,10 +27,14 @@
             <form [formGroup]="myGroup" (submit)="onSubmit()" method="post" class="bMargin-top-default">
               <div class="form-group">
                 <label class="bLegend" for="email">{{t('emailAddressLabel')}}</label>
-                <input class="bInputText" type="text" placeholder="{{t('emailAddressLabel')}}" formControlName="email" id="email" name="email" [class.invalidInput]="myGroup.get('email')?.invalid && myGroup.get('email')?.touched" />
+                <input class="bInputText" type="text" placeholder="{{t('emailAddressLabel')}}" formControlName="email" id="email" name="email" 
+                  [class.invalidInput]="myGroup.get('email')?.invalid && myGroup.get('email')?.touched" 
+                  (change)="onChange($event)"
+                  />
                 <!-- <div class="alert alert-danger" *ngIf="myGroup.get('email')?.invalid && myGroup.get('email')?.touched">{{t('requiredField')}}</div> -->
               </div>              
-              <input id="sendButton" class="bButton bMargin-top-default" type="submit" value="{{t('continueButton')}}" />                            
+              <input id="sendButton" class="bButton bMargin-top-default" type="submit" value="{{t('continueButton')}}" 
+                [disabled]="nextButtonDisabled" />                            
             </form>            
           </div>        
         </div>

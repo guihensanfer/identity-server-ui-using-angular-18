@@ -3,7 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { SeparatorElemComponent } from '../separator-elem/separator-elem.component';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { OauthService } from '../oauth.service';
+import { RespCheckEmailExists, RespDefault } from '../oauth-interfaces';
+import { escape } from 'querystring';
 
 @Component({
   selector: 'app-sso',
@@ -13,16 +16,18 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
   styleUrl: './sso.component.css'
 })
 export class SsoComponent  implements OnInit {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private translocoService: TranslocoService,
+    private oAuthService:OauthService
+  ) {}
+
 
   public myGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.maxLength(200), Validators.email])   
   });
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private translocoService: TranslocoService
-  ) {}
-
+  nextButtonDisabled: boolean = true;
 
   ngOnInit(): void {    
       const lang = this.route.snapshot.paramMap.get('lang');
@@ -37,7 +42,35 @@ export class SsoComponent  implements OnInit {
 
   onSubmit() {
     // throw new Error('Method not implemented.');
+    alert('teste');
   }  
+
+  onChange(event: Event){
+    const element = event.target as HTMLInputElement;
+
+    this.oAuthService.userEmailExists(element.value, null)
+      .subscribe({
+        next :  (res : RespDefault<RespCheckEmailExists>) => {                
+          if(res && res.data?.userExists){
+            this.nextButtonDisabled = false;
+          }
+          else{
+            this.nextButtonDisabled = true;
+            console.log('teste');
+          }      
+        },
+        error : (err) => {
+          this.nextButtonDisabled = true;
+          console.log(err);
+        },
+        complete: () => {
+          console.log('complete');
+        }
+      }
+    );
+
+
+  }
 
   title = 'identity-server-ui';
 
