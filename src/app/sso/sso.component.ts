@@ -8,6 +8,7 @@ import { OauthService } from '../services/oauth/oauth.service';
 import { RespCheckEmailExists } from '../interfaces/oauth/oauth-interfaces';
 import { LoadingService } from '../services/loading.service';
 import { RespDefault } from '../interfaces/default-interfaces';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-sso',
@@ -37,9 +38,8 @@ export class SsoComponent  implements OnInit {
       
       if (lang) {
         this.translocoService.setActiveLang(lang);
-      } else {
-        // Redireciona para o idioma padrão se não houver parâmetro de idioma na URL
-        this.router.navigate(['/sso/pt-br']);
+      } else {        
+        this.router.navigate(['/sso/' + environment.defaultLanguage]);
       }  
   }
 
