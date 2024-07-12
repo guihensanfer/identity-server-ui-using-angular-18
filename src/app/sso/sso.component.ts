@@ -5,10 +5,11 @@ import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { SeparatorElemComponent } from '../separator-elem/separator-elem.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OauthService } from '../services/oauth/oauth.service';
-import { RespCheckEmailExists } from '../interfaces/oauth/oauth-interfaces';
+import { CheckEmailExistsResp } from '../interfaces/oauth/oauth-interfaces';
 import { LoadingService } from '../services/loading.service';
 import { RespDefault } from '../interfaces/default-interfaces';
 import { environment } from '../../environments/environment';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-sso',
@@ -23,7 +24,8 @@ export class SsoComponent  implements OnInit {
     private router: Router,
     private translocoService: TranslocoService,
     private oAuthService:OauthService,
-    public _loading:LoadingService
+    private authService: AuthService, 
+    private _loading:LoadingService    
   ) {}
 
 
@@ -55,9 +57,11 @@ export class SsoComponent  implements OnInit {
       this._loading.showLoading();
       const element = event.target as HTMLInputElement;
 
+      console.log(this.authService.login());
+
       this.oAuthService.userEmailExists(element.value, null)
         .subscribe({
-          next :  (res : RespDefault<RespCheckEmailExists>) => {                
+          next :  (res : RespDefault<CheckEmailExistsResp>) => {                
             if(res && res.data?.userExists){
               this.nextButtonDisabled = false;
               this.emailFound = true;

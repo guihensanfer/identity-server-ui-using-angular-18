@@ -1,8 +1,8 @@
-export interface RespCheckEmailExists{
+export interface CheckEmailExistsResp{
   userExists: boolean
 }
 
-export interface PostCheckEmailExists{
+export interface CheckEmailExistsPost{
   email: string,
   enabled: boolean  
 }

@@ -1,7 +1,7 @@
 export interface RespDefault <T> {
+    ticket:  string;
     message: string;
-    ticket: string;
-    success:boolean;
-    errors: [],  
+    success: boolean;
+    errors:  string[];    
     data: T;
 }
