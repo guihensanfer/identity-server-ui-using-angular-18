@@ -4,7 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { TranslocoModule } from '@ngneat/transloco';
 import { LoadingComponent } from "./loading/loading.component";
 import { CommonModule } from '@angular/common';
-import { LoadingService } from './loading.service';
+import { LoadingService } from './services/loading.service';
 
 @Component({
   selector: 'app-root',

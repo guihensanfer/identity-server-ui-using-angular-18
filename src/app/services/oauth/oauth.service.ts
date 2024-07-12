@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PostCheckEmailExists, RespCheckEmailExists, RespDefault } from './oauth-interfaces';
+import { PostCheckEmailExists, RespCheckEmailExists } from '../../interfaces/oauth/oauth-interfaces';
+import { RespDefault } from '../../interfaces/default-interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,6 @@ export class OauthService {
       enabled: enabled
     };
     
-    return this.http.post<RespDefault<RespCheckEmailExists>>(this.apiUrl + '/api/v1/oauth/user-email-exists', data);
+    return this.http.post<RespDefault<RespCheckEmailExists>>(this.apiUrl + '/api/v1/oauth/user-check-email-exists', data);
   } 
 }

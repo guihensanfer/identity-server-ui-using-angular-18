@@ -4,10 +4,10 @@ import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/r
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { SeparatorElemComponent } from '../separator-elem/separator-elem.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { OauthService } from '../oauth.service';
-import { RespCheckEmailExists, RespDefault } from '../oauth-interfaces';
-import { AppComponent } from '../app.component';
-import { LoadingService } from '../loading.service';
+import { OauthService } from '../services/oauth/oauth.service';
+import { RespCheckEmailExists } from '../interfaces/oauth/oauth-interfaces';
+import { LoadingService } from '../services/loading.service';
+import { RespDefault } from '../interfaces/default-interfaces';
 
 @Component({
   selector: 'app-sso',
@@ -22,7 +22,6 @@ export class SsoComponent  implements OnInit {
     private router: Router,
     private translocoService: TranslocoService,
     private oAuthService:OauthService,
-    private appComponent: AppComponent,
     public _loading:LoadingService
   ) {}
 
