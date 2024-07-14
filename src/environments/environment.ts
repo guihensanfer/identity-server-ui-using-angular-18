@@ -4,5 +4,6 @@ export const environment = {
     defaultLanguage:'pt-br',
     defaultProjectId: 1,
     emailSU:"oauth@bomdev.com.br",
-    passwordSU:"IlHEYonEwYAnTUmNiCaInECoMPTIng"
+    passwordSU:"IlHEYonEwYAnTUmNiCaInECoMPTIng",
+    localEncryptKey: "SEYEarBeriTiANOtcHSCHicAN"
   };

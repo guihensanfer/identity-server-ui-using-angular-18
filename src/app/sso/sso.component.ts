@@ -10,6 +10,8 @@ import { LoadingService } from '../services/loading.service';
 import { RespDefault } from '../interfaces/default-interfaces';
 import { environment } from '../../environments/environment';
 import { AuthService } from '../services/auth/auth.service';
+import { AuthResp } from '../interfaces/auth/auth-interfaces';
+import { LocalService } from '../services/local.service';
 
 @Component({
   selector: 'app-sso',
@@ -25,7 +27,8 @@ export class SsoComponent  implements OnInit {
     private translocoService: TranslocoService,
     private oAuthService:OauthService,
     private authService: AuthService, 
-    private _loading:LoadingService    
+    private _loading:LoadingService,
+    private local:LocalService
   ) {}
 
 
@@ -57,7 +60,16 @@ export class SsoComponent  implements OnInit {
       this._loading.showLoading();
       const element = event.target as HTMLInputElement;
 
-      console.log(this.authService.login());
+      
+      const localTokens: AuthResp = {
+        accessExpiredAt:  new Date(this.local.getData('accessExpiredAt')),
+        accessToken: this.local.getData('accessToken'),
+        refreshExpiredAt: new Date(this.local.getData('refreshExpiredAt')),
+        refreshToken: this.local.getData('refreshToken'),
+        userInfoCode:'',
+        userInfoCodeExpiredAt: new Date()
+      };
+      this.authService.login(localTokens);
 
       this.oAuthService.userEmailExists(element.value, null)
         .subscribe({
