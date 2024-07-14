@@ -60,16 +60,12 @@ export class SsoComponent  implements OnInit {
       this._loading.showLoading();
       const element = event.target as HTMLInputElement;
 
+            
       
-      const localTokens: AuthResp = {
-        accessExpiredAt:  new Date(this.local.getData('accessExpiredAt')),
-        accessToken: this.local.getData('accessToken'),
-        refreshExpiredAt: new Date(this.local.getData('refreshExpiredAt')),
-        refreshToken: this.local.getData('refreshToken'),
-        userInfoCode:'',
-        userInfoCodeExpiredAt: new Date()
-      };
-      this.authService.login(localTokens);
+      console.log(localStorage);
+      this.authService.login().then((x) => {
+        console.log(x);
+      });
 
       this.oAuthService.userEmailExists(element.value, null)
         .subscribe({

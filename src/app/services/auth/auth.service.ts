@@ -5,13 +5,14 @@ import { Observable } from 'rxjs';
 import { AuthPost, AuthResp } from '../../interfaces/auth/auth-interfaces';
 import { environment } from '../../../environments/environment';
 import { lastValueFrom } from 'rxjs';
+import { LocalService } from '../local.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) {}  
+  constructor(private http: HttpClient, private local: LocalService) {}  
 
   private firstLogin(data: AuthPost): Observable<RespDefault<AuthResp>> {     
     return this.http.post<RespDefault<AuthResp>>(environment.bomdevApiUrl + '/api/v1/auth/login', data);
@@ -32,8 +33,9 @@ export class AuthService {
     return new Date() > dateExpires;
   }
 
-  public async login(localTokens: AuthResp | null): Promise<AuthResp | null> {        
+  public async login(): Promise<AuthResp | null> {        
     let result: AuthResp | null = null;
+    const localTokens = this.local.getAuthStoraged();
 
     // Check if already authenticated            
     if(localTokens && localTokens.accessToken) {
@@ -69,7 +71,9 @@ export class AuthService {
       }
     }
 
-    console.log(result);
+    // Update local storage
+    this.local.setAuthStorage(result);    
+
     return result;
   }
 }
