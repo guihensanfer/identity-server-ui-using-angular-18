@@ -36,8 +36,8 @@
                 <div class="bLegend bMargin-top-default" *ngIf="emailFound">{{t('emailFound')}}</div>
               </div>              
               <input id="sendButton" class="bButton bMargin-top-default" type="submit" value="{{t('continueButton')}}" 
-                [disabled]="nextButtonDisabled"
-                [class.bButtonUnfocused]="nextButtonDisabled" />                            
+                [disabled]="nextButtonDisabled || !emailFound"
+                [class.bButtonUnfocused]="nextButtonDisabled || !emailFound" />                            
             </form>            
           </div>        
         </div>
