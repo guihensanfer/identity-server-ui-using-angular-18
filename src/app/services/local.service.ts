@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { AuthResp } from '../interfaces/auth/auth-interfaces';
+import { EncryptAndDecryptDataService } from './encrypt-and-decrypt-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalService {
 
-  constructor() { }
+  constructor(private encrypt:EncryptAndDecryptDataService) { }
 
   public ACCESS_TOKEN_SECRET_NAME = 'orYQmZGYgcdR';
   public ACCESS_TOKEN_SECRET_TOKEN = 'bNSodIjmHRnXQWAUziBXxZqsFoR';
@@ -27,31 +27,28 @@ export class LocalService {
   public USER_INFO_SECRET_NAME = 'MKpXzoxVTZiVEm';
   public USER_INFO_SECRET_TOKEN = 'MfiuXWjLsLYqdpupKQfgpBMyvQz';
 
-  private encrypt(txt: string): string {
-    // const token = jwt.sign({ data: txt }, environment.localEncryptKey);
-    
-    return txt;
-  }  
-  
-  private decrypt(token: string): string {
-    try {
-      // const decoded = jwt.verify(token, environment.localEncryptKey);
-      const decoded = '';
-      // return (decoded as any).data;
-      return token;
-    } catch (err) {
-      console.error('Error decrypting token:', err);
-      return '';
-    }
-  }
+  private DEFAULT_SECRET_TOKEN = 'YNJnXzAgBXLpAKUdBNhfnnahRIZ';
 
-  public saveData(key: string, value: string): void {
-    localStorage.setItem(key, this.encrypt(value));
+
+  public saveData(key: string, value: string, token:string | null = null): void {
+    if(!token){
+      token = this.DEFAULT_SECRET_TOKEN;
+    }
+
+    localStorage.setItem(key, this.encrypt.encryptData(value, token));
   }  
   
-  public getData(key: string): string {
+  public getData(key:string, token:string | null = null): string {
+    if(!token){
+      token = this.DEFAULT_SECRET_TOKEN;
+    }
+
     const data = localStorage.getItem(key) || "";
-    return this.decrypt(data);
+
+    if(!data || data === '')
+      return data;
+    
+    return this.encrypt.decryptData(data, token);
   }
   
   public removeData(key: string): void {
@@ -63,8 +60,8 @@ export class LocalService {
   }    
 
   public isAuthStoraged():boolean{
-    const accessToken = this.getData(this.ACCESS_TOKEN_SECRET_NAME);
-    const refreshToken = this.getData(this.REFRESH_TOKEN_SECRET_NAME);
+    const accessToken = this.getData(this.ACCESS_TOKEN_SECRET_NAME, this.ACCESS_TOKEN_EXPIRES_AT_SECRET_TOKEN);
+    const refreshToken = this.getData(this.REFRESH_TOKEN_SECRET_NAME, this.ACCESS_TOKEN_EXPIRES_AT_SECRET_TOKEN);
     
     if(accessToken && accessToken !== '' && refreshToken && refreshToken !== '')
       return true;
@@ -74,12 +71,12 @@ export class LocalService {
 
   public getAuthStoraged(): AuthResp{
     const localTokens: AuthResp = {
-      accessExpiredAt:  new Date(this.getData(this.ACCESS_TOKEN_EXPIRES_AT_SECRET_NAME)),
-      accessToken: this.getData(this.ACCESS_TOKEN_SECRET_NAME),
-      refreshExpiredAt: new Date(this.REFRESH_TOKEN_EXPIRES_AT_SECRET_NAME),
-      refreshToken: this.getData(this.REFRESH_TOKEN_SECRET_NAME),
-      userInfoCode:this.getData(this.USER_INFO_SECRET_NAME),
-      userInfoCodeExpiredAt: new Date(this.USER_INFO_EXPIRES_AT_SECRET_TOKEN)
+      accessExpiredAt:  new Date(this.getData(this.ACCESS_TOKEN_EXPIRES_AT_SECRET_NAME, this.ACCESS_TOKEN_EXPIRES_AT_SECRET_TOKEN)),
+      accessToken: this.getData(this.ACCESS_TOKEN_SECRET_NAME,this.ACCESS_TOKEN_SECRET_TOKEN),
+      refreshExpiredAt: new Date(this.getData(this.REFRESH_TOKEN_EXPIRES_AT_SECRET_NAME, this.REFRESH_TOKEN_EXPIRES_AT_SECRET_TOKEN)),
+      refreshToken: this.getData(this.getData(this.REFRESH_TOKEN_SECRET_NAME, this.REFRESH_TOKEN_SECRET_TOKEN)),
+      userInfoCode:this.getData(this.getData(this.USER_INFO_SECRET_NAME, this.USER_INFO_SECRET_TOKEN)),
+      userInfoCodeExpiredAt: new Date(this.getData(this.USER_INFO_EXPIRES_AT_SECRET_NAME, this.USER_INFO_EXPIRES_AT_SECRET_TOKEN))
     };
 
     return localTokens;
@@ -87,12 +84,12 @@ export class LocalService {
 
   public setAuthStorage(data: AuthResp | null):void{
     if(data){
-      this.saveData(this.ACCESS_TOKEN_SECRET_NAME, data.accessToken);
-      this.saveData(this.ACCESS_TOKEN_EXPIRES_AT_SECRET_NAME, data.accessExpiredAt.toString());
-      this.saveData(this.REFRESH_TOKEN_SECRET_NAME, data.refreshToken);
-      this.saveData(this.REFRESH_TOKEN_EXPIRES_AT_SECRET_NAME, data.refreshExpiredAt.toString());
-      this.saveData(this.USER_INFO_SECRET_NAME, data.userInfoCode);
-      this.saveData(this.USER_INFO_EXPIRES_AT_SECRET_TOKEN, data.userInfoCodeExpiredAt.toString());
+      this.saveData(this.ACCESS_TOKEN_SECRET_NAME, data.accessToken, this.ACCESS_TOKEN_SECRET_TOKEN);
+      this.saveData(this.ACCESS_TOKEN_EXPIRES_AT_SECRET_NAME, data.accessExpiredAt.toString(), this.ACCESS_TOKEN_EXPIRES_AT_SECRET_TOKEN);
+      this.saveData(this.REFRESH_TOKEN_SECRET_NAME, data.refreshToken, this.REFRESH_TOKEN_SECRET_TOKEN);
+      this.saveData(this.REFRESH_TOKEN_EXPIRES_AT_SECRET_NAME, data.refreshExpiredAt.toString(), this.REFRESH_TOKEN_EXPIRES_AT_SECRET_TOKEN);
+      this.saveData(this.USER_INFO_SECRET_NAME, data.userInfoCode, this.USER_INFO_SECRET_TOKEN);
+      this.saveData(this.USER_INFO_EXPIRES_AT_SECRET_NAME, data.userInfoCodeExpiredAt.toString(), this.USER_INFO_EXPIRES_AT_SECRET_TOKEN);
     }    
   }
 }
