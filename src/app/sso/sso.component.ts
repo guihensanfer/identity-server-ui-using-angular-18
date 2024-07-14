@@ -10,7 +10,6 @@ import { LoadingService } from '../services/loading.service';
 import { RespDefault } from '../interfaces/default-interfaces';
 import { environment } from '../../environments/environment';
 import { AuthService } from '../services/auth/auth.service';
-import { AuthResp } from '../interfaces/auth/auth-interfaces';
 import { LocalService } from '../services/local.service';
 
 @Component({
@@ -80,16 +79,14 @@ export class SsoComponent  implements OnInit {
                 else{
                   this.nextButtonDisabled = true;
                   this.emailFound = false;              
-                }      
-
-                console.log('deu boa', res);
+                }                      
               },
-              error : (err : RespDefault<CheckEmailExistsResp>) => {
-                if(err && err.success && err.data.userExists){
+              error : (err) => {                                                
+                if(err && err.error.success && !err.error.data.userExists){
                   // Email user not found
                   
                   this.nextButtonDisabled = false;
-                  this.emailFound = false;
+                  this.emailFound = false;                  
                 }
                 else
                 {
