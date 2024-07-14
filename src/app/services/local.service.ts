@@ -74,8 +74,8 @@ export class LocalService {
       accessExpiredAt:  new Date(this.getData(this.ACCESS_TOKEN_EXPIRES_AT_SECRET_NAME, this.ACCESS_TOKEN_EXPIRES_AT_SECRET_TOKEN)),
       accessToken: this.getData(this.ACCESS_TOKEN_SECRET_NAME,this.ACCESS_TOKEN_SECRET_TOKEN),
       refreshExpiredAt: new Date(this.getData(this.REFRESH_TOKEN_EXPIRES_AT_SECRET_NAME, this.REFRESH_TOKEN_EXPIRES_AT_SECRET_TOKEN)),
-      refreshToken: this.getData(this.getData(this.REFRESH_TOKEN_SECRET_NAME, this.REFRESH_TOKEN_SECRET_TOKEN)),
-      userInfoCode:this.getData(this.getData(this.USER_INFO_SECRET_NAME, this.USER_INFO_SECRET_TOKEN)),
+      refreshToken: this.getData(this.REFRESH_TOKEN_SECRET_NAME, this.REFRESH_TOKEN_SECRET_TOKEN),
+      userInfoCode:this.getData(this.USER_INFO_SECRET_NAME, this.USER_INFO_SECRET_TOKEN),
       userInfoCodeExpiredAt: new Date(this.getData(this.USER_INFO_EXPIRES_AT_SECRET_NAME, this.USER_INFO_EXPIRES_AT_SECRET_TOKEN))
     };
 

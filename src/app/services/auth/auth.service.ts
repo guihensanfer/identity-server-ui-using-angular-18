@@ -37,6 +37,8 @@ export class AuthService {
     let result: AuthResp | null = null;
     const localTokens = this.local.getAuthStoraged();
 
+    console.log('storage data: ', localTokens);
+
     // Check if already authenticated            
     if(localTokens && localTokens.accessToken) {
       if(!this.isTokenExpired(new Date(localTokens.accessExpiredAt))) {        
