@@ -39,13 +39,13 @@ export class AuthService {
 
     // Check if already authenticated            
     if(localTokens && localTokens.accessToken) {
-      if(!this.isTokenExpired(new Date(localTokens.accessExpiredAt))) {
+      if(!this.isTokenExpired(new Date(localTokens.accessExpiredAt))) {        
         return localTokens;
       } else if(localTokens.refreshToken && !this.isTokenExpired(new Date(localTokens.refreshExpiredAt))) {
         try {
           const res = await lastValueFrom(this.refreshLogin(localTokens.refreshToken));
           if(res.success) {            
-            result = res.data;
+            result = res.data;            
           }
         } catch (err) {
           console.log('refreshToken Error', err);
@@ -64,7 +64,7 @@ export class AuthService {
       try {
         const res = await lastValueFrom(this.firstLogin(data));
         if(res.success) {
-          result = res.data;
+          result = res.data;          
         }
       } catch (err) {
         console.log('firstLogin Error', err);

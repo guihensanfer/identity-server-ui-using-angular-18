@@ -19,7 +19,13 @@ export class LocalService {
   public ACCESS_TOKEN_EXPIRES_AT_SECRET_TOKEN = 'MXWYglCejiYaaPrUqZWPcgqjbHu';
 
   public REFRESH_TOKEN_EXPIRES_AT_SECRET_NAME = 'PwrMZOeTNstg';
-  public REFRESH_TOKEN_EXPIRES_AT_SECRET_TOKEN = 'YFpQJCMOzwnpxyCuMQLGNwzgpjQ';
+  public REFRESH_TOKEN_EXPIRES_AT_SECRET_TOKEN = 'YFpQJCMOzwnpxyCuMQLGNwzgpjQ';  
+
+  public USER_INFO_EXPIRES_AT_SECRET_NAME = 'CsicjErNEqcuGh';
+  public USER_INFO_EXPIRES_AT_SECRET_TOKEN = 'UKutVBptMQQTyewmrZthZRAOYSH';
+
+  public USER_INFO_SECRET_NAME = 'MKpXzoxVTZiVEm';
+  public USER_INFO_SECRET_TOKEN = 'MfiuXWjLsLYqdpupKQfgpBMyvQz';
 
   private encrypt(txt: string): string {
     // const token = jwt.sign({ data: txt }, environment.localEncryptKey);
@@ -72,8 +78,8 @@ export class LocalService {
       accessToken: this.getData(this.ACCESS_TOKEN_SECRET_NAME),
       refreshExpiredAt: new Date(this.REFRESH_TOKEN_EXPIRES_AT_SECRET_NAME),
       refreshToken: this.getData(this.REFRESH_TOKEN_SECRET_NAME),
-      userInfoCode:'',
-      userInfoCodeExpiredAt: new Date()
+      userInfoCode:this.getData(this.USER_INFO_SECRET_NAME),
+      userInfoCodeExpiredAt: new Date(this.USER_INFO_EXPIRES_AT_SECRET_TOKEN)
     };
 
     return localTokens;
@@ -85,6 +91,8 @@ export class LocalService {
       this.saveData(this.ACCESS_TOKEN_EXPIRES_AT_SECRET_NAME, data.accessExpiredAt.toString());
       this.saveData(this.REFRESH_TOKEN_SECRET_NAME, data.refreshToken);
       this.saveData(this.REFRESH_TOKEN_EXPIRES_AT_SECRET_NAME, data.refreshExpiredAt.toString());
+      this.saveData(this.USER_INFO_SECRET_NAME, data.userInfoCode);
+      this.saveData(this.USER_INFO_EXPIRES_AT_SECRET_TOKEN, data.userInfoCodeExpiredAt.toString());
     }    
   }
 }
