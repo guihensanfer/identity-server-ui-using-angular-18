@@ -5,7 +5,7 @@ import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { SeparatorElemComponent } from '../separator-elem/separator-elem.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OauthService } from '../services/oauth/oauth.service';
-import { CheckEmailExistsResp } from '../interfaces/oauth/oauth-interfaces';
+import { CheckEmailExistsPost, CheckEmailExistsResp } from '../interfaces/oauth/oauth-interfaces';
 import { LoadingService } from '../services/loading.service';
 import { RespDefault } from '../interfaces/default-interfaces';
 import { environment } from '../../environments/environment';
@@ -59,36 +59,59 @@ export class SsoComponent  implements OnInit {
     if(this.myGroup.controls.email.valid){
       this._loading.showLoading();
       const element = event.target as HTMLInputElement;
-
-            
       
-      console.log(localStorage);
-      this.authService.login().then((x) => {
-        console.log(x);
+                      
+      this.authService.login().then((auth) => {
+        
+        if(auth){
+          const data: CheckEmailExistsPost = {
+            email: element.value.trim(),
+            enabled: null,
+            projectId: 1
+          };
+
+          this.oAuthService.userEmailExists(data, auth.accessToken)
+          .subscribe({
+              next :  (res : RespDefault<CheckEmailExistsResp>) => {                
+                if(res && res.data?.userExists){
+                  this.nextButtonDisabled = false;
+                  this.emailFound = true;
+                }
+                else{
+                  this.nextButtonDisabled = true;
+                  this.emailFound = false;              
+                }      
+
+                console.log('deu boa', res);
+              },
+              error : (err : RespDefault<CheckEmailExistsResp>) => {
+                if(err && err.success && err.data.userExists){
+                  // Email user not found
+                  
+                  this.nextButtonDisabled = false;
+                  this.emailFound = false;
+                }
+                else
+                {
+                  // Anything error else
+
+                  this.nextButtonDisabled = true;
+                  this.emailFound = false;
+                }
+                
+                this._loading.hideLoading();
+                
+              },
+              complete: () => {
+                this._loading.hideLoading();
+              }          
+            }
+          );
+        }
+        
       });
 
-      this.oAuthService.userEmailExists(element.value, null)
-        .subscribe({
-          next :  (res : RespDefault<CheckEmailExistsResp>) => {                
-            if(res && res.data?.userExists){
-              this.nextButtonDisabled = false;
-              this.emailFound = true;
-            }
-            else{
-              this.nextButtonDisabled = true;
-              this.emailFound = false;              
-            }      
-          },
-          error : (err) => {
-            this.nextButtonDisabled = true;
-            this._loading.hideLoading();
-            console.log(err);
-          },
-          complete: () => {
-            this._loading.hideLoading();
-          }          
-        }
-      );
+      
     }  
          
   }

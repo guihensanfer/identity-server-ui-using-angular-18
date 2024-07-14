@@ -3,6 +3,7 @@ export interface CheckEmailExistsResp{
 }
 
 export interface CheckEmailExistsPost{
-  email: string,
-  enabled: boolean  
+  email: string;
+  enabled: boolean  | null;
+  projectId: number;
 }

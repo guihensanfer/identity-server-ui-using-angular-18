@@ -35,9 +35,7 @@ export class AuthService {
 
   public async login(): Promise<AuthResp | null> {        
     let result: AuthResp | null = null;
-    const localTokens = this.local.getAuthStoraged();
-
-    console.log('storage data: ', localTokens);
+    const localTokens = this.local.getAuthStoraged();    
 
     // Check if already authenticated            
     if(localTokens && localTokens.accessToken) {
