@@ -1,10 +1,9 @@
-import { HttpClient, HttpErrorResponse, HttpEvent, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, EMPTY, Observable, of, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CheckEmailExistsPost, CheckEmailExistsResp } from '../../interfaces/oauth/oauth-interfaces';
 import { RespDefault } from '../../interfaces/default-interfaces';
 import { environment } from '../../../environments/environment';
-import { error } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +20,6 @@ export class OauthService {
     return this.http.post<RespDefault<CheckEmailExistsResp>>(`${environment.bomdevApiUrl}/api/v1/oauth/user-check-email-exists`, data,
     {
       headers: _headers
-    });
+    })    
   } 
 }
