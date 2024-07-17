@@ -41,7 +41,10 @@ export class LocalService {
   public getData(key:string, token:string | null = null): string {
     if(!token){
       token = this.DEFAULT_SECRET_TOKEN;
-    }
+    }    
+
+    if(!localStorage)
+      return '';
 
     const data = localStorage.getItem(key) || "";
 

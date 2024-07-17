@@ -5,12 +5,11 @@ import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { SeparatorElemComponent } from '../separator-elem/separator-elem.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OauthService } from '../services/oauth/oauth.service';
-import { CheckEmailExistsPost, CheckEmailExistsResp } from '../interfaces/oauth/oauth-interfaces';
+import { CheckEmailExistsPost, CheckEmailExistsResp, GetContextResp } from '../interfaces/oauth/oauth-interfaces';
 import { LoadingService } from '../services/loading.service';
 import { RespDefault } from '../interfaces/default-interfaces';
 import { environment } from '../../environments/environment';
 import { AuthService } from '../services/auth/auth.service';
-import { LocalService } from '../services/local.service';
 
 @Component({
   selector: 'app-sso',
@@ -26,8 +25,7 @@ export class SsoComponent  implements OnInit {
     private translocoService: TranslocoService,
     private oAuthService:OauthService,
     private authService: AuthService, 
-    private _loading:LoadingService,
-    private local:LocalService
+    private _loading:LoadingService
   ) {}
 
 
@@ -36,15 +34,43 @@ export class SsoComponent  implements OnInit {
   });
   nextButtonDisabled: boolean = true;
   emailFound:boolean = false;
+  public context: GetContextResp | null = null;
+  
 
   ngOnInit(): void {    
       const lang = this.route.snapshot.paramMap.get('lang');
+      const secret = this.route.snapshot.paramMap.get('secret');      
       
-      if (lang) {
+      if (lang && secret) {
         this.translocoService.setActiveLang(lang);
+
+        this.authService.login().then((auth) => {
+          if(auth){
+            this.oAuthService.getContext(secret, auth.accessToken).subscribe(
+              {
+                next: (res) => {
+
+                  if(res && res.success){
+                    this.context = res.data;                                      
+                  }                  
+                  
+                },
+                error(err) {
+                  console.log('err', err);
+                },
+                complete() {
+                  console.log('complete');
+                },
+              }
+            );
+          }
+          
+        });
       } else {        
         this.router.navigate(['/sso/' + environment.defaultLanguage]);
       }  
+
+      
   }
 
   onSubmit() {
@@ -66,7 +92,7 @@ export class SsoComponent  implements OnInit {
           const data: CheckEmailExistsPost = {
             email: element.value.trim(),
             enabled: null,
-            projectId: 1
+            projectId: environment.defaultProjectId
           };
 
           this.oAuthService.userEmailExists(data, auth.accessToken)
@@ -112,7 +138,6 @@ export class SsoComponent  implements OnInit {
          
   }
 
-  title = 'identity-server-ui';
 
 
 }

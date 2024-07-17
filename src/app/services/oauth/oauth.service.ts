@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CheckEmailExistsPost, CheckEmailExistsResp } from '../../interfaces/oauth/oauth-interfaces';
+import { CheckEmailExistsPost, CheckEmailExistsResp, GetContextResp } from '../../interfaces/oauth/oauth-interfaces';
 import { RespDefault } from '../../interfaces/default-interfaces';
 import { environment } from '../../../environments/environment';
 
@@ -16,10 +16,25 @@ export class OauthService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${accessToken}`
     });
-    
+
     return this.http.post<RespDefault<CheckEmailExistsResp>>(`${environment.bomdevApiUrl}/api/v1/oauth/user-check-email-exists`, data,
     {
       headers: _headers
+    });
+  } 
+
+  getContext(secret: string, accessToken: string): Observable<RespDefault<GetContextResp>>{    
+    const _headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`
+    });
+    
+    return this.http.get<RespDefault<GetContextResp>>(`${environment.bomdevApiUrl}/api/v1/oauth/get-context`,
+    {
+      headers: _headers,
+      params:{
+        secretKey: secret
+      }
     });
   } 
 }
