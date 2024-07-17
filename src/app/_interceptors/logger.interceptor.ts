@@ -10,14 +10,10 @@ export const loggerInterceptor: HttpInterceptorFn = (req, next) => {
   }
   
   return from(inject(AuthService).getAuthToken()).pipe(
-    switchMap(accessToken => {
-      const _headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken?.accessToken}`
-      });
+    switchMap(accessToken => {      
       
       const newReq = req.clone({
-        headers: _headers
+        headers: req.headers.append('Authorization', `Bearer ${accessToken?.accessToken}`)
       });
 
       return next(newReq);
