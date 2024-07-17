@@ -1,5 +1,5 @@
 export const environment = {
-    production: false,
+    production: true,
     bomdevApiUrl: 'http://localhost:3000',
     defaultLanguage:'pt-br',
     defaultProjectId: 1,

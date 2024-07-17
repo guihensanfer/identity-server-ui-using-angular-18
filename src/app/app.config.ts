@@ -3,14 +3,21 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { TranslocoHttpLoader } from './transloco-loader';
 import { provideTransloco } from '@ngneat/transloco';
 import { environment } from '../environments/environment';
+import { errorInterceptor } from './_interceptors/error.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes, withComponentInputBinding()), provideClientHydration(), provideHttpClient(withFetch()), provideTransloco({
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes, withComponentInputBinding()), provideClientHydration(), 
+    provideHttpClient(
+      withInterceptors([
+        errorInterceptor
+
+    ])), 
+    provideTransloco({
         config: { 
           availableLangs: ['en-us', 'pt-br'],
           defaultLang: environment.defaultLanguage,

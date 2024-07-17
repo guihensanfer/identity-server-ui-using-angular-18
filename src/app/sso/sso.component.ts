@@ -96,8 +96,7 @@ export class SsoComponent  implements OnInit {
                   this.emailFound = false;
                 }
                 
-                this._loading.hideLoading();
-                
+                this._loading.hideLoading();                              
               },
               complete: () => {
                 this._loading.hideLoading();

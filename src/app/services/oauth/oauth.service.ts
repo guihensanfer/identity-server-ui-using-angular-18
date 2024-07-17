@@ -20,6 +20,6 @@ export class OauthService {
     return this.http.post<RespDefault<CheckEmailExistsResp>>(`${environment.bomdevApiUrl}/api/v1/oauth/user-check-email-exists`, data,
     {
       headers: _headers
-    })    
+    });
   } 
 }
