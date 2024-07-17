@@ -33,7 +33,7 @@ export class AuthService {
     return new Date() > dateExpires;
   }
 
-  public async login(): Promise<AuthResp | null> {        
+  public async getAuthToken(): Promise<AuthResp | null> {        
     let result: AuthResp | null = null;
     const localTokens = this.local.getAuthStoraged();    
 

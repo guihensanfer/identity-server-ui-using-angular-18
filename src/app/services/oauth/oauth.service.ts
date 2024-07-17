@@ -12,26 +12,12 @@ export class OauthService {
   constructor(private http: HttpClient) {}
 
   userEmailExists(data:CheckEmailExistsPost, accessToken: string): Observable<RespDefault<CheckEmailExistsResp>>{    
-    const _headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
-    });
-
-    return this.http.post<RespDefault<CheckEmailExistsResp>>(`${environment.bomdevApiUrl}/api/v1/oauth/user-check-email-exists`, data,
-    {
-      headers: _headers
-    });
+    return this.http.post<RespDefault<CheckEmailExistsResp>>(`${environment.bomdevApiUrl}/api/v1/oauth/user-check-email-exists`, data);
   } 
 
-  getContext(secret: string, accessToken: string): Observable<RespDefault<GetContextResp>>{    
-    const _headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
-    });
-    
+  getContext(secret: string): Observable<RespDefault<GetContextResp>>{       
     return this.http.get<RespDefault<GetContextResp>>(`${environment.bomdevApiUrl}/api/v1/oauth/get-context`,
-    {
-      headers: _headers,
+    {      
       params:{
         secretKey: secret
       }

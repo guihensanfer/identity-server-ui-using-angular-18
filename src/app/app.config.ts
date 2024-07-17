@@ -8,13 +8,15 @@ import { TranslocoHttpLoader } from './transloco-loader';
 import { provideTransloco } from '@ngneat/transloco';
 import { environment } from '../environments/environment';
 import { errorInterceptor } from './_interceptors/error.interceptor';
+import { loggerInterceptor } from './_interceptors/logger.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes, withComponentInputBinding()), provideClientHydration(), 
     provideHttpClient(
       withInterceptors([
-        errorInterceptor
+        errorInterceptor,
+        loggerInterceptor
 
     ])), 
     provideTransloco({

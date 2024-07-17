@@ -44,28 +44,23 @@ export class SsoComponent  implements OnInit {
       if (lang && secret) {
         this.translocoService.setActiveLang(lang);
 
-        this.authService.login().then((auth) => {
-          if(auth){
-            this.oAuthService.getContext(secret, auth.accessToken).subscribe(
-              {
-                next: (res) => {
+        this.oAuthService.getContext(secret).subscribe(
+          {
+            next: (res) => {
 
-                  if(res && res.success){
-                    this.context = res.data;                                      
-                  }                  
-                  
-                },
-                error(err) {
-                  console.log('err', err);
-                },
-                complete() {
-                  console.log('complete');
-                },
-              }
-            );
+              if(res && res.success){
+                this.context = res.data;                                      
+              }                  
+              
+            },
+            error(err) {
+              console.log('err', err);
+            },
+            complete() {
+              console.log('complete');
+            },
           }
-          
-        });
+        );
       } else {        
         this.router.navigate(['/sso/' + environment.defaultLanguage]);
       }  
@@ -86,7 +81,7 @@ export class SsoComponent  implements OnInit {
       const element = event.target as HTMLInputElement;
       
                       
-      this.authService.login().then((auth) => {
+      this.authService.getAuthToken().then((auth) => {
         
         if(auth){
           const data: CheckEmailExistsPost = {
