@@ -5,9 +5,9 @@
         <div class="content">
             <div class="left-side">                                                             
               <span class="bTextLink" (click)="goStep(0)">{{t('useAnotherEmail')}}</span>
-              <div class="didntGetCode">
+              <div *ngIf="!this.sentByDemand" class="didntGetCode">
                 <span class="bText">{{t('otpDidGetCode')}}</span>
-                <span class="bTextLink" style="margin-top:5px">{{t('clickToResend')}}</span>
+                <span class="bTextLink" style="margin-top:5px" (click)="resendEmail()">{{t('clickToResend')}}</span>
               </div>
 
               <form [formGroup]="this.myGroup" class="bMargin-top-default" method="post" (submit)="onSubmit()">                
