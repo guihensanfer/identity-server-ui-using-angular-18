@@ -44,6 +44,7 @@ export class OtpComponent implements AfterViewInit, OnInit {
     this.otpRequest();
 
     this.sentByDemand = true;
+    this.myGroup.reset();    
   }
 
   ngAfterViewInit(): void {
