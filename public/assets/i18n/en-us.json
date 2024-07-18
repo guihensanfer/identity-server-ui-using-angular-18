@@ -16,5 +16,6 @@
     "termsOfUseLabel":"Terms of use",
     "requiredField":"This field is required",
     "emailFound":"Click bellow to continue",
-    "emailNotFound":"Email not found."
+    "emailNotFound":"Email not found.",
+    "errorTitle":"Invalid request"
 }

@@ -83,6 +83,11 @@
     font-weight: bold;
     padding-left: 10px;
     padding-right: 10px;
+
+    text-decoration: none;
+    text-align: center;
+
+    width: 100%;
   }
 
   .bButton:hover{
@@ -124,3 +129,23 @@
     margin-bottom: 5px;
     display: block;
   }
+
+  .bMargin-top-default{
+    margin-top:20px;
+    display: block;
+}
+
+ 
+/* Custom style for steps components in the same screen  */
+.customContainer{
+    padding-top:10px;    
+    padding-left:20px;
+    padding-right:20px;    
+    padding-bottom:10px;
+    /* border: solid 1px #DCDCDC; */
+    background-color: #1A504F;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    /* width: 420px; */
+    min-height: 500px;
+}

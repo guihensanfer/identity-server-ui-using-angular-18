@@ -1,1 +1,17 @@
-<p>error works!</p>
+<ng-container *transloco="let t">
+    <div class="customContainer">
+        <h1 class="bText2">{{ t('errorTitle') }}</h1>        
+        <div class="content">
+            <div class="left-side">                                    
+              <app-separator-elem class="bMargin-top-default"></app-separator-elem>            
+              <span class="bText bMargin-top-default" style="display: block;">Possible causes:</span>
+              <ul>
+                <li class="bText">The request is invalid or expired, please check with the origin request;</li>
+                <li class="bText" style="margin-top: 5px;">A temporary instability occurred, please try again later.</li>
+              </ul>
+              <button href="#" class="bButton bMargin-top-default" (click)="refreshPage()">Try again</button>
+            </div>        
+          </div>
+      </div>
+</ng-container>
+
