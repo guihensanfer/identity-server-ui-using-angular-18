@@ -11,11 +11,12 @@ import { RespDefault } from '../interfaces/default-interfaces';
 import { environment } from '../../environments/environment';
 import { AuthService } from '../services/auth/auth.service';
 import { ErrorComponent } from "../error/error.component";
+import { OtpComponent } from "../otp/otp.component";
 
 @Component({
   selector: 'app-sso',
   standalone: true,
-  imports: [TranslocoModule, CommonModule, RouterLink, RouterLinkActive, SeparatorElemComponent, ReactiveFormsModule, FormsModule, ErrorComponent],
+  imports: [TranslocoModule, CommonModule, RouterLink, RouterLinkActive, SeparatorElemComponent, ReactiveFormsModule, FormsModule, ErrorComponent, OtpComponent],
   templateUrl: './sso.component.html',
   styleUrl: './sso.component.css'
 })
@@ -37,6 +38,7 @@ export class SsoComponent  implements OnInit {
   emailFound:boolean = false;
   public context: GetContextResp | null = null;
   step : number = 0;
+  emailLogin: string | null = null;
   
 
   ngOnInit(): void {    
@@ -77,8 +79,8 @@ export class SsoComponent  implements OnInit {
   }
 
   onSubmit() {
-    // throw new Error('Method not implemented.');
-    alert('teste');
+    this.step = 1;
+    this.emailLogin = this.myGroup.controls.email.value;
   }  
 
   onChange(event: Event){

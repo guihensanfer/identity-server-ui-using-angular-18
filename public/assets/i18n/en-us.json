@@ -21,5 +21,10 @@
     "errorCausesLabel":"Possible causes:",
     "errorCause1":"The request is invalid or expired, check with the origin request;",
     "errorCause2":"A temporary instability occurred, try again later.",
-    "tryAgain": "Try again"
+    "tryAgain": "Try again",
+    "otpTitle":"Please check your email",
+    "otpSubTitle": "We've sent a code to ",
+    "otpDidGetCode": "Didn't get the code?",
+    "clickToResend":"Click to resend",
+    "useAnotherEmail": "Use another email"
 }

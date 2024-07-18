@@ -1,0 +1,12 @@
+<ng-container *transloco="let t">
+    <div class="customContainer">
+        <h1 class="bText2">{{ t('otpTitle') }}</h1>        
+        <h2 class="bText2">{{ t('otpSubTitle') + this.sso.emailLogin}}</h2>        
+        <div class="content">
+            <div class="left-side">                                    
+              <app-separator-elem class="bMargin-top-default"></app-separator-elem>            
+              <button class="bButton" (click)="goStep(0)">{{t('useAnotherEmail')}}</button>
+            </div>        
+          </div>
+      </div>
+</ng-container>

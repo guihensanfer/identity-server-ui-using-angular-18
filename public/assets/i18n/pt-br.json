@@ -21,5 +21,10 @@
     "errorCausesLabel":"Possíveis causas:",
     "errorCause1":"A requisição é inválida ou expirou, verifique a requisição de origem;",
     "errorCause2":"Uma instabilidade temporária ocorreu, tente novamente mais tarde.",
-    "tryAgain": "Tentar novamente"
+    "tryAgain": "Tentar novamente",
+    "otpTitle":"Por favor, verifique seu e-mail",
+    "otpSubTitle": "Enviamos um código para ",
+    "otpDidGetCode": "Não recebeu o código?",
+    "clickToResend":"Reenviar código",
+    "useAnotherEmail": "Usar outro e-mail"
 }
