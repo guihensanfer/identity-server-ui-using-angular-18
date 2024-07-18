@@ -14,3 +14,14 @@ export interface AuthResp {
     refreshToken:          string;
     refreshExpiredAt:      Date;
 }
+
+
+export interface OtpPost {
+    email:             string;
+    clientUri:          string;
+    projectId:         number | null;    
+}
+
+export interface OtpResp {
+    code:             string;
+}
