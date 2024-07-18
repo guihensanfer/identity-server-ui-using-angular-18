@@ -29,8 +29,22 @@ export class LocalService {
 
   private DEFAULT_SECRET_TOKEN = 'YNJnXzAgBXLpAKUdBNhfnnahRIZ';
 
+  private isLocalStorageAvailable(): boolean {
+    try {
+      const testKey = '__test__';
+      localStorage.setItem(testKey, testKey);
+      localStorage.removeItem(testKey);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 
   public saveData(key: string, value: string, token:string | null = null): void {
+    if (!this.isLocalStorageAvailable()) {
+      return;
+    }
+
     if(!token){
       token = this.DEFAULT_SECRET_TOKEN;
     }
@@ -39,6 +53,10 @@ export class LocalService {
   }  
   
   public getData(key:string, token:string | null = null): string {
+    if (!this.isLocalStorageAvailable()) {
+      return '';
+    }
+    
     if(!token){
       token = this.DEFAULT_SECRET_TOKEN;
     }    

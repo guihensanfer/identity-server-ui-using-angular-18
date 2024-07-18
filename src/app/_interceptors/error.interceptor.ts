@@ -10,11 +10,6 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         console.clear();
       }
 
-      // if([500].includes(error.status)){
-      //   this.
-      // }
-      
-
       return throwError(() => error);
     })
   );
