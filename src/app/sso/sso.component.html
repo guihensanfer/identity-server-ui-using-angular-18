@@ -1,6 +1,6 @@
 <main class="main container">
     <ng-container *transloco="let t">
-      <div class="customContainer">
+      <div class="customContainer" *ngIf="step === 0">
         <h1 class="bText2" *ngIf="context">{{ t('title') + ' ' + context.projectName }}</h1>        
         <div class="content">
           <div class="left-side">                        
@@ -42,6 +42,6 @@
           </div>        
         </div>
       </div>
-      
+      <app-error *ngIf="step === -1"></app-error>
     </ng-container>      
   </main>

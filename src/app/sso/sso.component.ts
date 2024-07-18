@@ -10,11 +10,12 @@ import { LoadingService } from '../services/loading.service';
 import { RespDefault } from '../interfaces/default-interfaces';
 import { environment } from '../../environments/environment';
 import { AuthService } from '../services/auth/auth.service';
+import { ErrorComponent } from "../error/error.component";
 
 @Component({
   selector: 'app-sso',
   standalone: true,
-  imports: [TranslocoModule, CommonModule, RouterLink, RouterLinkActive, SeparatorElemComponent, ReactiveFormsModule,FormsModule],
+  imports: [TranslocoModule, CommonModule, RouterLink, RouterLinkActive, SeparatorElemComponent, ReactiveFormsModule, FormsModule, ErrorComponent],
   templateUrl: './sso.component.html',
   styleUrl: './sso.component.css'
 })
@@ -35,11 +36,13 @@ export class SsoComponent  implements OnInit {
   nextButtonDisabled: boolean = true;
   emailFound:boolean = false;
   public context: GetContextResp | null = null;
+  step : number = 0;
   
 
   ngOnInit(): void {    
       const lang = this.route.snapshot.paramMap.get('lang');
       const secret = this.route.snapshot.paramMap.get('secret');      
+      this._loading.showLoading();
       
       if (lang && secret) {
         this.translocoService.setActiveLang(lang);
@@ -47,22 +50,27 @@ export class SsoComponent  implements OnInit {
         this.oAuthService.getContext(secret).subscribe(
           {
             next: (res) => {
-
+              
               if(res && res.success){
                 this.context = res.data;                                      
               }                  
               
             },
-            error(err) {
-              console.log('err', err);
+            error : (err) => {
+              if(err && err.error.success && err.error.data === null){
+                // Context not found
+              } 
+
+              this.step = -1;
+              this._loading.hideLoading();    
             },
-            complete() {
-              console.log('complete');
-            },
+            complete: () => {              
+              this._loading.hideLoading();
+            }
           }
         );
       } else {        
-        this.router.navigate(['/sso/' + environment.defaultLanguage]);
+        this.step = -1;
       }  
 
       
