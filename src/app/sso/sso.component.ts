@@ -23,7 +23,6 @@ import { OtpComponent } from "../otp/otp.component";
 export class SsoComponent  implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private translocoService: TranslocoService,
     private oAuthService:OauthService,
     private authService: AuthService, 

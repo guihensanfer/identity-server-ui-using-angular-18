@@ -1,11 +1,38 @@
 <ng-container *transloco="let t">
     <div class="customContainer">
-        <h1 class="bText2">{{ t('otpTitle') }}</h1>        
-        <h2 class="bText2">{{ t('otpSubTitle') + this.sso.emailLogin}}</h2>        
+        <h2 class="bText2">{{ t('otpTitle') }}</h2>        
+        <h4 class="bText">{{ t('otpSubTitle') + this.sso.emailLogin}}</h4>        
         <div class="content">
-            <div class="left-side">                                    
-              <app-separator-elem class="bMargin-top-default"></app-separator-elem>            
-              <button class="bButton" (click)="goStep(0)">{{t('useAnotherEmail')}}</button>
+            <div class="left-side">                                                             
+              <span class="bTextLink" (click)="goStep(0)">{{t('useAnotherEmail')}}</span>
+              <div class="didntGetCode">
+                <span class="bText">{{t('otpDidGetCode')}}</span>
+                <span class="bTextLink" style="margin-top:5px">{{t('clickToResend')}}</span>
+              </div>
+
+              <form [formGroup]="this.myGroup" class="bMargin-top-default" method="post" (submit)="onSubmit()">                
+                <input class="inputCode bInputText" type="number" placeholder="0" formControlName="i1" name="i1" id="i1" maxlength="1"
+                  [class.invalidInput]="myGroup.get('i1')?.invalid && myGroup.get('i1')?.touched" 
+                  [class.validInput]="myGroup.controls.i1.valid"                  
+                  />
+                <input class="inputCode bInputText" type="number" placeholder="0" formControlName="i2" name="i2" maxlength="1"
+                  [class.invalidInput]="myGroup.get('i2')?.invalid && myGroup.get('i2')?.touched" 
+                  [class.validInput]="myGroup.controls.i2.valid"                  
+                  />
+                <input class="inputCode bInputText" type="number" placeholder="0" formControlName="i3" name="i3" maxlength="1"
+                  [class.invalidInput]="myGroup.get('i3')?.invalid && myGroup.get('i3')?.touched" 
+                  [class.validInput]="myGroup.controls.i3.valid"                  
+                  />
+                <input class="inputCode bInputText" type="number" placeholder="0" formControlName="i4" name="i4" maxlength="1"
+                  [class.invalidInput]="myGroup.get('i4')?.invalid && myGroup.get('i4')?.touched" 
+                  [class.validInput]="myGroup.controls.i4.valid"                  
+                  />
+
+                <input id="sendButton" class="bButton" type="submit" value="{{t('continueButton')}}" 
+                  [disabled]="myGroup.controls.i1.invalid || myGroup.controls.i2.invalid || myGroup.controls.i3.invalid || myGroup.controls.i4.invalid"
+                  [class.bButtonUnfocused]="myGroup.controls.i1.invalid || myGroup.controls.i2.invalid || myGroup.controls.i3.invalid || myGroup.controls.i4.invalid" />    
+              </form>
+              
             </div>        
           </div>
       </div>

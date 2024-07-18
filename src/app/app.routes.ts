@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { SsoComponent } from './sso/sso.component';
 import { environment } from '../environments/environment';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { OtpComponent } from './otp/otp.component';
 
 export const routes: Routes = [    
     {

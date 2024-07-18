@@ -1,0 +1,32 @@
+.didntGetCode span{
+    margin-right:5px;
+}
+
+form{text-align: center;margin-top: 50px;}
+
+.inputCode{
+    display: inline-block;
+    width: 16% !important;
+    height: 160px !important;
+    margin-left:0.5%;
+    font-size: 500%;    
+}
+
+.inputCode:first-child{
+    margin-left: 0px;
+}
+
+#sendButton{
+    margin-top:50px;
+    margin-bottom: 50px;
+}
+
+
+.invalidInput{
+    border: solid 2px #e75151;
+  }
+  
+  .validInput{
+    border: solid 2px #17c06c;
+ 
+  }

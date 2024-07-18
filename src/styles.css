@@ -4,6 +4,7 @@
   --background-primary-color:#1A504F;
   --background-secundary-color:#2C3636;
   --background-third-color:#213333;
+  --background-fourth-color:#2F9492;
 }
 
 @font-face {
@@ -65,6 +66,8 @@
     color:#48E0DE;
     text-decoration: none;
     font-weight: bold;    
+
+    cursor: pointer;
   }
 
   .bTextLink:hover{
@@ -93,7 +96,7 @@
   }
 
   .bButton:hover{
-    background-color: #2F9492;
+    background-color: var(--background-fourth-color);
   }
 
   .bButtonUnfocused{
@@ -114,7 +117,7 @@
     padding-left: 20px;
     padding-right: 5px;
     
-    background-color:#2F9492;
+    background-color:var(--background-fourth-color);
     border: none;
   
     border-radius: 20px;
