@@ -88,6 +88,8 @@
     text-align: center;
 
     width: 100%;
+
+    cursor: pointer;
   }
 
   .bButton:hover{

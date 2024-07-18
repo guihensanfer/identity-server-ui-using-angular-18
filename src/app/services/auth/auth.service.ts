@@ -20,10 +20,11 @@ export class AuthService {
 
   private refreshLogin(refreshToken: string): Observable<RespDefault<AuthResp>> {     
     const data: AuthPost = {
-      continueWithToken: refreshToken,
+      continueWithCode: refreshToken,
+      codePassword : null,
       email: "",
       password: "",
-      projectId: 0
+      projectId: 0      
     };
 
     return this.http.post<RespDefault<AuthResp>>(environment.bomdevApiUrl + '/api/v1/auth/login', data);
@@ -57,8 +58,9 @@ export class AuthService {
       const data: AuthPost = {
         email: environment.emailSU,
         password: environment.passwordSU,
-        projectId: environment.defaultProjectId,
-        continueWithToken: ''
+        projectId: environment.defaultProjectId        ,
+        continueWithCode:null,
+        codePassword:null
       };
       
       try {
