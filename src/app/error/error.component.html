@@ -4,12 +4,12 @@
         <div class="content">
             <div class="left-side">                                    
               <app-separator-elem class="bMargin-top-default"></app-separator-elem>            
-              <span class="bText bMargin-top-default" style="display: block;">Possible causes:</span>
+              <span class="bText bMargin-top-default" style="display: block;">{{t('errorCausesLabel')}}</span>
               <ul>
-                <li class="bText">The request is invalid or expired, please check with the origin request;</li>
-                <li class="bText" style="margin-top: 5px;">A temporary instability occurred, please try again later.</li>
+                <li class="bText">{{t('errorCause1')}}</li>
+                <li class="bText" style="margin-top: 5px;">{{t('errorCause2')}}</li>
               </ul>
-              <button href="#" class="bButton bMargin-top-default" (click)="refreshPage()">Try again</button>
+              <button href="#" class="bButton bMargin-top-default" (click)="refreshPage()">{{t('tryAgain')}}</button>
             </div>        
           </div>
       </div>

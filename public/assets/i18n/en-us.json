@@ -19,7 +19,7 @@
     "emailNotFound":"Email not found.",
     "errorTitle":"Invalid request",
     "errorCausesLabel":"Possible causes:",
-    "errorCause1":"The request is invalid or expired, please check with the origin request;",
-    "errorCause2":"A temporary instability occurred, please try again later.",
+    "errorCause1":"The request is invalid or expired, check with the origin request;",
+    "errorCause2":"A temporary instability occurred, try again later.",
     "tryAgain": "Try again"
 }

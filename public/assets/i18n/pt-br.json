@@ -19,7 +19,7 @@
     "emailNotFound":"E-mail não encontrado.",
     "errorTitle":"Requisição inválida",
     "errorCausesLabel":"Possíveis causas:",
-    "errorCause1":"A requisição é inválida ou expirou, por favor verifique a requisição de origem;",
-    "errorCause2":"Uma instabilidade temporária ocorreu, por favor tente novamente mais tarde.",
+    "errorCause1":"A requisição é inválida ou expirou, verifique a requisição de origem;",
+    "errorCause2":"Uma instabilidade temporária ocorreu, tente novamente mais tarde.",
     "tryAgain": "Tentar novamente"
 }
