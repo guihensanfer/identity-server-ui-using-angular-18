@@ -22,3 +22,15 @@ export interface GetContextResp {
   projectDescription: string
   projectPicture: string | null
 }
+
+export interface GetUserInfoResp {
+  userId: number
+  firstName: string
+  lastName: string
+  email: string
+  defaultLanguage: string
+  picture: string | null
+  projectId: number
+  emailConfirmed: boolean
+  enabled: boolean
+}

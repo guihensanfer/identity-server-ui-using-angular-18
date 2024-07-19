@@ -12,11 +12,12 @@ import { environment } from '../../environments/environment';
 import { AuthService } from '../services/auth/auth.service';
 import { ErrorComponent } from "../error/error.component";
 import { OtpComponent } from "../otp/otp.component";
+import { ByPasswordComponent } from "../by-password/by-password.component";
 
 @Component({
   selector: 'app-sso',
   standalone: true,
-  imports: [TranslocoModule, CommonModule, RouterLink, RouterLinkActive, SeparatorElemComponent, ReactiveFormsModule, FormsModule, ErrorComponent, OtpComponent],
+  imports: [TranslocoModule, CommonModule, RouterLink, RouterLinkActive, SeparatorElemComponent, ReactiveFormsModule, FormsModule, ErrorComponent, OtpComponent, ByPasswordComponent],
   templateUrl: './sso.component.html',
   styleUrl: './sso.component.css'
 })
@@ -90,7 +91,7 @@ export class SsoComponent  implements OnInit {
       const element = event.target as HTMLInputElement;
       
                       
-      this.authService.getAuthToken().then((auth) => {
+      this.authService.login().then((auth) => {
         
         if(auth){
           const data: CheckEmailExistsPost = {
@@ -99,7 +100,7 @@ export class SsoComponent  implements OnInit {
             projectId: environment.defaultProjectId
           };
 
-          this.oAuthService.userEmailExists(data, auth.accessToken)
+          this.oAuthService.userEmailExists(data)
           .subscribe({
               next :  (res : RespDefault<CheckEmailExistsResp>) => {                
                 if(res && res.data?.userExists){

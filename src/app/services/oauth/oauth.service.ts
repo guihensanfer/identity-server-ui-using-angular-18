@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CheckEmailExistsPost, CheckEmailExistsResp, GetContextResp } from '../../interfaces/oauth/oauth-interfaces';
+import { CheckEmailExistsPost, CheckEmailExistsResp, GetContextResp, GetUserInfoResp } from '../../interfaces/oauth/oauth-interfaces';
 import { RespDefault } from '../../interfaces/default-interfaces';
 import { environment } from '../../../environments/environment';
 
@@ -11,7 +11,7 @@ import { environment } from '../../../environments/environment';
 export class OauthService {  
   constructor(private http: HttpClient) {}
 
-  userEmailExists(data:CheckEmailExistsPost, accessToken: string): Observable<RespDefault<CheckEmailExistsResp>>{    
+  userEmailExists(data:CheckEmailExistsPost): Observable<RespDefault<CheckEmailExistsResp>>{    
     return this.http.post<RespDefault<CheckEmailExistsResp>>(`${environment.bomdevApiUrl}/api/v1/oauth/user-check-email-exists`, data);
   } 
 
@@ -20,6 +20,15 @@ export class OauthService {
     {      
       params:{
         secretKey: secret
+      }
+    });
+  } 
+
+  getUserInfo(code: string): Observable<RespDefault<GetUserInfoResp>>{       
+    return this.http.get<RespDefault<GetUserInfoResp>>(`${environment.bomdevApiUrl}/api/v1/oauth/user-info`,
+    {      
+      params:{
+        code: code
       }
     });
   } 

@@ -5,11 +5,11 @@ import { from, switchMap } from 'rxjs';
 
 export const loggerInterceptor: HttpInterceptorFn = (req, next) => {
 
-  if(req.url.includes('auth/login')){
+  if(req.url.includes(AuthService.LOGIN_ENDPOINT_PATH)){
     return next(req);
   }
   
-  return from(inject(AuthService).getAuthToken()).pipe(
+  return from(inject(AuthService).login()).pipe(
     switchMap(accessToken => {      
       
       const newReq = req.clone({

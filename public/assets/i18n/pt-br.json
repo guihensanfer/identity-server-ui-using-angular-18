@@ -26,5 +26,7 @@
     "otpSubTitle": "Enviamos um código para ",
     "otpDidGetCode": "Não recebeu o código?",
     "clickToResend":"Reenviar código",
-    "useAnotherEmail": "Usar outro e-mail"
+    "useAnotherEmail": "Usar outro e-mail",
+    "byPasswordTitle":"Confirmação com senha",
+    "byPasswordWelcome": "Olá, "
 }

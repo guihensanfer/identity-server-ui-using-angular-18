@@ -1,7 +1,7 @@
 export interface AuthPost {
-    email:             string;
-    projectId:         number;
-    password:          string;
+    email:             string | null;
+    projectId:         number | null;
+    password:          string | null;
     continueWithCode: string | null;
     codePassword: string | null;
 }
@@ -18,7 +18,6 @@ export interface AuthResp {
 
 export interface OtpPost {
     email:             string;
-    clientUri:          string;
     projectId:         number | null;    
 }
 

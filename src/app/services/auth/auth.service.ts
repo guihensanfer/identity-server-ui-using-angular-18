@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RespDefault } from '../../interfaces/default-interfaces';
 import { Observable } from 'rxjs';
-import { AuthPost, AuthResp } from '../../interfaces/auth/auth-interfaces';
+import { AuthPost, AuthResp, OtpPost, OtpResp } from '../../interfaces/auth/auth-interfaces';
 import { environment } from '../../../environments/environment';
 import { lastValueFrom } from 'rxjs';
 import { LocalService } from '../local.service';
@@ -14,27 +14,32 @@ export class AuthService {
 
   constructor(private http: HttpClient, private local: LocalService) {}  
 
+  static LOGIN_ENDPOINT_PATH: string = '/api/v1/auth/login';
+
   private firstLogin(data: AuthPost): Observable<RespDefault<AuthResp>> {     
     return this.http.post<RespDefault<AuthResp>>(environment.bomdevApiUrl + '/api/v1/auth/login', data);
   } 
-
-  private refreshLogin(refreshToken: string): Observable<RespDefault<AuthResp>> {     
-    const data: AuthPost = {
-      continueWithCode: refreshToken,
-      codePassword : null,
-      email: "",
-      password: "",
-      projectId: 0      
-    };
-
-    return this.http.post<RespDefault<AuthResp>>(environment.bomdevApiUrl + '/api/v1/auth/login', data);
-  }     
 
   private isTokenExpired(dateExpires: Date): boolean {
     return new Date() > dateExpires;
   }
 
-  public async getAuthToken(): Promise<AuthResp | null> {        
+  // You can use this method for refresh token, OTP or external login redirected
+  public loginWithCode(code: string, codePassword:string | null = null): Observable<RespDefault<AuthResp>> {     
+    const data: AuthPost = {
+      continueWithCode: code,
+      codePassword : codePassword,
+      email: null,
+      password: null,
+      projectId: null     
+    };
+
+    return this.http.post<RespDefault<AuthResp>>(environment.bomdevApiUrl + AuthService.LOGIN_ENDPOINT_PATH, data);
+  }     
+
+
+  // Return the best way login for the current context.
+  public async login(): Promise<AuthResp | null> {        
     let result: AuthResp | null = null;
     const localTokens = this.local.getAuthStoraged();    
 
@@ -44,7 +49,7 @@ export class AuthService {
         return localTokens;
       } else if(localTokens.refreshToken && !this.isTokenExpired(new Date(localTokens.refreshExpiredAt))) {
         try {
-          const res = await lastValueFrom(this.refreshLogin(localTokens.refreshToken));
+          const res = await lastValueFrom(this.loginWithCode(localTokens.refreshToken));
           if(res.success) {            
             result = res.data;            
           }
@@ -78,4 +83,8 @@ export class AuthService {
 
     return result;
   }
+
+  public otp(data:OtpPost): Observable<RespDefault<OtpResp>>{    
+    return this.http.post<RespDefault<OtpResp>>(`${environment.bomdevApiUrl}/api/v1/auth/otp`, data);
+  }   
 }
