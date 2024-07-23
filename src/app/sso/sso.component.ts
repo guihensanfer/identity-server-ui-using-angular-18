@@ -13,6 +13,7 @@ import { AuthService } from '../services/auth/auth.service';
 import { ErrorComponent } from "../error/error.component";
 import { OtpComponent } from "../otp/otp.component";
 import { ByPasswordComponent } from "../by-password/by-password.component";
+import { SharedDataService } from '../services/shared-data.service';
 
 @Component({
   selector: 'app-sso',
@@ -27,7 +28,8 @@ export class SsoComponent  implements OnInit {
     private translocoService: TranslocoService,
     private oAuthService:OauthService,
     private authService: AuthService, 
-    private _loading:LoadingService
+    private _loading:LoadingService,
+    public sharedData:SharedDataService
   ) {}
 
 
@@ -35,11 +37,7 @@ export class SsoComponent  implements OnInit {
     email: new FormControl('', [Validators.required, Validators.maxLength(200), Validators.email])   
   });
   nextButtonDisabled: boolean = true;
-  emailFound:boolean = false;
-  public context: GetContextResp | null = null;
-  step : number = 0;
-  emailLogin: string | null = null;
-  
+  emailFound:boolean = false;    
 
   ngOnInit(): void {    
       const lang = this.route.snapshot.paramMap.get('lang');
@@ -54,7 +52,7 @@ export class SsoComponent  implements OnInit {
             next: (res) => {
               
               if(res && res.success){
-                this.context = res.data;                                      
+                this.sharedData.context = res.data;                                      
               }                  
               
             },
@@ -63,7 +61,7 @@ export class SsoComponent  implements OnInit {
                 // Context not found
               } 
 
-              this.step = -1;
+              this.sharedData.goStep(-1);
               this._loading.hideLoading();    
             },
             complete: () => {              
@@ -72,15 +70,15 @@ export class SsoComponent  implements OnInit {
           }
         );
       } else {        
-        this.step = -1;
+        this.sharedData.goStep(-1)
       }  
 
       
   }
 
   onSubmit() {
-    this.step = 1;
-    this.emailLogin = this.myGroup.controls.email.value;
+    this.sharedData.emailLogin = this.myGroup.controls.email.value!.trim();
+    this.sharedData.goStep(1)    
   }  
 
   onChange(event: Event){

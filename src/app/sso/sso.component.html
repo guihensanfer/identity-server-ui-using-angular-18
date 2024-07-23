@@ -1,7 +1,7 @@
 <main class="main container">
     <ng-container *transloco="let t">
-      <div class="customContainer" *ngIf="step === 0">
-        <h1 class="bText2" *ngIf="context">{{ t('title') + ' ' + context.projectName }}</h1>        
+      <div class="customContainer" *ngIf="this.sharedData.step === 0">
+        <h1 class="bText2" *ngIf="this.sharedData.context">{{ t('title') + ' ' + this.sharedData.context.projectName }}</h1>        
         <div class="content">
           <div class="left-side">                        
             <div class="bMargin-top-default">
@@ -42,8 +42,8 @@
           </div>        
         </div>
       </div>
-      <app-error *ngIf="step === -1"></app-error>
-      <app-otp *ngIf="step === 1"></app-otp>
-      <app-by-password *ngIf="step === 2"></app-by-password>
+      <app-error *ngIf="this.sharedData.step === -1"></app-error>
+      <app-otp *ngIf="this.sharedData.step === 1"></app-otp>
+      <app-by-password *ngIf="this.sharedData.step === 2"></app-by-password>
     </ng-container>      
   </main>

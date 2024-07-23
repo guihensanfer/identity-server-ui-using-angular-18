@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { SsoComponent } from '../sso/sso.component';
 import { GetUserInfoResp } from '../interfaces/oauth/oauth-interfaces';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AvatarComponent } from "../avatar/avatar.component";
-import { OtpComponent } from '../otp/otp.component';
+import { SharedDataService } from '../services/shared-data.service';
 
 @Component({
   selector: 'app-by-password',
@@ -13,13 +12,13 @@ import { OtpComponent } from '../otp/otp.component';
   styleUrl: './by-password.component.css'
 })
 export class ByPasswordComponent {
-  constructor(private sso: SsoComponent,
-    public otp: OtpComponent
+  constructor(
+    public sharedData:SharedDataService
   ) {
     if(!this.userInfo)
-      this.goStep(-1);
+      this.sharedData.goStep(-1);
 
-    this.userInfo = otp.userInfo;
+    this.userInfo = this.sharedData.userInfo;
   }  
 
   userInfo: GetUserInfoResp | null = null;
@@ -28,11 +27,7 @@ export class ByPasswordComponent {
     password: new FormControl('', [Validators.required, Validators.maxLength(300)])    
   });
 
- 
-
-  goStep(step:number):void {
-    this.sso.step = step;
-  }
+   
 
   onSubmit():void{
 
