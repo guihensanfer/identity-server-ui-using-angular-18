@@ -1,19 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AfterViewInit, Component, OnInit, PLATFORM_ID } from '@angular/core';
+import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
-import { SeparatorElemComponent } from '../separator-elem/separator-elem.component';
+import { SeparatorElemComponent } from '../../components/separator-elem/separator-elem.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { OauthService } from '../services/oauth/oauth.service';
-import { CheckEmailExistsPost, CheckEmailExistsResp, GetContextResp } from '../interfaces/oauth/oauth-interfaces';
-import { LoadingService } from '../services/loading.service';
-import { RespDefault } from '../interfaces/default-interfaces';
-import { environment } from '../../environments/environment';
-import { AuthService } from '../services/auth/auth.service';
-import { ErrorComponent } from "../error/error.component";
+import { OauthService } from '../../../services/oauth/oauth.service';
+import { CheckEmailExistsPost, CheckEmailExistsResp } from '../../../interfaces/oauth/oauth-interfaces';
+import { LoadingService } from '../../../services/loading.service';
+import { RespDefault } from '../../../interfaces/default-interfaces';
+import { environment } from '../../../../environments/environment';
+import { AuthService } from '../../../services/auth/auth.service';
+import { ErrorComponent } from "../../components/error/error.component";
 import { OtpComponent } from "../otp/otp.component";
 import { ByPasswordComponent } from "../by-password/by-password.component";
-import { SharedDataService } from '../services/shared-data.service';
+import { SharedDataService } from '../../../services/shared-data.service';
 
 @Component({
   selector: 'app-sso',
@@ -22,7 +22,7 @@ import { SharedDataService } from '../services/shared-data.service';
   templateUrl: './sso.component.html',
   styleUrl: './sso.component.css'
 })
-export class SsoComponent  implements OnInit {
+export class SsoComponent  implements OnInit, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private translocoService: TranslocoService,
@@ -31,6 +31,7 @@ export class SsoComponent  implements OnInit {
     private _loading:LoadingService,
     public sharedData:SharedDataService
   ) {}
+ 
 
 
   public myGroup = new FormGroup({
@@ -38,6 +39,13 @@ export class SsoComponent  implements OnInit {
   });
   nextButtonDisabled: boolean = true;
   emailFound:boolean = false;    
+
+  ngAfterViewInit(): void {
+    if(typeof document !== 'undefined'){
+      document.getElementById('email')?.focus();
+    }
+    
+  }
 
   ngOnInit(): void {    
       const lang = this.route.snapshot.paramMap.get('lang');

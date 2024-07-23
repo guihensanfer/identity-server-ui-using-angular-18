@@ -1,15 +1,15 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { SeparatorElemComponent } from "../separator-elem/separator-elem.component";
+import { SeparatorElemComponent } from "../../components/separator-elem/separator-elem.component";
 import { TranslocoModule } from '@ngneat/transloco';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LoadingService } from '../services/loading.service';
+import { LoadingService } from '../../../services/loading.service';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../services/auth/auth.service';
-import { OtpPost, OtpResp } from '../interfaces/auth/auth-interfaces';
-import { RespDefault } from '../interfaces/default-interfaces';
-import { GetUserInfoResp } from '../interfaces/oauth/oauth-interfaces';
-import { OauthService } from '../services/oauth/oauth.service';
-import { SharedDataService } from '../services/shared-data.service';
+import { AuthService } from '../../../services/auth/auth.service';
+import { OtpPost, OtpResp } from '../../../interfaces/auth/auth-interfaces';
+import { RespDefault } from '../../../interfaces/default-interfaces';
+import { GetUserInfoResp } from '../../../interfaces/oauth/oauth-interfaces';
+import { OauthService } from '../../../services/oauth/oauth.service';
+import { SharedDataService } from '../../../services/shared-data.service';
 
 @Component({
   selector: 'app-otp',

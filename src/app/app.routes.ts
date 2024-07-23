@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { SsoComponent } from './sso/sso.component';
+import { SsoComponent } from './views/main/sso/sso.component';
 import { environment } from '../environments/environment';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { OtpComponent } from './otp/otp.component';
+import { NotFoundComponent } from './views/components/not-found/not-found.component';
+import { OtpComponent } from './views/main/otp/otp.component';
 
 export const routes: Routes = [    
     {

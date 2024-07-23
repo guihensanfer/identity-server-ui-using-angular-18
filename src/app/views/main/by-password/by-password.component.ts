@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { GetUserInfoResp } from '../interfaces/oauth/oauth-interfaces';
+import { GetUserInfoResp } from '../../../interfaces/oauth/oauth-interfaces';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AvatarComponent } from "../avatar/avatar.component";
-import { SharedDataService } from '../services/shared-data.service';
+import { AvatarComponent } from "../../components/avatar/avatar.component";
+import { SharedDataService } from '../../../services/shared-data.service';
 
 @Component({
   selector: 'app-by-password',
