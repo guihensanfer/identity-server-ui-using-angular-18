@@ -5,7 +5,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { LoadingService } from '../../../services/loading.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth/auth.service';
-import { OtpPost, OtpResp } from '../../../interfaces/auth/auth-interfaces';
+import { AuthResp, OtpPost, OtpResp } from '../../../interfaces/auth/auth-interfaces';
 import { RespDefault } from '../../../interfaces/default-interfaces';
 import { GetUserInfoResp } from '../../../interfaces/oauth/oauth-interfaces';
 import { OauthService } from '../../../services/oauth/oauth.service';
@@ -38,9 +38,6 @@ export class OtpComponent implements AfterViewInit, OnInit {
     i4: new FormControl('', [Validators.required, Validators.maxLength(1), Validators.pattern("^[0-9]*$")])
   });
   sentByDemand: boolean = false;
-  //codeOtp: string | null = null;
-  //userInfo: GetUserInfoResp | null = null;
-
 
   ngOnInit(): void {
     
@@ -88,14 +85,14 @@ export class OtpComponent implements AfterViewInit, OnInit {
           }
           else{
             // show error
-            this.sharedData.goStep(-1);
+            this.sharedData.goStep(-1, '#OTP230724-1649');
           }
 
           this.loading.hideLoading();
         },
         error: () => {
           // show error
-          this.sharedData.goStep(-1);
+          this.sharedData.goStep(-1, '#OTP230724-1650');
 
           this.loading.hideLoading();
         }
@@ -114,32 +111,45 @@ export class OtpComponent implements AfterViewInit, OnInit {
     document.getElementById('i1')?.focus()
   }
 
+  getNumberCodeFromView():number{
+    return parseInt(`${this.myGroup.controls.i1.value}${this.myGroup.controls.i2.value}${this.myGroup.controls.i3.value}${this.myGroup.controls.i4.value}`);
+  }
+
   onSubmit():void{
+    const numberCode = this.getNumberCodeFromView();
     this.loading.showLoading();
 
-    if(this.sharedData.codeOtp){
-      // Implement here the login with code and number code, then call the line below:      
-      this.oAuth.getUserInfo(this.sharedData.codeOtp).subscribe({
-        next : (resp : RespDefault<GetUserInfoResp>) => {
-          if(resp){
-            console.log(resp.data);
-            if(resp.success){
-              this.sharedData.userInfo = resp.data;
-              this.sharedData.goStep(2);
-            }
-            else
-            {
-              this.loading.hideLoading();    
-              this.sharedData.goStep(-1);
-              
+    if(this.sharedData.codeOtp && numberCode > 0){      
+
+      this.auth.loginWithCode(this.sharedData.codeOtp, numberCode.toString())
+        .subscribe({
+          next : (resp : RespDefault<AuthResp>) => {
+            if(resp && resp.success){
+              this.oAuth.getUserInfo(resp.data.userInfoCode).subscribe({
+                next : (resp : RespDefault<GetUserInfoResp>) => {
+                  if(resp){
+                    console.log(resp.data);
+                    if(resp.success){
+                      this.sharedData.userInfo = resp.data;
+                      this.sharedData.goStep(2);
+                    }
+                    else
+                    {
+                      this.loading.hideLoading();    
+                      this.sharedData.goStep(-1, '#OTP230724-1648');
+                      
+                    }
+                  }
+                }
+              });
             }
           }
-        }
-      });
+        });    
+      
     }
     else{
       this.loading.hideLoading();    
-      this.sharedData.goStep(-1);
+      this.sharedData.goStep(-1, '#OTP230724-1647');
         
     }
   }

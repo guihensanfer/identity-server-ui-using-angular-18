@@ -17,7 +17,11 @@ export class SharedDataService {
   public userInfo: GetUserInfoResp | null = null;
   public codeOtp: string | null = null;
 
-  public goStep(step:number):void {
+  public errorCode: string | null = null;
+
+
+  public goStep(step:number, errorCode:string | null = null):void {
     this.step = step;
+    this.errorCode = errorCode;
   }
 }

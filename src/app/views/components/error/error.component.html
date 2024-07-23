@@ -5,6 +5,7 @@
             <div class="left-side">                                    
               <app-separator-elem class="bMargin-top-default"></app-separator-elem>            
               <span class="bText bMargin-top-default" style="display: block;">{{t('errorCausesLabel')}}</span>
+              <span *ngIf="this.sharedData.errorCode" class="bText bMargin-top-default" style="display: block;">{{this.sharedData.errorCode}}</span>
               <ul>
                 <li class="bText">{{t('errorCause1')}}</li>
                 <li class="bText" style="margin-top: 5px;">{{t('errorCause2')}}</li>

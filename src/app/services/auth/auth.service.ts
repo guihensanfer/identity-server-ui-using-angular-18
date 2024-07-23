@@ -40,8 +40,13 @@ export class AuthService {
 
   // Return the best way login for the current context.
   public async login(): Promise<AuthResp | null> {        
-    let result: AuthResp | null = null;
-    const localTokens = this.local.getAuthStoraged();    
+    // Prevent unnecessarily requests
+    if(!this.local.isLocalStorageAvailable())
+      return null;    
+    
+
+    let result: AuthResp | null = null;    
+    const localTokens = this.local.getAuthStoraged();        
 
     // Check if already authenticated            
     if(localTokens && localTokens.accessToken) {
@@ -49,6 +54,7 @@ export class AuthService {
         return localTokens;
       } else if(localTokens.refreshToken && !this.isTokenExpired(new Date(localTokens.refreshExpiredAt))) {
         try {
+          console.log('loginWithCode');
           const res = await lastValueFrom(this.loginWithCode(localTokens.refreshToken));
           if(res.success) {            
             result = res.data;            
@@ -69,6 +75,7 @@ export class AuthService {
       };
       
       try {
+        console.log('firstLogin');
         const res = await lastValueFrom(this.firstLogin(data));
         if(res.success) {
           result = res.data;          

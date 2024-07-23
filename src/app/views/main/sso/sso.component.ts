@@ -69,7 +69,7 @@ export class SsoComponent  implements OnInit, AfterViewInit {
                 // Context not found
               } 
 
-              this.sharedData.goStep(-1);
+              this.sharedData.goStep(-1, '#OTP230724-1651');
               this._loading.hideLoading();    
             },
             complete: () => {              
@@ -78,7 +78,7 @@ export class SsoComponent  implements OnInit, AfterViewInit {
           }
         );
       } else {        
-        this.sharedData.goStep(-1)
+        this.sharedData.goStep(-1, '#OTP230724-1652')
       }  
 
       

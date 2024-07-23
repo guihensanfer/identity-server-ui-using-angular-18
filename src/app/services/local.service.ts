@@ -29,7 +29,7 @@ export class LocalService {
 
   private DEFAULT_SECRET_TOKEN = 'YNJnXzAgBXLpAKUdBNhfnnahRIZ';
 
-  private isLocalStorageAvailable(): boolean {
+  public isLocalStorageAvailable(): boolean {
     try {
       const testKey = '__test__';
       localStorage.setItem(testKey, testKey);

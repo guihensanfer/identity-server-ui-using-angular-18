@@ -16,7 +16,7 @@ export class ByPasswordComponent {
     public sharedData:SharedDataService
   ) {
     if(!this.userInfo)
-      this.sharedData.goStep(-1);
+      this.sharedData.goStep(-1, '#OTP230724-1651');
 
     this.userInfo = this.sharedData.userInfo;
   }  
