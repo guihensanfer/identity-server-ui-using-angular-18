@@ -16,7 +16,7 @@ export class AuthService {
 
   static LOGIN_ENDPOINT_PATH: string = '/api/v1/auth/login';
 
-  private firstLogin(data: AuthPost): Observable<RespDefault<AuthResp>> {     
+  public loginFullReq(data: AuthPost): Observable<RespDefault<AuthResp>> {     
     return this.http.post<RespDefault<AuthResp>>(environment.bomdevApiUrl + '/api/v1/auth/login', data);
   } 
 
@@ -34,7 +34,7 @@ export class AuthService {
       projectId: null     
     };
 
-    return this.http.post<RespDefault<AuthResp>>(environment.bomdevApiUrl + AuthService.LOGIN_ENDPOINT_PATH, data);
+    return this.loginFullReq(data);    
   }     
 
 
@@ -78,7 +78,7 @@ export class AuthService {
       
       try {
         console.log('firstLogin');
-        const res = await lastValueFrom(this.firstLogin(data));
+        const res = await lastValueFrom(this.loginFullReq(data));
         if(res.success) {
           result = res.data;          
         }

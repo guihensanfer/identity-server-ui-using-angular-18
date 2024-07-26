@@ -54,7 +54,16 @@ export class SsoComponent  implements OnInit, AfterViewInit {
       this._loading.showLoading();
       
       if (lang && secret) {
-        this.translocoService.setActiveLang(lang);        
+        const availableTranslations = ['en-us', 'pt-br'];
+
+        if(!availableTranslations.includes(lang.toLowerCase())){
+          this.translocoService.setActiveLang(environment.defaultLanguage);  
+        }
+        else
+        {
+          this.translocoService.setActiveLang(lang);  
+        }
+   
         this.oAuthService.getContext(secret).subscribe(
           {
             next: (res) => {
@@ -64,7 +73,8 @@ export class SsoComponent  implements OnInit, AfterViewInit {
               }                  
               
             },
-            error : (err) => {                 
+            error : (err) => {        
+              console.log(err)         ;
               if(err?.message !== environment.preflightedRequestErrorName){
                 if(err && err.error.success && err.error.data === null){
                   // Context not found
@@ -90,7 +100,7 @@ export class SsoComponent  implements OnInit, AfterViewInit {
 
   onSubmit() {
     this.sharedData.emailLogin = this.myGroup.controls.email.value!.trim();
-    this.sharedData.goStep(1)    
+    this.sharedData.goStep(1);
   }  
 
   onChange(event: Event){

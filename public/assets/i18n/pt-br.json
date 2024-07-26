@@ -29,5 +29,8 @@
     "clickToResend":"Reenviar código",
     "useAnotherEmail": "Usar outra conta",
     "byPasswordTitle":"Confirme sua identidade com senha",
-    "byPasswordWelcome": "Olá, "
+    "byPasswordWelcome": "Olá, ",
+    "byPasswordInvalidPassword": "Senha inválida",
+    "byPasswordValidPassword": "Autorização completa! Você será redirecionado em alguns segundos...",
+    "byPasswordIforgetPassword": "Esqueci minha senha"
 }
