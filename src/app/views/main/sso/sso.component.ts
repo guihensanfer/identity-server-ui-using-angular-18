@@ -72,9 +72,9 @@ export class SsoComponent  implements OnInit, AfterViewInit {
                 }        
                 
                 this.sharedData.goStep(-1, '#SSO260724-1009');
-                this._loading.hideLoading();              
+                    
               }                          
-                                                      
+              this._loading.hideLoading();                                                
             },
             complete: () => {              
               this._loading.hideLoading();
@@ -122,21 +122,10 @@ export class SsoComponent  implements OnInit, AfterViewInit {
                   this.emailFound = false;              
                 }                      
               },
-              error : (err) => {                                                
-                if(err && err.error.success && !err.error.data.userExists){
-                  // Email user not found
-                  
-                  this.nextButtonDisabled = false;
-                  this.emailFound = false;                  
-                }
-                else
-                {
-                  // Anything error else
+              error : () => {      
+                this.nextButtonDisabled = false;
+                this.emailFound = false;   
 
-                  this.nextButtonDisabled = true;
-                  this.emailFound = false;
-                }
-                
                 this._loading.hideLoading();                              
               },
               complete: () => {

@@ -47,6 +47,13 @@ export class OtpComponent implements AfterViewInit, OnInit {
 
   }
 
+  validateInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.value.length > 1) {
+      input.value = input.value.slice(0, 1);
+    }
+  }
+
   inputKeyUp(event: Event):void{
     const element = event.target as HTMLInputElement;
         
