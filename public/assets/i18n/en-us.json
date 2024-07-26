@@ -25,6 +25,7 @@
     "otpTitle":"Please check your email",
     "otpSubTitle": "We've sent a code to ",
     "otpDidGetCode": "Didn't get the code?",
+    "otpWrongVerifyCode":"Invalid verify code, please click to resend another code.",
     "clickToResend":"Click to resend",
     "useAnotherEmail": "Use another account",
     "byPasswordTitle":"Password confirmation",

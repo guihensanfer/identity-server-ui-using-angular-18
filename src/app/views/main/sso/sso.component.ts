@@ -14,6 +14,7 @@ import { ErrorComponent } from "../../components/error/error.component";
 import { OtpComponent } from "../otp/otp.component";
 import { ByPasswordComponent } from "../by-password/by-password.component";
 import { SharedDataService } from '../../../services/shared-data.service';
+import { Console } from 'node:console';
 
 @Component({
   selector: 'app-sso',
@@ -53,8 +54,7 @@ export class SsoComponent  implements OnInit, AfterViewInit {
       this._loading.showLoading();
       
       if (lang && secret) {
-        this.translocoService.setActiveLang(lang);
-
+        this.translocoService.setActiveLang(lang);        
         this.oAuthService.getContext(secret).subscribe(
           {
             next: (res) => {
@@ -64,13 +64,17 @@ export class SsoComponent  implements OnInit, AfterViewInit {
               }                  
               
             },
-            error : (err) => {
-              if(err && err.error.success && err.error.data === null){
-                // Context not found
-              } 
-
-              this.sharedData.goStep(-1, '#OTP230724-1651');
-              this._loading.hideLoading();    
+            error : (err) => {                 
+              if(err?.message !== environment.preflightedRequestErrorName){
+                if(err && err.error.success && err.error.data === null){
+                  // Context not found
+                  
+                }        
+                
+                this.sharedData.goStep(-1, '#SSO260724-1009');
+                this._loading.hideLoading();              
+              }                          
+                                                      
             },
             complete: () => {              
               this._loading.hideLoading();
@@ -78,7 +82,7 @@ export class SsoComponent  implements OnInit, AfterViewInit {
           }
         );
       } else {        
-        this.sharedData.goStep(-1, '#OTP230724-1652')
+        this.sharedData.goStep(-1, '#SSO230724-1652')
       }  
 
       

@@ -1,0 +1,13 @@
+<ng-content>
+    <div 
+        class="bText"
+        [ngClass]="{
+            'alert': true,
+            'alert-success': type === 'success',
+            'alert-error': type === 'error',
+            'alert-warning': type === 'warning'
+        }" role="alert">    
+        {{message}}
+    </div>
+</ng-content>
+

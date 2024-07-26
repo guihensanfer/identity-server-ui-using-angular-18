@@ -6,7 +6,7 @@ import { GetContextResp, GetUserInfoResp } from '../interfaces/oauth/oauth-inter
 })
 export class SharedDataService {
 
-  constructor() { }
+  constructor() { }  
 
   // Sso step
   public context: GetContextResp | null = null;
@@ -20,7 +20,7 @@ export class SharedDataService {
   public errorCode: string | null = null;
 
 
-  public goStep(step:number, errorCode:string | null = null):void {
+  public goStep(step:number, errorCode:string | null = null):void {    
     this.step = step;
     this.errorCode = errorCode;
   }

@@ -10,11 +10,12 @@ import { RespDefault } from '../../../interfaces/default-interfaces';
 import { GetUserInfoResp } from '../../../interfaces/oauth/oauth-interfaces';
 import { OauthService } from '../../../services/oauth/oauth.service';
 import { SharedDataService } from '../../../services/shared-data.service';
+import { AlertComponent } from "../../components/alert/alert.component";
 
 @Component({
   selector: 'app-otp',
   standalone: true,
-  imports: [SeparatorElemComponent, TranslocoModule,ReactiveFormsModule,CommonModule],
+  imports: [SeparatorElemComponent, TranslocoModule, ReactiveFormsModule, CommonModule, AlertComponent],
   templateUrl: './otp.component.html',
   styleUrl: './otp.component.css'
 })
@@ -38,6 +39,7 @@ export class OtpComponent implements AfterViewInit, OnInit {
     i4: new FormControl('', [Validators.required, Validators.maxLength(1), Validators.pattern("^[0-9]*$")])
   });
   sentByDemand: boolean = false;
+  invalidNumberCode:boolean = false;
 
   ngOnInit(): void {
     
@@ -62,6 +64,8 @@ export class OtpComponent implements AfterViewInit, OnInit {
         {
           document.getElementById('sendButton')?.focus();
         }
+
+        this.invalidNumberCode = false;
       }
     }
   }
@@ -105,10 +109,17 @@ export class OtpComponent implements AfterViewInit, OnInit {
 
     this.sentByDemand = true;
     this.myGroup.reset();    
+    const form = window.document.getElementById('formCode');
+    if(form){
+      form.style.display = 'block';
+      document.getElementById('i1')?.focus();
+    }
+    
+    this.invalidNumberCode = false;    
   }
 
   ngAfterViewInit(): void {
-    document.getElementById('i1')?.focus()
+    document.getElementById('i1')?.focus();
   }
 
   getNumberCodeFromView():number{
@@ -119,7 +130,7 @@ export class OtpComponent implements AfterViewInit, OnInit {
     const numberCode = this.getNumberCodeFromView();
     this.loading.showLoading();
 
-    if(this.sharedData.codeOtp && numberCode > 0){      
+    if(this.sharedData.codeOtp && numberCode > -1){      
 
       this.auth.loginWithCode(this.sharedData.codeOtp, numberCode.toString())
         .subscribe({
@@ -127,8 +138,7 @@ export class OtpComponent implements AfterViewInit, OnInit {
             if(resp && resp.success){
               this.oAuth.getUserInfo(resp.data.userInfoCode).subscribe({
                 next : (resp : RespDefault<GetUserInfoResp>) => {
-                  if(resp){
-                    console.log(resp.data);
+                  if(resp){                    
                     if(resp.success){
                       this.sharedData.userInfo = resp.data;
                       this.sharedData.goStep(2);
@@ -139,10 +149,35 @@ export class OtpComponent implements AfterViewInit, OnInit {
                       this.sharedData.goStep(-1, '#OTP230724-1648');
                       
                     }
+
+
                   }
+
+
+                },
+                error: () => {
+                  this.sharedData.goStep(-1, '#OTP240724-1502');
+                  this.loading.hideLoading();    
+                },
+                complete:() =>{
+                  this.loading.hideLoading();    
                 }
+
               });
             }
+          },
+          error : () => {
+            this.invalidNumberCode = true;
+            this.myGroup.reset();
+            const form = window.document.getElementById('formCode');
+            if(form){
+              form.style.display = 'none';
+            }
+            this.loading.hideLoading();
+            document.getElementById('i1')?.focus();
+          },
+          complete:()=>{
+            this.loading.hideLoading();
           }
         });    
       

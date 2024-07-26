@@ -40,9 +40,11 @@ export class AuthService {
 
   // Return the best way login for the current context.
   public async login(): Promise<AuthResp | null> {        
+
     // Prevent unnecessarily requests
     if(!this.local.isLocalStorageAvailable())
       return null;    
+    
     
 
     let result: AuthResp | null = null;    

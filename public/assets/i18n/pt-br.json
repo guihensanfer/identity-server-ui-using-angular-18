@@ -25,8 +25,9 @@
     "otpTitle":"Por favor, verifique seu e-mail",
     "otpSubTitle": "Enviamos um código para ",
     "otpDidGetCode": "Não recebeu o código?",
+    "otpWrongVerifyCode":"Código de verificação inválido, por favor clique em reenviar código.",
     "clickToResend":"Reenviar código",
-    "useAnotherEmail": "Usar outro e-mail",
-    "byPasswordTitle":"Confirmação com senha",
+    "useAnotherEmail": "Usar outra conta",
+    "byPasswordTitle":"Confirme sua identidade com senha",
     "byPasswordWelcome": "Olá, "
 }

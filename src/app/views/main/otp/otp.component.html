@@ -10,29 +10,30 @@
                 <span class="bTextLink" style="margin-top:5px" (click)="resendEmail()">{{t('clickToResend')}}</span>
               </div>
 
-              <form [formGroup]="this.myGroup" class="bMargin-top-default" method="post" (submit)="onSubmit()">                
+              <form [formGroup]="this.myGroup" class="bMargin-top-default" method="post" (submit)="onSubmit()" id="formCode">                
                 <input class="inputCode bInputText" type="number" placeholder="0" formControlName="i1" name="i1" id="i1" maxlength="1"
-                  [class.invalidInput]="myGroup.get('i1')?.invalid && myGroup.get('i1')?.touched"                   
+                  [class.invalidInput]="myGroup.get('i1')?.invalid && myGroup.get('i1')?.touched || invalidNumberCode"                   
                   (keyup)="inputKeyUp($event)"
                   />
                 <input class="inputCode bInputText" type="number" placeholder="0" formControlName="i2" name="i2" maxlength="1" id="i2"
-                  [class.invalidInput]="myGroup.get('i2')?.invalid && myGroup.get('i2')?.touched"                   
+                  [class.invalidInput]="myGroup.get('i2')?.invalid && myGroup.get('i2')?.touched || invalidNumberCode"                   
                   (keyup)="inputKeyUp($event)"
                   />
                 <input class="inputCode bInputText" type="number" placeholder="0" formControlName="i3" name="i3" maxlength="1" id="i3"
-                  [class.invalidInput]="myGroup.get('i3')?.invalid && myGroup.get('i3')?.touched"                   
+                  [class.invalidInput]="myGroup.get('i3')?.invalid && myGroup.get('i3')?.touched || invalidNumberCode"                   
                   (keyup)="inputKeyUp($event)"
                   />
                 <input class="inputCode bInputText" type="number" placeholder="0" formControlName="i4" name="i4" maxlength="1" id="i4"
-                  [class.invalidInput]="myGroup.get('i4')?.invalid && myGroup.get('i4')?.touched"                              
+                  [class.invalidInput]="myGroup.get('i4')?.invalid && myGroup.get('i4')?.touched || invalidNumberCode"                              
                   (keyup)="inputKeyUp($event)"
                   />
 
                 <input id="sendButton" class="bButton" type="submit" value="{{t('continueButton')}}" 
-                  [disabled]="myGroup.controls.i1.invalid || myGroup.controls.i2.invalid || myGroup.controls.i3.invalid || myGroup.controls.i4.invalid"
-                  [class.bButtonUnfocused]="myGroup.controls.i1.invalid || myGroup.controls.i2.invalid || myGroup.controls.i3.invalid || myGroup.controls.i4.invalid" />    
+                  [disabled]="myGroup.controls.i1.invalid || myGroup.controls.i2.invalid || myGroup.controls.i3.invalid || myGroup.controls.i4.invalid || invalidNumberCode"
+                  [class.bButtonUnfocused]="myGroup.controls.i1.invalid || myGroup.controls.i2.invalid || myGroup.controls.i3.invalid || myGroup.controls.i4.invalid || invalidNumberCode" />    
               </form>
               
+              <app-alert *ngIf="invalidNumberCode" class="bMargin-top-default" [type]="'error'" [message]="t('otpWrongVerifyCode')"></app-alert>
             </div>        
           </div>
       </div>
