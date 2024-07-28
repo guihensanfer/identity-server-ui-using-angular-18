@@ -29,5 +29,8 @@
     "clickToResend":"Click to resend",
     "useAnotherEmail": "Use another account",
     "byPasswordTitle":"Password confirmation",
-    "byPasswordWelcome": "Hello, "
+    "byPasswordWelcome": "Hello, ",
+    "byPasswordInvalidPassword": "Invalid password",
+    "byPasswordValidPassword": "Authorization complete! You'll be redirected in just a few seconds...",
+    "byPasswordIforgetPassword": "I forget my password"
 }
