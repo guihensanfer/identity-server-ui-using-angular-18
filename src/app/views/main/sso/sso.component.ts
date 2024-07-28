@@ -28,6 +28,7 @@ export class SsoComponent  implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private translocoService: TranslocoService,
     private oAuthService:OauthService,    
+    private auth:AuthService,
     private _loading:LoadingService,
     public sharedData:SharedDataService
   ) {}
@@ -97,6 +98,12 @@ export class SsoComponent  implements OnInit, AfterViewInit {
     this.sharedData.emailLogin = this.myGroup.controls.email.value!.trim();
     this.sharedData.goStep(1);
   }  
+
+  loginWithGoogle():void{
+    this.auth.loginUsingGoogle().then((url) => {
+      console.log(url);
+    });
+  }
 
   onChange(event: Event){
     

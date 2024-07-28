@@ -24,3 +24,8 @@ export interface OtpPost {
 export interface OtpResp {
     code:             string;
 }
+
+export interface ExternalGoogleResp{
+    codeForRedirect: string,
+    expiresAt: Date
+}

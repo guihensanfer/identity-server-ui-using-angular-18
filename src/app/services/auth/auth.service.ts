@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RespDefault } from '../../interfaces/default-interfaces';
 import { Observable } from 'rxjs';
-import { AuthPost, AuthResp, OtpPost, OtpResp } from '../../interfaces/auth/auth-interfaces';
+import { AuthPost, AuthResp, ExternalGoogleResp, OtpPost, OtpResp } from '../../interfaces/auth/auth-interfaces';
 import { environment } from '../../../environments/environment';
 import { lastValueFrom } from 'rxjs';
 import { LocalService } from '../local.service';
@@ -15,6 +15,7 @@ export class AuthService {
   constructor(private http: HttpClient, private local: LocalService) {}  
 
   static LOGIN_ENDPOINT_PATH: string = '/api/v1/auth/login';
+  static LOGIN_EXTERNAL_GOOGLE_REDIRECT = '/auth/login/external/redirect';
 
   public loginFullReq(data: AuthPost): Observable<RespDefault<AuthResp>> {     
     return this.http.post<RespDefault<AuthResp>>(environment.bomdevApiUrl + '/api/v1/auth/login', data);
@@ -43,9 +44,7 @@ export class AuthService {
 
     // Prevent unnecessarily requests
     if(!this.local.isLocalStorageAvailable())
-      return null;    
-    
-    
+      return null;        
 
     let result: AuthResp | null = null;    
     const localTokens = this.local.getAuthStoraged();        
@@ -95,5 +94,26 @@ export class AuthService {
 
   public otp(data:OtpPost): Observable<RespDefault<OtpResp>>{    
     return this.http.post<RespDefault<OtpResp>>(`${environment.bomdevApiUrl}/api/v1/auth/otp`, data);
-  }   
+  }    
+
+  public loginUsingGoogle(): Promise<string> {
+    let urlToRedirect = `${environment.bomdevApiUrl}${AuthService.LOGIN_EXTERNAL_GOOGLE_REDIRECT}`;
+  
+    return new Promise((resolve, reject) => {
+      this.http.post<RespDefault<ExternalGoogleResp>>(`${environment.bomdevApiUrl}/api/v1/auth/external/google`, null)
+        .subscribe({
+          next: (resp: RespDefault<ExternalGoogleResp>) => {
+            if (resp && resp.statusCode === 200) {
+              urlToRedirect += `?codeForRedirect=${resp.data.codeForRedirect}`;
+              resolve(urlToRedirect);
+            } else {
+              reject(new Error('#SERV280724-1932'));
+            }
+          },
+          error: () => {
+            reject(new Error('#SERV280724-1933'));
+          }
+        });
+    });
+  }
 }

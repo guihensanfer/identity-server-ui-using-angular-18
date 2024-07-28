@@ -5,7 +5,5 @@ export const environment = {
     defaultProjectId: 1,
     emailSU:"oauth@bomdev.com.br",
     passwordSU:"IlHEYonEwYAnTUmNiCaInECoMPTIng",
-    localEncryptKey: "SEYEarBeriTiANOtcHSCHicAN",
-    catchPreflightedRequest:true,
-    preflightedRequestErrorName:"PREFLIGHTED_REQUEST_CATCH_ERROR"
+    localEncryptKey: "SEYEarBeriTiANOtcHSCHicAN"
   };
