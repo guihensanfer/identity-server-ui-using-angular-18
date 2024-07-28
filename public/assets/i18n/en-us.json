@@ -17,7 +17,7 @@
     "requiredField":"This field is required",
     "emailFound":"Click bellow to continue",
     "emailNotFound":"Account not found.",
-    "errorTitle":"Invalid request",
+    "errorTitle":"Ops, something didn't work right",
     "errorCausesLabel":"Possible causes:",
     "errorCause1":"The request is invalid or expired, check with the origin request;",
     "errorCause2":"A temporary instability occurred, try again later.",

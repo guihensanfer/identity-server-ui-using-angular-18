@@ -17,7 +17,7 @@
     "requiredField":"Obrigatório",
     "emailFound":"Clique abaixo para continuar",
     "emailNotFound":"Conta não encontrada.",
-    "errorTitle":"Requisição inválida",
+    "errorTitle":"Ops, algo não funcionou bem",
     "errorCausesLabel":"Possíveis causas:",
     "errorCause1":"A requisição é inválida ou expirou, verifique a requisição de origem;",
     "errorCause2":"Uma instabilidade temporária ocorreu, tente novamente mais tarde.",

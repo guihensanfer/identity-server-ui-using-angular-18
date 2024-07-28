@@ -27,7 +27,7 @@
             <form [formGroup]="myGroup" (submit)="onSubmit()" method="post" class="bMargin-top-default">
               <div class="form-group">
                 <label class="bLegend" for="email">{{t('emailAddressLabel')}}</label>
-                <input class="bInputText" type="text" placeholder="{{t('emailAddressPlaceholder')}}" formControlName="email" id="email" name="email" 
+                <input class="bInputText" tabindex="1" type="text" placeholder="{{t('emailAddressPlaceholder')}}" formControlName="email" id="email" name="email" 
                   [class.invalidInput]="myGroup.get('email')?.invalid && myGroup.get('email')?.touched || (!nextButtonDisabled && !emailFound)" 
                   [class.validInput]="emailFound"
                   (change)="onChange($event)"
@@ -35,7 +35,7 @@
                 <div class="bLegend bMargin-top-default" *ngIf="!nextButtonDisabled && !emailFound">{{t('emailNotFound')}}</div>
                 <div class="bLegend bMargin-top-default" *ngIf="emailFound">{{t('emailFound')}}</div>
               </div>              
-              <input id="sendButton" class="bButton bMargin-top-default" type="submit" value="{{t('continueButton')}}" 
+              <input id="sendButton" tabindex="2" class="bButton bMargin-top-default" type="submit" value="{{t('continueButton')}}" 
                 [disabled]="nextButtonDisabled || !emailFound"
                 [class.bButtonUnfocused]="nextButtonDisabled || !emailFound" />                            
             </form>            

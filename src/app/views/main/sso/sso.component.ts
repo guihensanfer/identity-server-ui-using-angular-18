@@ -65,15 +65,12 @@ export class SsoComponent  implements OnInit, AfterViewInit {
               
             },
             error : (err) => {                 
-              if(err?.message !== environment.preflightedRequestErrorName){
-                if(err && err.error.success && err.error.data === null){
-                  // Context not found
-                  
-                }        
+              if(err && err.error.success && err.error.data === null){
+                // Context not found
                 
-                this.sharedData.goStep(-1, '#SSO260724-1009');
-                    
-              }                          
+              }        
+              
+              this.sharedData.goStep(-1, '#SSO260724-1009');
               this._loading.hideLoading();                                                
             },
             complete: () => {              
@@ -98,45 +95,39 @@ export class SsoComponent  implements OnInit, AfterViewInit {
 
     if(this.myGroup.controls.email.valid){
       this._loading.showLoading();
-      const element = event.target as HTMLInputElement;
-      
-                      
-      this.authService.login().then((auth) => {
-        
-        if(auth){
-          const data: CheckEmailExistsPost = {
-            email: element.value.trim(),
-            enabled: null,
-            projectId: environment.defaultProjectId
-          };
+      const element = event.target as HTMLInputElement;                            
+      const data: CheckEmailExistsPost = {
+        email: element.value.trim(),
+        enabled: null,
+        projectId: environment.defaultProjectId
+      };
 
-          this.oAuthService.userEmailExists(data)
-          .subscribe({
-              next :  (res : RespDefault<CheckEmailExistsResp>) => {                
-                if(res && res.data?.userExists){
-                  this.nextButtonDisabled = false;
-                  this.emailFound = true;
-                }
-                else{
-                  this.nextButtonDisabled = true;
-                  this.emailFound = false;              
-                }                      
-              },
-              error : () => {      
-                this.nextButtonDisabled = false;
-                this.emailFound = false;   
+      this.oAuthService.userEmailExists(data)
+      .subscribe({
+          next :  (res : RespDefault<CheckEmailExistsResp>) => {                
+            if(res && res.data?.userExists){
+              // User exists
 
-                this._loading.hideLoading();                              
-              },
-              complete: () => {
-                this._loading.hideLoading();
-              }          
+              this.nextButtonDisabled = false;
+              this.emailFound = true;
+              document.getElementById('sendButton')?.focus();
             }
-          );
-        }
-        
-      });
+            else{
+              this.nextButtonDisabled = true;
+              this.emailFound = false;              
+            }                      
+          },
+          error : () => {      
+            this.nextButtonDisabled = false;
+            this.emailFound = false;   
 
+            this._loading.hideLoading();                              
+          },
+          complete: () => {
+            this._loading.hideLoading();
+          }          
+        }
+      );
       
     }  
          

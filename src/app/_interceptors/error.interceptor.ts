@@ -10,9 +10,9 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         console.clear();
       }
 
-      if(environment.catchPreflightedRequest && req.body === null && !req.headers.has('Authorization')){
-        return throwError(() => new Error(environment.preflightedRequestErrorName));
-      }
+      // if(environment.catchPreflightedRequest && req.body === null && !req.headers.has('Authorization')){
+      //   return throwError(() => new Error(environment.preflightedRequestErrorName));
+      // }
       
 
       return throwError(() => error);
