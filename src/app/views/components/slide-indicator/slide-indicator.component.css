@@ -1,0 +1,20 @@
+.indicator-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--background-primary-color);
+    padding-bottom: 10px;
+  }
+  
+  .indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--background-third-color);
+  }
+  
+  .indicator.active {
+    background-color: var(--background-fourth-color);
+  }
+  

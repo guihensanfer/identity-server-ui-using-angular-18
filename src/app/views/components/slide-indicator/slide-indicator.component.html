@@ -1,0 +1,5 @@
+<div class="indicator-container">
+  <div *ngFor="let slide of slides; let i = index" 
+       [ngClass]="{'active': (i + 1) === currentSlide}" 
+       class="indicator"></div>
+</div>

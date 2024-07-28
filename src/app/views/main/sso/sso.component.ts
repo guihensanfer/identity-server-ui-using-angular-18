@@ -14,12 +14,12 @@ import { ErrorComponent } from "../../components/error/error.component";
 import { OtpComponent } from "../otp/otp.component";
 import { ByPasswordComponent } from "../by-password/by-password.component";
 import { SharedDataService } from '../../../services/shared-data.service';
-import { Console } from 'node:console';
+import { SlideIndicatorComponent } from "../../components/slide-indicator/slide-indicator.component";
 
 @Component({
   selector: 'app-sso',
   standalone: true,
-  imports: [TranslocoModule, CommonModule, RouterLink, RouterLinkActive, SeparatorElemComponent, ReactiveFormsModule, FormsModule, ErrorComponent, OtpComponent, ByPasswordComponent],
+  imports: [TranslocoModule, CommonModule, RouterLink, RouterLinkActive, SeparatorElemComponent, ReactiveFormsModule, FormsModule, ErrorComponent, OtpComponent, ByPasswordComponent, SlideIndicatorComponent],
   templateUrl: './sso.component.html',
   styleUrl: './sso.component.css'
 })
@@ -27,8 +27,7 @@ export class SsoComponent  implements OnInit, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private translocoService: TranslocoService,
-    private oAuthService:OauthService,
-    private authService: AuthService, 
+    private oAuthService:OauthService,    
     private _loading:LoadingService,
     public sharedData:SharedDataService
   ) {}

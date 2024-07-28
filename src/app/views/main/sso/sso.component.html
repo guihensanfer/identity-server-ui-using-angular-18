@@ -40,10 +40,12 @@
                 [class.bButtonUnfocused]="nextButtonDisabled || !emailFound" />                            
             </form>            
           </div>        
-        </div>
-      </div>
+        </div>        
+      </div>      
       <app-error *ngIf="this.sharedData.step === -1"></app-error>
       <app-otp *ngIf="this.sharedData.step === 1"></app-otp>
       <app-by-password *ngIf="this.sharedData.step === 2"></app-by-password>
+      
+      <app-slide-indicator *ngIf="sharedData.step >= 1 || sharedData.step <= 3" [slides]="[1,2,3]" [currentSlide]="sharedData.step + 1"></app-slide-indicator>
     </ng-container>      
   </main>
