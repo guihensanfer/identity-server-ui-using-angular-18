@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RespDefault } from '../../interfaces/default-interfaces';
 import { Observable } from 'rxjs';
@@ -15,7 +15,7 @@ export class AuthService {
   constructor(private http: HttpClient, private local: LocalService) {}  
 
   static LOGIN_ENDPOINT_PATH: string = '/api/v1/auth/login';
-  static LOGIN_EXTERNAL_GOOGLE_REDIRECT = '/auth/login/external/redirect';
+  static LOGIN_EXTERNAL_GOOGLE_REDIRECT = '/api/v1/auth/login/external/redirect';
 
   public loginFullReq(data: AuthPost): Observable<RespDefault<AuthResp>> {     
     return this.http.post<RespDefault<AuthResp>>(environment.bomdevApiUrl + '/api/v1/auth/login', data);
@@ -96,24 +96,34 @@ export class AuthService {
     return this.http.post<RespDefault<OtpResp>>(`${environment.bomdevApiUrl}/api/v1/auth/otp`, data);
   }    
 
-  public loginUsingGoogle(): Promise<string> {
+  public loginUsingGoogle(): string {
     let urlToRedirect = `${environment.bomdevApiUrl}${AuthService.LOGIN_EXTERNAL_GOOGLE_REDIRECT}`;
+    const header = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
   
-    return new Promise((resolve, reject) => {
-      this.http.post<RespDefault<ExternalGoogleResp>>(`${environment.bomdevApiUrl}/api/v1/auth/external/google`, null)
-        .subscribe({
-          next: (resp: RespDefault<ExternalGoogleResp>) => {
-            if (resp && resp.statusCode === 200) {
-              urlToRedirect += `?codeForRedirect=${resp.data.codeForRedirect}`;
-              resolve(urlToRedirect);
-            } else {
-              reject(new Error('#SERV280724-1932'));
-            }
-          },
-          error: () => {
-            reject(new Error('#SERV280724-1933'));
+    this.http.post<RespDefault<ExternalGoogleResp>>(`${environment.bomdevApiUrl}/api/v1/auth/login/external/google`, null,
+      {
+        headers: header
+      }          
+    )
+      .subscribe({
+        next: (resp: RespDefault<ExternalGoogleResp>) => {
+          console.log('tst', resp);
+          if (resp && resp.statusCode === 200) {
+            urlToRedirect += `?codeForRedirect=${resp.data.codeForRedirect}`;
+        
+          } else {
+            throw new Error('#SERV280724-1932');
           }
-        });
-    });
+        },
+        error: (err) => {
+          console.log(err);
+          throw new Error('#SERV280724-1933');
+        }
+      });
+
+    return urlToRedirect;
   }
 }

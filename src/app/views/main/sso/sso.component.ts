@@ -100,9 +100,9 @@ export class SsoComponent  implements OnInit, AfterViewInit {
   }  
 
   loginWithGoogle():void{
-    this.auth.loginUsingGoogle().then((url) => {
-      console.log(url);
-    });
+    const urlToRedirect = this.auth.loginUsingGoogle();
+console.log(urlToRedirect);
+    // document.location.href = urlToRedirect;
   }
 
   onChange(event: Event){

@@ -17,8 +17,9 @@ export const loggerInterceptor: HttpInterceptorFn = (req, next) => {
     switchMap(accessToken => {            
       
       const newReq = req.clone({
-        headers: req.headers.append('Authorization', `Bearer ${accessToken?.accessToken}`)
-      });          
+        headers: req.headers
+          .append('Authorization', `Bearer ${accessToken?.accessToken}`)          
+      });              
 
       return next(newReq);
     })
