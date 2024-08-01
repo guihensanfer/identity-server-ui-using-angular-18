@@ -4,12 +4,11 @@ import { inject } from '@angular/core';
 import { from, switchMap } from 'rxjs';
 import { environment } from '../../environments/environment';
 
-export const loggerInterceptor: HttpInterceptorFn = (req, next) => {
+export const loggerInterceptor: HttpInterceptorFn = (req, next) => {  
 
   const url = req.url;
 
-
-  if(!url.includes(environment.bomdevApiUrl) || url.includes(AuthService.LOGIN_ENDPOINT_PATH)){
+  if(!url.includes(environment.bomdevApiUrl) || url === (environment.bomdevApiUrl + AuthService.LOGIN_ENDPOINT_PATH)){          
     return next(req);
   }
   

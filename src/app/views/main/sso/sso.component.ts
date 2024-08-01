@@ -51,9 +51,9 @@ export class SsoComponent  implements OnInit, AfterViewInit {
   ngOnInit(): void {    
       const lang = this.route.snapshot.paramMap.get('lang');
       const secret = this.route.snapshot.paramMap.get('secret');      
-      this._loading.showLoading();
+      this._loading.showLoading();      
       
-      if (lang && secret) {
+      if (lang && secret) {                
         const availableTranslations = ['en-us', 'pt-br'];
 
         if(!availableTranslations.includes(lang.toLowerCase())){
@@ -100,9 +100,12 @@ export class SsoComponent  implements OnInit, AfterViewInit {
   }  
 
   loginWithGoogle():void{
-    const urlToRedirect = this.auth.loginUsingGoogle();
-console.log(urlToRedirect);
-    // document.location.href = urlToRedirect;
+        
+    this.auth.loginUsingGoogle().then((urlToRedirect : string) => {
+      window.location.href = urlToRedirect;
+    });
+    
+    
   }
 
   onChange(event: Event){

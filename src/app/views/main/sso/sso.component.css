@@ -21,19 +21,14 @@ h1{
     /* border-bottom:solid 1px #626262; */
     /* padding: 10px; */
     display: block;
+    display: flex;
+    align-items: center;
+    
 }
 
-.externalProviders a {
-    display: flex;
-    align-items: center;            
-}
 .externalProviders img {
     margin-right: 10px;
     width: 22px; 
-}
-.externalProviders .bText {
-    display: flex;
-    align-items: center;
 }
 
 #sendButton{

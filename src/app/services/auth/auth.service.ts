@@ -96,34 +96,36 @@ export class AuthService {
     return this.http.post<RespDefault<OtpResp>>(`${environment.bomdevApiUrl}/api/v1/auth/otp`, data);
   }    
 
-  public loginUsingGoogle(): string {
-    let urlToRedirect = `${environment.bomdevApiUrl}${AuthService.LOGIN_EXTERNAL_GOOGLE_REDIRECT}`;
-    const header = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    };
-  
-    this.http.post<RespDefault<ExternalGoogleResp>>(`${environment.bomdevApiUrl}/api/v1/auth/login/external/google`, null,
-      {
-        headers: header
-      }          
-    )
-      .subscribe({
-        next: (resp: RespDefault<ExternalGoogleResp>) => {
-          console.log('tst', resp);
-          if (resp && resp.statusCode === 200) {
-            urlToRedirect += `?codeForRedirect=${resp.data.codeForRedirect}`;
-        
-          } else {
-            throw new Error('#SERV280724-1932');
-          }
-        },
-        error: (err) => {
-          console.log(err);
-          throw new Error('#SERV280724-1933');
-        }
-      });
+  public loginUsingGoogleTest(){
 
-    return urlToRedirect;
+    this.http.get('http://localhost:3000/api/v1/auth/login/external/google')
+    .subscribe(
+      (response) => {
+        console.log('Resposta:', response);
+      },
+      (error) => {
+        console.error('Erro:', error);
+      }
+    );
+  }
+
+  public async loginUsingGoogle(): Promise<string> {
+    let urlToRedirect = `${environment.bomdevApiUrl}${AuthService.LOGIN_EXTERNAL_GOOGLE_REDIRECT}`;
+  
+    try {
+      const response = await lastValueFrom(this.http.get<RespDefault<ExternalGoogleResp>>(
+        `${environment.bomdevApiUrl}/api/v1/auth/login/external/google`
+      ));
+        
+      if (response.success && response.statusCode === 200) {
+        urlToRedirect += `?codeForRedirect=${response.data.codeForRedirect}`;
+
+        return urlToRedirect;
+      } else {
+        throw new Error('#SERV280724-1932');
+      }
+    } catch (err) {      
+      throw new Error('#SERV280724-1933');
+    }
   }
 }
