@@ -24,4 +24,11 @@ export class SharedDataService {
     this.step = step;
     this.errorCode = errorCode;
   }
+
+  public generateCallbackUrl(userInfoCode: string):string{
+    if(!this.context)
+      return '';
+
+    return this.context!.clientCallbackUri + '?userInfoCode=' + userInfoCode;
+  }
 }

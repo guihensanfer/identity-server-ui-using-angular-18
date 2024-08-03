@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, OnInit, PLATFORM_ID } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { SeparatorElemComponent } from '../../components/separator-elem/separator-elem.component';

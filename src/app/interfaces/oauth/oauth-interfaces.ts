@@ -24,6 +24,11 @@ export interface GetContextResp {
 }
 
 export interface GetUserInfoResp {
+  userInfo: UserInfo
+  operations: Operations
+}
+
+export interface UserInfo {
   userId: number
   firstName: string
   lastName: string
@@ -33,4 +38,13 @@ export interface GetUserInfoResp {
   projectId: number
   emailConfirmed: boolean
   enabled: boolean
+  isPasswordEmpty: boolean
+}
+
+export interface Operations {
+  resetPasswordQuickly: ResetPasswordQuickly
+}
+
+export interface ResetPasswordQuickly {
+  code: string
 }

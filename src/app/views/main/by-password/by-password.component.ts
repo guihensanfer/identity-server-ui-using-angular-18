@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AvatarComponent } from "../../components/avatar/avatar.component";
 import { SharedDataService } from '../../../services/shared-data.service';
@@ -10,7 +10,7 @@ import { RespDefault } from '../../../interfaces/default-interfaces';
 import { LoadingService } from '../../../services/loading.service';
 import { AlertComponent } from "../../components/alert/alert.component";
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { passwordMatchValidator } from '../../../validators/passwords-validator';
 
 @Component({
   selector: 'app-by-password',
@@ -27,10 +27,14 @@ export class ByPasswordComponent implements AfterViewInit {
   ) {
     if(!this.sharedData.userInfo)
       this.sharedData.goStep(-1, '#PASSWD230724-1832');
+
+    this.resetPasswordFlow = this.sharedData.userInfo!.userInfo.isPasswordEmpty;    
     
   }  
   invalidPassword : boolean = false;
   successPassword:boolean = false;
+  resetPasswordFlow:boolean = false;
+  passwordsDoNotMatch:boolean = false;
 
 
   ngAfterViewInit(): void {
@@ -43,9 +47,19 @@ export class ByPasswordComponent implements AfterViewInit {
     password: new FormControl('', [Validators.required, Validators.maxLength(300)])    
   });
 
+  public resetPasswordGroup = new FormGroup({
+    newPassword: new FormControl('', [Validators.required, Validators.maxLength(300)]),
+    confirmPassword: new FormControl('', [Validators.required, Validators.maxLength(300)])
+  }, { validators: passwordMatchValidator('newPassword', 'confirmPassword') });
+
+
   textChanged(){
     this.invalidPassword = false;
     this.successPassword = false;    
+  }
+
+  textChangedResetPasswdFlow(){
+    this.passwordsDoNotMatch = false;  
   }
 
   onSubmit():void{
@@ -67,7 +81,7 @@ export class ByPasswordComponent implements AfterViewInit {
         next : (resp : RespDefault<AuthResp>) => {
           console.log(resp);
           if(resp && resp.success && resp.data){
-            const callbackUrl = this.sharedData.context?.clientCallbackUri + '?userInfoCode=' + resp.data.userInfoCode;
+            const callbackUrl = this.sharedData.generateCallbackUrl(resp.data.userInfoCode);
             
             this.successPassword = true; 
             this.myGroup.controls.password.disable();

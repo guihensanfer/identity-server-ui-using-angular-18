@@ -32,5 +32,8 @@
     "byPasswordWelcome": "Hello, ",
     "byPasswordInvalidPassword": "Invalid password",
     "byPasswordValidPassword": "Authorization complete! You'll be redirected in just a few seconds...",
-    "byPasswordIforgetPassword": "I forget my password"
+    "byPasswordIforgetPassword": "I forget my password",
+    "byPasswordNewPassword": "New password",
+    "byPasswordConfirmPassword": "Confirm password",
+    "byPasswordPasswordsDoNotMatch": "The passwords do not match"
 }
