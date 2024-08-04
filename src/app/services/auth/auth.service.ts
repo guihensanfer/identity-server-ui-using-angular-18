@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RespDefault } from '../../interfaces/default-interfaces';
 import { Observable } from 'rxjs';
-import { AuthPost, AuthResp, ExternalGoogleResp, OtpPost, OtpResp } from '../../interfaces/auth/auth-interfaces';
+import { AuthPost, AuthResp, ExternalGoogleResp, OtpPost, OtpResp, ResetPasswordPut } from '../../interfaces/auth/auth-interfaces';
 import { environment } from '../../../environments/environment';
 import { lastValueFrom } from 'rxjs';
 import { LocalService } from '../local.service';
@@ -96,19 +96,6 @@ export class AuthService {
     return this.http.post<RespDefault<OtpResp>>(`${environment.bomdevApiUrl}/api/v1/auth/otp`, data);
   }    
 
-  public loginUsingGoogleTest(){
-
-    this.http.get('http://localhost:3000/api/v1/auth/login/external/google')
-    .subscribe(
-      (response) => {
-        console.log('Resposta:', response);
-      },
-      (error) => {
-        console.error('Erro:', error);
-      }
-    );
-  }
-
   public async loginUsingGoogle(): Promise<string> {
     let urlToRedirect = `${environment.bomdevApiUrl}${AuthService.LOGIN_EXTERNAL_GOOGLE_REDIRECT}`;
   
@@ -128,4 +115,8 @@ export class AuthService {
       throw new Error('#SERV280724-1933');
     }
   }
+
+  public resetPassword(data:ResetPasswordPut): Observable<RespDefault<null>>{    
+    return this.http.put<RespDefault<null>>(`${environment.bomdevApiUrl}/api/v1/auth/reset-password`, data);
+  }    
 }

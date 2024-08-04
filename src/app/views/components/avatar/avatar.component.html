@@ -1,6 +1,6 @@
 <div class="avatar bText">
     <ng-container *ngIf="imageUrl; else initialsTemplate">
-      <img [src]="imageUrl" alt="User Avatar" />
+      <img [src]="imageUrl" alt="{{initials}}" />
     </ng-container>
     <ng-template #initialsTemplate>
       {{ initials }}

@@ -10,7 +10,8 @@
     font-size: 160%;
     font-weight: bold;
     text-transform: uppercase;
-    overflow: hidden;    
+    overflow: hidden;  
+    border:solid 3px var(--background-third-color);  
   }
   
   .avatar img {

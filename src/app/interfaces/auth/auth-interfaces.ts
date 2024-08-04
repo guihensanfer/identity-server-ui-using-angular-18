@@ -29,3 +29,8 @@ export interface ExternalGoogleResp{
     codeForRedirect: string,
     expiresAt: Date
 }
+
+export interface ResetPasswordPut {
+    code:                string;
+    newPassword:         string;    
+}

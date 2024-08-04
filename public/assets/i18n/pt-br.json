@@ -35,5 +35,6 @@
     "byPasswordIforgetPassword": "Esqueci minha senha",
     "byPasswordNewPassword": "Nova senha",
     "byPasswordConfirmPassword": "Confirmar senha",
-    "byPasswordPasswordsDoNotMatch": "As senhas não coincidem"
+    "byPasswordPasswordsDoNotMatch": "As senhas não coincidem",
+    "byPasswordSendContinueButton": "Definir senha e continuar"
 }

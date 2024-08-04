@@ -35,5 +35,6 @@
     "byPasswordIforgetPassword": "I forget my password",
     "byPasswordNewPassword": "New password",
     "byPasswordConfirmPassword": "Confirm password",
-    "byPasswordPasswordsDoNotMatch": "The passwords do not match"
+    "byPasswordPasswordsDoNotMatch": "The passwords do not match",
+    "byPasswordSendContinueButton": "Set password and continue"
 }

@@ -38,7 +38,13 @@ export class ByPasswordComponent implements AfterViewInit {
 
 
   ngAfterViewInit(): void {
-    document.getElementById('passwordField')?.focus();
+    if(this.resetPasswordFlow){
+      document.getElementById('newPasswordField')?.focus();
+    }
+    else
+    {
+      document.getElementById('passwordField')?.focus();
+    }    
   }
 
   
@@ -59,7 +65,7 @@ export class ByPasswordComponent implements AfterViewInit {
   }
 
   textChangedResetPasswdFlow(){
-    this.passwordsDoNotMatch = false;  
+    this.passwordsDoNotMatch = this.resetPasswordGroup.errors && this.resetPasswordGroup.errors['passwordMismatch'];
   }
 
   onSubmit():void{
@@ -110,4 +116,7 @@ export class ByPasswordComponent implements AfterViewInit {
     }
   }
 
+  onSubmitResetPasswdFlow():void{
+    
+  }
 }
