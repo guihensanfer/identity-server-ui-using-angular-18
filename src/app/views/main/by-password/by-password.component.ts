@@ -69,7 +69,7 @@ export class ByPasswordComponent implements AfterViewInit {
   }
 
   onSubmit():void{
-    if(this.myGroup.controls.password.valid){
+    if(this.myGroup.controls.password.valid && !this.myGroup.errors){
       this.loading.showLoading();
       const password = this.myGroup.controls.password.value;
 
