@@ -5,6 +5,10 @@
   --background-secundary-color:#2C3636;
   --background-third-color:#213333;
   --background-fourth-color:#2F9492;
+
+  --avatar-color:#000; 
+  --avatar-size: 70px;
+  --avatar-font-size: 30px;
 }
 
 @font-face {

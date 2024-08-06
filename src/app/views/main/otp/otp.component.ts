@@ -130,7 +130,7 @@ export class OtpComponent implements AfterViewInit, OnInit {
   }
 
   getNumberCodeFromView():number{
-    return parseInt(`${this.myGroup.controls.i1.value}${this.myGroup.controls.i2.value}${this.myGroup.controls.i3.value}${this.myGroup.controls.i4.value}`);
+    return parseInt(`${this.myGroup.controls.i1.value?.toString().slice(0, 1)}${this.myGroup.controls.i2.value?.toString().slice(0, 1)}${this.myGroup.controls.i3.value?.toString().slice(0, 1)}${this.myGroup.controls.i4.value?.toString().slice(0, 1)}`);
   }
 
   onSubmit():void{

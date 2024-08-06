@@ -15,11 +15,12 @@ import { OtpComponent } from "../otp/otp.component";
 import { ByPasswordComponent } from "../by-password/by-password.component";
 import { SharedDataService } from '../../../services/shared-data.service';
 import { SlideIndicatorComponent } from "../../components/slide-indicator/slide-indicator.component";
+import { AvatarComponent } from "../../components/avatar/avatar.component";
 
 @Component({
   selector: 'app-sso',
   standalone: true,
-  imports: [TranslocoModule, CommonModule, RouterLink, RouterLinkActive, SeparatorElemComponent, ReactiveFormsModule, FormsModule, ErrorComponent, OtpComponent, ByPasswordComponent, SlideIndicatorComponent],
+  imports: [TranslocoModule, CommonModule, RouterLink, RouterLinkActive, SeparatorElemComponent, ReactiveFormsModule, FormsModule, ErrorComponent, OtpComponent, ByPasswordComponent, SlideIndicatorComponent, AvatarComponent],
   templateUrl: './sso.component.html',
   styleUrl: './sso.component.css'
 })
