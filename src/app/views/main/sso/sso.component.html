@@ -1,11 +1,7 @@
 <main class="main container">
     <ng-container *transloco="let t">
       <div class="customContainer" *ngIf="this.sharedData.step === 0">
-        <h1 class="bText2" *ngIf="this.sharedData.context">{{ t('title') + ' ' + this.sharedData.context.projectName }}</h1>   
-        <app-avatar [firstName]="'Guilherme'" 
-        [lastName]="'Ferreira'" 
-        [imageUrl]="'https://example.com.br/tst.png'"
-        ></app-avatar>     
+        <h1 class="bText2" *ngIf="this.sharedData.context">{{ t('title') + ' ' + this.sharedData.context.projectName }}</h1>        
         <div class="content">
           <div class="left-side">                      
             <div class="bMargin-top-default">
