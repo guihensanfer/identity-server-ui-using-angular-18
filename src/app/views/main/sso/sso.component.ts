@@ -40,18 +40,37 @@ export class SsoComponent  implements OnInit, AfterViewInit {
     email: new FormControl('', [Validators.required, Validators.maxLength(200), Validators.email])   
   });
   nextButtonDisabled: boolean = true;
-  emailFound:boolean = false;    
-
+  emailFound:boolean = false;   
+  resetPasswordFlow:boolean = false;   
   ngAfterViewInit(): void {
     if(typeof document !== 'undefined'){
-      document.getElementById('email')?.focus();
+      const emailElement = document.getElementById('email');
+
+      if(emailElement){
+        if(this.resetPasswordFlow){
+          const requestEmail = this.route.snapshot.paramMap.get('forget_passwd_email')?.toString();
+
+          if(requestEmail){
+            this.myGroup.controls.email.setValue(requestEmail);
+
+          }
+          
+        }
+  
+        emailElement.focus();
+      }      
+
+
     }
     
   }
 
+
+
   ngOnInit(): void {    
       const lang = this.route.snapshot.paramMap.get('lang');
-      const secret = this.route.snapshot.paramMap.get('secret');      
+      const secret = this.route.snapshot.paramMap.get('secret');   
+      this.resetPasswordFlow = this.route.snapshot.paramMap.get('reset_password_flow') === 'true';   
       this._loading.showLoading();      
       
       if (lang && secret) {                

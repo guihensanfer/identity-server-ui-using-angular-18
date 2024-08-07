@@ -11,6 +11,7 @@ import { LoadingService } from '../../../services/loading.service';
 import { AlertComponent } from "../../components/alert/alert.component";
 import { CommonModule } from '@angular/common';
 import { passwordMatchValidator } from '../../../validators/passwords-validator';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-by-password',
@@ -23,12 +24,13 @@ export class ByPasswordComponent implements AfterViewInit {
   constructor(
     public sharedData:SharedDataService,
     private auth : AuthService,
-    private loading: LoadingService
+    private loading: LoadingService,
+    private route: ActivatedRoute,
   ) {
-    if(!this.sharedData.userInfo)
+    if(!this.sharedData.userInfo || !this.sharedData.userInfo.userInfo || this.sharedData.userInfo.userInfo.userId <= 0)
       this.sharedData.goStep(-1, '#PASSWD230724-1832');
 
-    this.resetPasswordFlow = this.sharedData.userInfo!.userInfo.isPasswordEmpty;    
+    this.resetPasswordFlow = this.sharedData.userInfo!.userInfo.isPasswordEmpty || this.route.snapshot.paramMap.get('reset_password_flow') === 'true';    
     
   }  
   invalidPassword : boolean = false;

@@ -34,3 +34,8 @@ export interface ResetPasswordPut {
     code:                string;
     newPassword:         string;    
 }
+
+export interface ForgetPasswordPost {
+    email:                string;
+    clientUrl:            string;    
+}

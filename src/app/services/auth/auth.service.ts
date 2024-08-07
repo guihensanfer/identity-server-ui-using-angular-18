@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RespDefault } from '../../interfaces/default-interfaces';
 import { Observable } from 'rxjs';
-import { AuthPost, AuthResp, ExternalGoogleResp, OtpPost, OtpResp, ResetPasswordPut } from '../../interfaces/auth/auth-interfaces';
+import { AuthPost, AuthResp, ExternalGoogleResp, ForgetPasswordPost, OtpPost, OtpResp, ResetPasswordPut } from '../../interfaces/auth/auth-interfaces';
 import { environment } from '../../../environments/environment';
 import { lastValueFrom } from 'rxjs';
 import { LocalService } from '../local.service';
