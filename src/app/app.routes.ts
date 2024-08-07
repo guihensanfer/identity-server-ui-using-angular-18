@@ -13,7 +13,7 @@ export const routes: Routes = [
     component: SsoComponent
   },
   {
-    path: 'sso/:lang/:secret/:reset_password_flow/:forget_passwd_email',
+    path: 'sso/:lang/:secret/:reset_password_flow/:user_email',
     component: SsoComponent
   },
   {

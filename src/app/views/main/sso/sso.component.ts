@@ -48,12 +48,14 @@ export class SsoComponent  implements OnInit, AfterViewInit {
 
       if(emailElement){
         if(this.resetPasswordFlow){
-          const requestEmail = this.route.snapshot.paramMap.get('forget_passwd_email')?.toString();
-
-          if(requestEmail){
-            this.myGroup.controls.email.setValue(requestEmail);
-
-          }
+          const requestEmail = this.route.snapshot.paramMap.get('user_email')?.toString();
+          setTimeout(() =>{
+            if(requestEmail){
+              this.myGroup.controls['email'].setValue(requestEmail);          
+              this.emailValidate(requestEmail);
+  
+            }
+          });          
           
         }
   
@@ -127,6 +129,41 @@ export class SsoComponent  implements OnInit, AfterViewInit {
     
     
   }
+  
+  emailValidate(email:string){
+    const data: CheckEmailExistsPost = {
+      email: email.trim(),
+      enabled: null,
+      projectId: environment.defaultProjectId
+    };
+
+    this.oAuthService.userEmailExists(data)
+    .subscribe({
+        next :  (res : RespDefault<CheckEmailExistsResp>) => {                
+          if(res && res.data?.userExists){
+            // User exists
+
+            this.nextButtonDisabled = false;
+            this.emailFound = true;
+            document.getElementById('sendButton')?.focus();
+          }
+          else{
+            this.nextButtonDisabled = true;
+            this.emailFound = false;              
+          }                      
+        },
+        error : () => {      
+          this.nextButtonDisabled = false;
+          this.emailFound = false;   
+
+          this._loading.hideLoading();                              
+        },
+        complete: () => {
+          this._loading.hideLoading();
+        }          
+      }
+    );
+  }
 
   onChange(event: Event){
     
@@ -134,39 +171,8 @@ export class SsoComponent  implements OnInit, AfterViewInit {
     if(this.myGroup.controls.email.valid){
       this._loading.showLoading();
       const element = event.target as HTMLInputElement;                            
-      const data: CheckEmailExistsPost = {
-        email: element.value.trim(),
-        enabled: null,
-        projectId: environment.defaultProjectId
-      };
-
-      this.oAuthService.userEmailExists(data)
-      .subscribe({
-          next :  (res : RespDefault<CheckEmailExistsResp>) => {                
-            if(res && res.data?.userExists){
-              // User exists
-
-              this.nextButtonDisabled = false;
-              this.emailFound = true;
-              document.getElementById('sendButton')?.focus();
-            }
-            else{
-              this.nextButtonDisabled = true;
-              this.emailFound = false;              
-            }                      
-          },
-          error : () => {      
-            this.nextButtonDisabled = false;
-            this.emailFound = false;   
-
-            this._loading.hideLoading();                              
-          },
-          complete: () => {
-            this._loading.hideLoading();
-          }          
-        }
-      );
       
+      this.emailValidate(element.value);
     }  
          
   }
