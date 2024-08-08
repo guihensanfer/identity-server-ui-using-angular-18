@@ -138,8 +138,11 @@ export class ByPasswordComponent implements AfterViewInit, OnInit {
         next : (resp : RespDefault<null>) => {
           if(resp && resp.success){
             // Reset was succefully            
-            // Callback redirect
+            // Callback redirect            
             window.location.href  = this.redirectUrlForResetPasswd ?? this.sharedData.generateCallbackUrl();
+
+            this.successPassword = true; 
+            this.myGroup.controls.password.disable();
 
           }
           else
@@ -153,5 +156,14 @@ export class ByPasswordComponent implements AfterViewInit, OnInit {
         }
       });  
     }
+  }
+
+  forgetMyPasswordClick():void{
+    window.location.href = this.sharedData.generateForgetPasswordPath(
+      this.sharedData.emailLogin!.toString(),
+      this.route.snapshot.paramMap.get('lang')!.toString(),
+      this.route.snapshot.paramMap.get('secret')!.toString(),
+      this.redirectUrlForResetPasswd
+    );
   }
 }

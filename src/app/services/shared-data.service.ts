@@ -38,4 +38,17 @@ export class SharedDataService {
 
     return this.context!.clientCallbackUrl + '?userInfoCode=' + userInfoCode;
   }
+
+  public generateForgetPasswordPath(userEmail:string,currentLang:string, currentSecret:string, redirectUrl: string | null = null):string{
+    if(!this.context)
+      return '';    
+
+    let redirectUrlParm = '';
+
+    if(redirectUrl){
+      redirectUrlParm = `&${this.RESET_PASSWD_FLOW_REDIRECT_URL_QUERY}=${redirectUrl}`;
+    }
+
+    return `${currentLang}/sso/${currentSecret}?${this.IS_RESET_PASSWD_FLOW_QUERY}=true&${this.USER_EMAIL_QUERY}=${userEmail}${redirectUrlParm}`;
+  }
 }

@@ -32,7 +32,7 @@
     "byPasswordTitle":"Password confirmation",
     "byPasswordWelcome": "Hello, ",
     "byPasswordInvalidPassword": "Invalid password",
-    "byPasswordValidPassword": "Authorization complete! You'll be redirected in just a few seconds...",
+    "byPasswordValidPassword": "Success! You'll be redirected in just a few seconds...",
     "byPasswordIforgetPassword": "I forget my password",
     "byPasswordNewPassword": "New password",
     "byPasswordConfirmPassword": "Confirm password",

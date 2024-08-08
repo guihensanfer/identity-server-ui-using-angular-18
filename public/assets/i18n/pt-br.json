@@ -32,7 +32,7 @@
     "byPasswordTitle":"Confirme sua identidade com senha",
     "byPasswordWelcome": "Olá, ",
     "byPasswordInvalidPassword": "Senha inválida",
-    "byPasswordValidPassword": "Autorização completa! Você será redirecionado em alguns segundos...",
+    "byPasswordValidPassword": "Sucesso! Você será redirecionado em alguns segundos...",
     "byPasswordIforgetPassword": "Esqueci minha senha",
     "byPasswordNewPassword": "Nova senha",
     "byPasswordConfirmPassword": "Confirmar senha",
