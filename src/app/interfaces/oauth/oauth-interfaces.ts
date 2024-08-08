@@ -20,7 +20,8 @@ export interface GetContextResp {
   projectId: number
   projectName: string
   projectDescription: string
-  projectPicture: string | null
+  projectPicture: string | null,
+  projectPasswordStrengthRegex: string | null
 }
 
 export interface GetUserInfoResp {

@@ -37,5 +37,6 @@
     "byPasswordNewPassword": "Nova senha",
     "byPasswordConfirmPassword": "Confirmar senha",
     "byPasswordPasswordsDoNotMatch": "As senhas não coincidem",
-    "byPasswordSendContinueButton": "Definir senha e continuar"
+    "byPasswordSendContinueButton": "Definir senha e continuar",
+    "byPasswordWeakPassword":"Senha fraca"
 }

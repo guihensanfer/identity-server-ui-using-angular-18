@@ -10,7 +10,7 @@ import { RespDefault } from '../../../interfaces/default-interfaces';
 import { LoadingService } from '../../../services/loading.service';
 import { AlertComponent } from "../../components/alert/alert.component";
 import { CommonModule } from '@angular/common';
-import { passwordMatchValidator } from '../../../validators/passwords-validator';
+import { passwordMatchValidator, passwordStrengthValidator } from '../../../validators/passwords-validator';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -38,6 +38,7 @@ export class ByPasswordComponent implements AfterViewInit, OnInit {
   successPassword:boolean = false;
   resetPasswordFlow:boolean = false;
   passwordsDoNotMatch:boolean = false;
+  passwordStrengt:boolean = false;
   redirectUrlForResetPasswd: string | null = null;
 
   ngOnInit(): void {
@@ -65,7 +66,13 @@ export class ByPasswordComponent implements AfterViewInit, OnInit {
   public resetPasswordGroup = new FormGroup({
     newPassword: new FormControl('', [Validators.required, Validators.maxLength(300)]),
     confirmPassword: new FormControl('', [Validators.required, Validators.maxLength(300)])
-  }, { validators: passwordMatchValidator('newPassword', 'confirmPassword') });
+  }, 
+  { 
+    validators: [
+      passwordMatchValidator('newPassword', 'confirmPassword'), 
+      passwordStrengthValidator(this.sharedData.context?.projectPasswordStrengthRegex ?? '', 'newPassword')
+    ]
+  });
 
 
   textChanged(){
@@ -75,6 +82,7 @@ export class ByPasswordComponent implements AfterViewInit, OnInit {
 
   textChangedResetPasswdFlow(){
     this.passwordsDoNotMatch = this.resetPasswordGroup.errors && this.resetPasswordGroup.errors['passwordMismatch'];
+    this.passwordStrengt = this.resetPasswordGroup.errors && this.resetPasswordGroup.errors['weakPassword'];
   }
 
   onSubmit():void{

@@ -94,7 +94,7 @@ export class SsoComponent  implements OnInit, AfterViewInit {
             next: (res) => {
               
               if(res && res.success){
-                this.sharedData.context = res.data;                                      
+                this.sharedData.context = res.data;                   
               }                  
               
             },
