@@ -10,7 +10,7 @@ export interface CheckEmailExistsPost{
 
 export interface GetContextResp {
   userId: number
-  clientCallbackUri: string
+  clientCallbackUrl: string
   clientSecret: string
   firstName: string
   lastName: string

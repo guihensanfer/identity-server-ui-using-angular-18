@@ -11,6 +11,7 @@ import { GetUserInfoResp } from '../../../interfaces/oauth/oauth-interfaces';
 import { OauthService } from '../../../services/oauth/oauth.service';
 import { SharedDataService } from '../../../services/shared-data.service';
 import { AlertComponent } from "../../components/alert/alert.component";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-otp',
@@ -21,6 +22,7 @@ import { AlertComponent } from "../../components/alert/alert.component";
 })
 export class OtpComponent implements AfterViewInit, OnInit {
   constructor(
+    private route: ActivatedRoute,
     private loading:LoadingService,
     private auth:AuthService,
     private oAuth: OauthService,
@@ -40,9 +42,14 @@ export class OtpComponent implements AfterViewInit, OnInit {
   });
   sentByDemand: boolean = false;
   invalidNumberCode:boolean = false;
+  isResetPasswdFlow:boolean = false;
 
   ngOnInit(): void {
-    
+    this.route.queryParams.subscribe(params => {
+      this.isResetPasswdFlow = params[this.sharedData.IS_RESET_PASSWD_FLOW_QUERY] === 'true';
+    });
+
+
     this.otpRequest();
 
   }
@@ -82,7 +89,8 @@ export class OtpComponent implements AfterViewInit, OnInit {
     
     const data: OtpPost = {
       email: this.sharedData.emailLogin!,
-      projectId: this.sharedData.context!.projectId      
+      projectId: this.sharedData.context!.projectId,      
+      resetUserPassword: this.isResetPasswdFlow
     };
 
     this.sharedData.codeOtp = null;

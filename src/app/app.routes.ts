@@ -5,15 +5,7 @@ import { NotFoundComponent } from './views/components/not-found/not-found.compon
 
 export const routes: Routes = [    
   {
-    path: 'sso/:lang/:secret',
-    component: SsoComponent
-  },
-  {
-    path: 'sso/:lang/:secret/:reset_password_flow',
-    component: SsoComponent
-  },
-  {
-    path: 'sso/:lang/:secret/:reset_password_flow/:user_email',
+    path: ':lang/sso/:secret',
     component: SsoComponent
   },
   {
@@ -21,7 +13,7 @@ export const routes: Routes = [
     redirectTo: (queryParams) => {
       const secret = queryParams.params['secret'];
 
-      return `sso/${environment.defaultLanguage}/${secret}`;
+      return `${environment.defaultLanguage}/sso/${secret}`;
     }
   },  
   { 

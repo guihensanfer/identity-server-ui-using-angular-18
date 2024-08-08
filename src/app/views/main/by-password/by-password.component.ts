@@ -1,11 +1,11 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AvatarComponent } from "../../components/avatar/avatar.component";
 import { SharedDataService } from '../../../services/shared-data.service';
 import { TranslocoModule } from '@ngneat/transloco';
 import { SeparatorElemComponent } from "../../components/separator-elem/separator-elem.component";
 import { AuthService } from '../../../services/auth/auth.service';
-import { AuthPost, AuthResp } from '../../../interfaces/auth/auth-interfaces';
+import { AuthPost, AuthResp, ResetPasswordPut } from '../../../interfaces/auth/auth-interfaces';
 import { RespDefault } from '../../../interfaces/default-interfaces';
 import { LoadingService } from '../../../services/loading.service';
 import { AlertComponent } from "../../components/alert/alert.component";
@@ -20,7 +20,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './by-password.component.html',
   styleUrl: './by-password.component.css'
 })
-export class ByPasswordComponent implements AfterViewInit {
+export class ByPasswordComponent implements AfterViewInit, OnInit {
   constructor(
     public sharedData:SharedDataService,
     private auth : AuthService,
@@ -30,14 +30,21 @@ export class ByPasswordComponent implements AfterViewInit {
     if(!this.sharedData.userInfo || !this.sharedData.userInfo.userInfo || this.sharedData.userInfo.userInfo.userId <= 0)
       this.sharedData.goStep(-1, '#PASSWD230724-1832');
 
-    this.resetPasswordFlow = this.sharedData.userInfo!.userInfo.isPasswordEmpty || this.route.snapshot.paramMap.get('reset_password_flow') === 'true';    
+    this.resetPasswordFlow = this.sharedData.userInfo!.userInfo.isPasswordEmpty;    
     
   }  
+  
   invalidPassword : boolean = false;
   successPassword:boolean = false;
   resetPasswordFlow:boolean = false;
   passwordsDoNotMatch:boolean = false;
+  redirectUrlForResetPasswd: string | null = null;
 
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.redirectUrlForResetPasswd = params[this.sharedData.RESET_PASSWD_FLOW_REDIRECT_URL_QUERY];
+    });
+  }
 
   ngAfterViewInit(): void {
     if(this.resetPasswordFlow){
@@ -87,7 +94,6 @@ export class ByPasswordComponent implements AfterViewInit {
       this.auth.loginFullReq(data)
       .subscribe({
         next : (resp : RespDefault<AuthResp>) => {
-          console.log(resp);
           if(resp && resp.success && resp.data){
             const callbackUrl = this.sharedData.generateCallbackUrl(resp.data.userInfoCode);
             
@@ -119,6 +125,33 @@ export class ByPasswordComponent implements AfterViewInit {
   }
 
   onSubmitResetPasswdFlow():void{
-    
+    if(!this.resetPasswordGroup.errors && !this.passwordsDoNotMatch){
+      this.loading.showLoading();
+
+      const data: ResetPasswordPut = {
+        code: this.sharedData.userInfo!.operations.resetPasswordQuickly.code,
+        newPassword: this.resetPasswordGroup.controls.confirmPassword.value!.toString()
+      };
+
+      this.auth.resetPassword(data)
+      .subscribe({
+        next : (resp : RespDefault<null>) => {
+          if(resp && resp.success){
+            // Reset was succefully            
+            // Callback redirect
+            window.location.href  = this.redirectUrlForResetPasswd ?? this.sharedData.generateCallbackUrl();
+
+          }
+          else
+          {
+            this.sharedData.goStep(-1, '#070824-1834');
+          }
+        },
+        error : () => {            
+          this.sharedData.goStep(-1, '#070824-1836');
+          this.loading.hideLoading();          
+        }
+      });  
+    }
   }
 }

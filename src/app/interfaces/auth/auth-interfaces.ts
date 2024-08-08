@@ -18,7 +18,8 @@ export interface AuthResp {
 
 export interface OtpPost {
     email:             string;
-    projectId:         number | null;    
+    projectId:         number | null; 
+    resetUserPassword: boolean | null;   
 }
 
 export interface OtpResp {

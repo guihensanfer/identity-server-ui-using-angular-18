@@ -8,6 +8,10 @@ export class SharedDataService {
 
   constructor() { }  
 
+  public readonly IS_RESET_PASSWD_FLOW_QUERY: string = 'reset_passwd_flow';
+  public readonly RESET_PASSWD_FLOW_REDIRECT_URL_QUERY: string = 'reset_passwd_redirect_url';
+  public readonly USER_EMAIL_QUERY: string = 'user_email'; 
+
   // Sso step
   public context: GetContextResp | null = null;
   public emailLogin:string | null = null;  
@@ -25,10 +29,13 @@ export class SharedDataService {
     this.errorCode = errorCode;
   }
 
-  public generateCallbackUrl(userInfoCode: string):string{
+  public generateCallbackUrl(userInfoCode: string | null = null):string{
     if(!this.context)
       return '';
 
-    return this.context!.clientCallbackUri + '?userInfoCode=' + userInfoCode;
+    if(!userInfoCode || userInfoCode === null || userInfoCode === '')
+      return this.context!.clientCallbackUrl;
+
+    return this.context!.clientCallbackUrl + '?userInfoCode=' + userInfoCode;
   }
 }

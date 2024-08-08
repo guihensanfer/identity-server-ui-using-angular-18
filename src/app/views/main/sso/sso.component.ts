@@ -41,22 +41,22 @@ export class SsoComponent  implements OnInit, AfterViewInit {
   });
   nextButtonDisabled: boolean = true;
   emailFound:boolean = false;   
-  resetPasswordFlow:boolean = false;   
+  isResetPasswdFlow:boolean = false;   
+  userEmailQuery:string | null = null;
+
   ngAfterViewInit(): void {
     if(typeof document !== 'undefined'){
       const emailElement = document.getElementById('email');
 
       if(emailElement){
-        if(this.resetPasswordFlow){
-          const requestEmail = this.route.snapshot.paramMap.get('user_email')?.toString();
+        const requestEmail = this.userEmailQuery;
+        if(requestEmail){
           setTimeout(() =>{
-            if(requestEmail){
-              this.myGroup.controls['email'].setValue(requestEmail);          
-              this.emailValidate(requestEmail);
-  
-            }
+            
+            this.myGroup.controls['email'].setValue(requestEmail);          
+            this.emailValidate(requestEmail);
+            
           });          
-          
         }
   
         emailElement.focus();
@@ -71,8 +71,11 @@ export class SsoComponent  implements OnInit, AfterViewInit {
 
   ngOnInit(): void {    
       const lang = this.route.snapshot.paramMap.get('lang');
-      const secret = this.route.snapshot.paramMap.get('secret');   
-      this.resetPasswordFlow = this.route.snapshot.paramMap.get('reset_password_flow') === 'true';   
+      const secret = this.route.snapshot.paramMap.get('secret');         
+      this.route.queryParams.subscribe(params => {        
+        this.isResetPasswdFlow = params[this.sharedData.IS_RESET_PASSWD_FLOW_QUERY] === 'true';
+        this.userEmailQuery = params[this.sharedData.USER_EMAIL_QUERY];
+      });
       this._loading.showLoading();      
       
       if (lang && secret) {                

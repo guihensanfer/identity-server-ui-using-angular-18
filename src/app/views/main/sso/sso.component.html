@@ -1,15 +1,15 @@
 <main class="main container">
     <ng-container *transloco="let t">
       <div class="customContainer" *ngIf="this.sharedData.step === 0">
-        <h1 class="bText2" *ngIf="this.sharedData.context && !this.resetPasswordFlow">{{ t('title') + ' ' + this.sharedData.context.projectName }}</h1>        
-        <h1 class="bText2" *ngIf="this.sharedData.context && this.resetPasswordFlow">{{ t('titleForResetPwdFlow') + ' ' + this.sharedData.context.projectName }}</h1>        
+        <h1 class="bText2" *ngIf="this.sharedData.context && !this.isResetPasswdFlow">{{ t('title') + ' ' + this.sharedData.context.projectName }}</h1>        
+        <h1 class="bText2" *ngIf="this.sharedData.context && this.isResetPasswdFlow">{{ t('titleForResetPwdFlow') + ' ' + this.sharedData.context.projectName }}</h1>        
         <div class="content">
           <div class="left-side">                      
-            <div *ngIf="!this.resetPasswordFlow" class="bMargin-top-default">
+            <div *ngIf="!this.isResetPasswdFlow" class="bMargin-top-default">
               <span class="bTextBold">{{t('newAccountLabel')}}</span>
               <a class="bTextLink" style="margin-left:5px;" href="#">{{t('newAccountButton')}}</a>
             </div>            
-            <div *ngIf="!this.resetPasswordFlow" class="externalProviders bMargin-top-default">      
+            <div *ngIf="!this.isResetPasswdFlow" class="externalProviders bMargin-top-default">      
               <ul>                  
                 <li>
                   
