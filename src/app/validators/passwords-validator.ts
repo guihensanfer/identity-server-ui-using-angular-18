@@ -27,9 +27,6 @@ export function passwordStrengthValidator(regex: string, elementName:string): Va
     const passwordRegex = new RegExp(regex);
 
     const passwordValid = passwordRegex.test(value);
-    console.log('regex', regex);
-    console.log('result', passwordValid);
-    console.log('value', value);
 
     return !passwordValid ? { weakPassword: true } : null;
   };
