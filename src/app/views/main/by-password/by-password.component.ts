@@ -115,15 +115,13 @@ export class ByPasswordComponent implements AfterViewInit, OnInit {
           }
         },
         error : (err) => {            
+          // The user maybe be has confirmed email or disabled
+
           if(err && err.error?.statusCode === 401){
             this.invalidPassword = true;        
             document.getElementById('password')?.focus();
                       
           }                  
-
-          if(err && err.error?.errors && err.error?.errors.length > 0){            
-            this.sharedData.goStep(-1, '#260724-1459', err);
-          }
           
           this.loading.hideLoading();          
         }
