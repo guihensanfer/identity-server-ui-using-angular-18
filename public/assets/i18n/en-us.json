@@ -19,6 +19,7 @@
     "emailFound":"Click bellow to continue",
     "emailNotFound":"Account not found.",
     "errorTitle":"Ops, something didn't work right",
+    "errorMoreInfos":"View technical information",
     "errorCausesLabel":"Possible causes:",
     "errorCause1":"The request is invalid or expired, check with the origin request;",
     "errorCause2":"A temporary instability occurred, try again later.",

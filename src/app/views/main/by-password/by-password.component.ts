@@ -119,10 +119,10 @@ export class ByPasswordComponent implements AfterViewInit, OnInit {
             this.invalidPassword = true;        
             document.getElementById('password')?.focus();
                       
-          }        
-          else
-          {
-            this.sharedData.goStep(-1, '#260724-1459');
+          }                  
+
+          if(err && err.error?.errors && err.error?.errors.length > 0){            
+            this.sharedData.goStep(-1, '#260724-1459', err);
           }
           
           this.loading.hideLoading();          
@@ -158,8 +158,8 @@ export class ByPasswordComponent implements AfterViewInit, OnInit {
             this.sharedData.goStep(-1, '#070824-1834');
           }
         },
-        error : () => {            
-          this.sharedData.goStep(-1, '#070824-1836');
+        error : (err) => {            
+          this.sharedData.goStep(-1, '#070824-1836', err);
           this.loading.hideLoading();          
         }
       });  

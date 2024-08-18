@@ -19,6 +19,7 @@
     "emailFound":"Clique abaixo para continuar",
     "emailNotFound":"Conta não encontrada.",
     "errorTitle":"Ops, algo não funcionou bem",
+    "errorMoreInfos":"Ver informações técnicas",
     "errorCausesLabel":"Possíveis causas:",
     "errorCause1":"A requisição é inválida ou expirou, verifique a requisição de origem;",
     "errorCause2":"Uma instabilidade temporária ocorreu, tente novamente mais tarde.",

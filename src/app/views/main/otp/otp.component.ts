@@ -109,9 +109,9 @@ export class OtpComponent implements AfterViewInit, OnInit {
 
           this.loading.hideLoading();
         },
-        error: () => {
+        error: (err) => {
           // show error
-          this.sharedData.goStep(-1, '#OTP230724-1650');
+          this.sharedData.goStep(-1, '#OTP230724-1650', err);
 
           this.loading.hideLoading();
         }
@@ -170,8 +170,8 @@ export class OtpComponent implements AfterViewInit, OnInit {
 
 
                 },
-                error: () => {
-                  this.sharedData.goStep(-1, '#OTP240724-1502');
+                error: (err) => {
+                  this.sharedData.goStep(-1, '#OTP240724-1502', err);
                   this.loading.hideLoading();    
                 },
                 complete:() =>{
@@ -181,15 +181,23 @@ export class OtpComponent implements AfterViewInit, OnInit {
               });
             }
           },
-          error : () => {
-            this.invalidNumberCode = true;
-            this.myGroup.reset();
-            const form = window.document.getElementById('formCode');
-            if(form){
-              form.style.display = 'none';
-            }
+          error : (err) => {
+            if(err && err.error?.statusCode === 401){
+              this.invalidNumberCode = true;
+              this.myGroup.reset();
+              const form = window.document.getElementById('formCode');
+              if(form){
+                form.style.display = 'none';
+              }
+              
+              document.getElementById('i1')?.focus();
+            }      
+            else
+            {
+              this.sharedData.goStep(-1, '#OTP180824-1909', err);
+            }  
+            
             this.loading.hideLoading();
-            document.getElementById('i1')?.focus();
           },
           complete:()=>{
             this.loading.hideLoading();

@@ -1,6 +1,9 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { SharedDataService } from '../services/shared-data.service';
+import { inject } from '@angular/core';
+import { RespDefault } from '../interfaces/default-interfaces';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {    
   return next(req).pipe(
@@ -9,10 +12,8 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       if(environment.production){
         console.clear();
       }
-
-      // if(environment.catchPreflightedRequest && req.body === null && !req.headers.has('Authorization')){
-      //   return throwError(() => new Error(environment.preflightedRequestErrorName));
-      // }
+      
+      
       
 
       return throwError(() => error);

@@ -102,9 +102,8 @@ export class SsoComponent  implements OnInit, AfterViewInit {
               if(err && err.error.success && err.error.data === null){
                 // Context not found
                 
-              }        
-              
-              this.sharedData.goStep(-1, '#SSO260724-1009');
+              }                      
+              this.sharedData.goStep(-1, '#SSO260724-1009', err);
               this._loading.hideLoading();                                                
             },
             complete: () => {              
@@ -136,7 +135,7 @@ export class SsoComponent  implements OnInit, AfterViewInit {
   emailValidate(email:string){
     const data: CheckEmailExistsPost = {
       email: email.trim(),
-      enabled: null,
+      enabled: true,
       projectId: environment.defaultProjectId
     };
 
@@ -159,7 +158,8 @@ export class SsoComponent  implements OnInit, AfterViewInit {
           this.nextButtonDisabled = false;
           this.emailFound = false;   
 
-          this._loading.hideLoading();                              
+          this._loading.hideLoading();        
+          
         },
         complete: () => {
           this._loading.hideLoading();
