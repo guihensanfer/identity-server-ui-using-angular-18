@@ -5,9 +5,7 @@ import { EncryptAndDecryptDataService } from './encrypt-and-decrypt-data.service
 @Injectable({
   providedIn: 'root'
 })
-export class LocalService {
-
-  constructor(private encrypt:EncryptAndDecryptDataService) { }
+export class LocalService {  
 
   public ACCESS_TOKEN_SECRET_NAME = 'orYQmZGYgcdR';
   public ACCESS_TOKEN_SECRET_TOKEN = 'bNSodIjmHRnXQWAUziBXxZqsFoR';
@@ -49,7 +47,7 @@ export class LocalService {
       token = this.DEFAULT_SECRET_TOKEN;
     }
 
-    localStorage.setItem(key, this.encrypt.encryptData(value, token));
+    localStorage.setItem(key, EncryptAndDecryptDataService.encryptData(value, token));
   }  
   
   public getData(key:string, token:string | null = null): string {
@@ -69,7 +67,7 @@ export class LocalService {
     if(!data || data === '')
       return data;
     
-    return this.encrypt.decryptData(data, token);
+    return EncryptAndDecryptDataService.decryptData(data, token);
   }
   
   public removeData(key: string): void {

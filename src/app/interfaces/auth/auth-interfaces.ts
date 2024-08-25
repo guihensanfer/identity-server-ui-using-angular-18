@@ -1,7 +1,7 @@
 export interface AuthPost {
     email:             string | null;
     projectId:         number | null;
-    password:          string | null;
+    passwordEncrypted: string | null;
     continueWithCode: string | null;
     codePassword: string | null;
 }
@@ -32,8 +32,8 @@ export interface ExternalGoogleResp{
 }
 
 export interface ResetPasswordPut {
-    code:                string;
-    newPassword:         string;    
+    code:                   string;
+    newPasswordEncrypted:   string;    
 }
 
 export interface ForgetPasswordPost {

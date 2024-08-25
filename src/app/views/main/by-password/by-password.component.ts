@@ -12,6 +12,7 @@ import { AlertComponent } from "../../components/alert/alert.component";
 import { CommonModule } from '@angular/common';
 import { passwordMatchValidator, passwordStrengthValidator } from '../../../validators/passwords-validator';
 import { ActivatedRoute } from '@angular/router';
+import { EncryptAndDecryptDataService } from '../../../services/encrypt-and-decrypt-data.service';
 
 @Component({
   selector: 'app-by-password',
@@ -88,13 +89,13 @@ export class ByPasswordComponent implements AfterViewInit, OnInit {
   onSubmit():void{
     if(this.myGroup.controls.password.valid && !this.myGroup.errors){
       this.loading.showLoading();
-      const password = this.myGroup.controls.password.value;
+      const password = this.myGroup.controls.password.value!;
 
       const data: AuthPost = {
         continueWithCode: null,
         codePassword : null,
         email: this.sharedData.emailLogin,
-        password: password,
+        passwordEncrypted: EncryptAndDecryptDataService.encryptWithIVData(password),
         projectId: this.sharedData.context!.projectId     
       };
   
@@ -134,9 +135,11 @@ export class ByPasswordComponent implements AfterViewInit, OnInit {
     if(!this.resetPasswordGroup.errors && !this.passwordsDoNotMatch){
       this.loading.showLoading();
 
+      const encryptedPassword = EncryptAndDecryptDataService.encryptWithIVData(this.resetPasswordGroup.controls.confirmPassword.value!.toString());
+
       const data: ResetPasswordPut = {
         code: this.sharedData.userInfo!.operations.resetPasswordQuickly.code,
-        newPassword: this.resetPasswordGroup.controls.confirmPassword.value!.toString()
+        newPasswordEncrypted: encryptedPassword
       };
 
       this.auth.resetPassword(data)

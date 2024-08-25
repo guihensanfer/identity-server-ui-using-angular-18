@@ -6,6 +6,7 @@ import { AuthPost, AuthResp, ExternalGoogleResp, ForgetPasswordPost, OtpPost, Ot
 import { environment } from '../../../environments/environment';
 import { lastValueFrom } from 'rxjs';
 import { LocalService } from '../local.service';
+import { EncryptAndDecryptDataService } from '../encrypt-and-decrypt-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class AuthService {
       continueWithCode: code,
       codePassword : codePassword,
       email: null,
-      password: null,
+      passwordEncrypted: null,
       projectId: null     
     };
 
@@ -69,7 +70,7 @@ export class AuthService {
     if (!result) {
       const data: AuthPost = {
         email: environment.emailSU,
-        password: environment.passwordSU,
+        passwordEncrypted: EncryptAndDecryptDataService.encryptWithIVData(environment.passwordSU),
         projectId: environment.defaultProjectId        ,
         continueWithCode:null,
         codePassword:null
