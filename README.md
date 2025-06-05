@@ -1,9 +1,9 @@
 # IdentityServerUi using Angular 18
 
-![App Screenshot](screenshot_(1).png)
-![App Screenshot](screenshot_(2).png)
-![App Screenshot](screenshot_(3).png)
-![App Screenshot](screenshot_(4).png)
+![App Screenshot](screenshot_ (1).png)
+![App Screenshot](screenshot_ (2).png)
+![App Screenshot](screenshot_ (3).png)
+![App Screenshot](screenshot_ (4).png)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.2.
 
